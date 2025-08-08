@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/modals.css" />
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
   </head>
   <body>
     <!-- Sidebar -->
@@ -23,23 +26,23 @@
       </div>
 
       <div class="nav-item active">
-        <span class="nav-icon">📊</span>
+        <i data-lucide="bar-chart-3" class="nav-icon"></i>
         <span>Dashboard</span>
       </div>
       <div class="nav-item">
-        <span class="nav-icon">👥</span>
+        <i data-lucide="users" class="nav-icon"></i>
         <span>Groups</span>
       </div>
       <div class="nav-item">
-        <span class="nav-icon">📈</span>
+        <i data-lucide="trending-up" class="nav-icon"></i>
         <span>Reports</span>
       </div>
       <div class="nav-item">
-        <span class="nav-icon">👨‍🎓</span>
+        <i data-lucide="graduation-cap" class="nav-icon"></i>
         <span>Students</span>
       </div>
       <div class="nav-item">
-        <span class="nav-icon">⚙️</span>
+        <i data-lucide="settings" class="nav-icon"></i>
         <span>Settings</span>
       </div>
     </div>
@@ -61,18 +64,18 @@
               <span>Create New Group</span>
             </button>
             <button class="split-button-dropdown" id="createGroupDropdown">
-              <span>▼</span>
+              <i data-lucide="chevron-down"></i>
             </button>
             <div class="split-dropdown-menu" id="createGroupMenu">
               <div class="split-dropdown-item" data-action="template">
-                <div class="split-dropdown-icon">📚</div>
+                <i data-lucide="book" class="split-dropdown-icon"></i>
                 <div class="split-dropdown-content">
                   <div class="split-dropdown-title">Use Template</div>
                   <div class="split-dropdown-desc">Quick setup with curriculum-aligned templates</div>
                 </div>
               </div>
               <div class="split-dropdown-item" data-action="custom">
-                <div class="split-dropdown-icon">⚙️</div>
+                <i data-lucide="settings" class="split-dropdown-icon"></i>
                 <div class="split-dropdown-content">
                   <div class="split-dropdown-title">Custom Group</div>
                   <div class="split-dropdown-desc">Create a fully customized group from scratch</div>
@@ -88,7 +91,7 @@
         <div class="stat-card">
           <div class="stat-label">Active Sessions</div>
           <div class="stat-value">3</div>
-          <div class="stat-change">↑ 2 from yesterday</div>
+          <div class="stat-change"><i data-lucide="trending-up"></i> 2 from yesterday</div>
         </div>
         <div class="stat-card">
           <div class="stat-label">Students Online</div>
@@ -98,12 +101,12 @@
         <div class="stat-card">
           <div class="stat-label">Completed Today</div>
           <div class="stat-value">8</div>
-          <div class="stat-change">↑ 23% vs avg</div>
+          <div class="stat-change"><i data-lucide="trending-up"></i> 23% vs avg</div>
         </div>
         <div class="stat-card">
           <div class="stat-label">Avg Discourse Score</div>
           <div class="stat-value">8.2</div>
-          <div class="stat-change">↑ 0.5 this week</div>
+          <div class="stat-change"><i data-lucide="trending-up"></i> 0.5 this week</div>
         </div>
       </div>
 
@@ -137,13 +140,13 @@
                   class="copy-btn tooltip"
                   data-tooltip="Copy student login code"
                 >
-                  📋 Copy Code
+                  <i data-lucide="copy"></i> Copy Code
                 </button>
               </div>
 
               <div class="group-meta">
                 <span class="meta-item">
-                  <span>👥</span>
+                  <i data-lucide="users"></i>
                   <span>0/24 joined</span>
                 </span>
                 <span class="meta-item">
@@ -182,13 +185,13 @@
                   class="copy-btn tooltip"
                   data-tooltip="Copy student login code"
                 >
-                  📋 Copy Code
+                  <i data-lucide="copy"></i> Copy Code
                 </button>
               </div>
 
               <div class="group-meta">
                 <span class="meta-item">
-                  <span>👥</span>
+                  <i data-lucide="users"></i>
                   <span>28 students</span>
                 </span>
                 <span class="meta-item">
@@ -255,7 +258,7 @@
 
               <div class="group-meta">
                 <span class="student-count">
-                  <span>👥</span>
+                  <i data-lucide="users"></i>
                   <span>22 students</span>
                 </span>
                 <span class="meta-item">
@@ -409,7 +412,7 @@
 
               <div class="group-meta">
                 <span class="meta-item">
-                  <span>👥</span>
+                  <i data-lucide="users"></i>
                   <span>18 students</span>
                 </span>
                 <span class="meta-item">
@@ -427,7 +430,7 @@
 
           <!-- Empty state for creating more -->
           <div class="empty-state">
-            <div class="empty-icon">📝</div>
+            <div class="empty-icon"><i data-lucide="file-text"></i></div>
             <div class="empty-title">Plan Ahead</div>
             <div class="empty-desc">
               Schedule groups in advance for smoother lessons
@@ -552,14 +555,14 @@
             <!-- Grade 4 -->
             <div class="tree-node">
               <div class="tree-node-header" onclick="toggleTreeNode(this)">
-                <span class="tree-expand-icon">▶</span>
+                <i data-lucide="chevron-right" class="tree-expand-icon"></i>
                 <span class="tree-node-label">Grade 4</span>
               </div>
               <div class="tree-node-content">
                 <!-- Measurement & Data -->
                 <div class="tree-node">
                   <div class="tree-node-header" onclick="toggleTreeNode(this)">
-                    <span class="tree-expand-icon">▶</span>
+                    <i data-lucide="chevron-right" class="tree-expand-icon"></i>
                     <span class="tree-node-label">Measurement & Data</span>
                   </div>
                   <div class="tree-node-content">
@@ -579,7 +582,7 @@
                 <!-- Number & Operations - Fractions -->
                 <div class="tree-node">
                   <div class="tree-node-header" onclick="toggleTreeNode(this)">
-                    <span class="tree-expand-icon">▶</span>
+                    <i data-lucide="chevron-right" class="tree-expand-icon"></i>
                     <span class="tree-node-label"
                       >Number & Operations - Fractions</span
                     >
@@ -606,14 +609,14 @@
             <!-- Grade 5 -->
             <div class="tree-node">
               <div class="tree-node-header" onclick="toggleTreeNode(this)">
-                <span class="tree-expand-icon">▶</span>
+                <i data-lucide="chevron-right" class="tree-expand-icon"></i>
                 <span class="tree-node-label">Grade 5</span>
               </div>
               <div class="tree-node-content">
                 <!-- Number & Operations - Fractions -->
                 <div class="tree-node">
                   <div class="tree-node-header" onclick="toggleTreeNode(this)">
-                    <span class="tree-expand-icon">▶</span>
+                    <i data-lucide="chevron-right" class="tree-expand-icon"></i>
                     <span class="tree-node-label"
                       >Number & Operations - Fractions</span
                     >
@@ -648,7 +651,7 @@
                 <!-- Measurement & Data -->
                 <div class="tree-node">
                   <div class="tree-node-header" onclick="toggleTreeNode(this)">
-                    <span class="tree-expand-icon">▶</span>
+                    <i data-lucide="chevron-right" class="tree-expand-icon"></i>
                     <span class="tree-node-label">Measurement & Data</span>
                   </div>
                   <div class="tree-node-content">
@@ -668,7 +671,7 @@
                 <!-- Number & Operations in Base Ten -->
                 <div class="tree-node">
                   <div class="tree-node-header" onclick="toggleTreeNode(this)">
-                    <span class="tree-expand-icon">▶</span>
+                    <i data-lucide="chevron-right" class="tree-expand-icon"></i>
                     <span class="tree-node-label"
                       >Number & Operations in Base Ten</span
                     >
@@ -693,14 +696,14 @@
             <!-- Grade 6 -->
             <div class="tree-node">
               <div class="tree-node-header" onclick="toggleTreeNode(this)">
-                <span class="tree-expand-icon">▶</span>
+                <i data-lucide="chevron-right" class="tree-expand-icon"></i>
                 <span class="tree-node-label">Grade 6</span>
               </div>
               <div class="tree-node-content">
                 <!-- Ratios & Proportional Relationships -->
                 <div class="tree-node">
                   <div class="tree-node-header" onclick="toggleTreeNode(this)">
-                    <span class="tree-expand-icon">▶</span>
+                    <i data-lucide="chevron-right" class="tree-expand-icon"></i>
                     <span class="tree-node-label"
                       >Ratios & Proportional Relationships</span
                     >
@@ -722,7 +725,7 @@
                 <!-- Expressions & Equations -->
                 <div class="tree-node">
                   <div class="tree-node-header" onclick="toggleTreeNode(this)">
-                    <span class="tree-expand-icon">▶</span>
+                    <i data-lucide="chevron-right" class="tree-expand-icon"></i>
                     <span class="tree-node-label">Expressions & Equations</span>
                   </div>
                   <div class="tree-node-content">
@@ -764,7 +767,7 @@
             "
           >
             <div style="font-size: 48px; margin-bottom: 16px; opacity: 0.3">
-              🔍
+              <i data-lucide="search"></i>
             </div>
             <div
               style="
@@ -786,7 +789,7 @@
           <div id="standardDetailContent" class="standard-detail-panel">
             <div class="guidance-text">
               <div class="guidance-title">
-                💡 Choose Standards Your Students Are Ready For
+                <i data-lucide="lightbulb"></i> Choose Standards Your Students Are Ready For
               </div>
               <div class="guidance-desc">
                 Selecting an appropriate difficulty level ensures productive
@@ -888,7 +891,7 @@
               class="template-card"
               onclick="selectTemplate('fractions-basic')"
             >
-              <div class="template-icon">🔢</div>
+              <div class="template-icon"><i data-lucide="hash"></i></div>
               <div class="template-name">Fractions Foundations</div>
               <div class="template-details">Grade 5 • 15 minutes</div>
               <div class="template-standard">5.NF.A.1</div>
@@ -902,7 +905,7 @@
               class="template-card"
               onclick="selectTemplate('area-perimeter')"
             >
-              <div class="template-icon">📐</div>
+              <div class="template-icon"><i data-lucide="ruler"></i></div>
               <div class="template-name">Area & Perimeter</div>
               <div class="template-details">Grade 4 • 20 minutes</div>
               <div class="template-standard">4.MD.A.3</div>
@@ -916,7 +919,7 @@
               class="template-card"
               onclick="selectTemplate('decimal-operations')"
             >
-              <div class="template-icon">💯</div>
+              <div class="template-icon"><i data-lucide="percent"></i></div>
               <div class="template-name">Decimal Operations</div>
               <div class="template-details">Grade 5 • 15 minutes</div>
               <div class="template-standard">5.NBT.B.7</div>
@@ -930,7 +933,7 @@
               class="template-card"
               onclick="selectTemplate('ratios-proportions')"
             >
-              <div class="template-icon">⚖️</div>
+              <div class="template-icon"><i data-lucide="scale"></i></div>
               <div class="template-name">Ratios & Proportions</div>
               <div class="template-details">Grade 6 • 20 minutes</div>
               <div class="template-standard">6.RP.A.1</div>
@@ -944,7 +947,7 @@
               class="template-card"
               onclick="selectTemplate('volume-measurement')"
             >
-              <div class="template-icon">📦</div>
+              <div class="template-icon"><i data-lucide="box"></i></div>
               <div class="template-name">Volume & Measurement</div>
               <div class="template-details">Grade 5 • 15 minutes</div>
               <div class="template-standard">5.MD.C.5</div>
@@ -957,7 +960,7 @@
               class="template-card"
               onclick="selectTemplate('algebraic-expressions')"
             >
-              <div class="template-icon">📊</div>
+              <div class="template-icon"><i data-lucide="bar-chart"></i></div>
               <div class="template-name">Algebraic Expressions</div>
               <div class="template-details">Grade 6 • 20 minutes</div>
               <div class="template-standard">6.EE.A.2</div>
@@ -1029,7 +1032,7 @@
                     class="tooltip"
                     data-tooltip="Search math standards"
                     style="font-size: 18px; color: #999"
-                    >🔍</span
+                    ><i data-lucide="search"></i></span
                   >
                 </div>
               </div>
@@ -1068,5 +1071,12 @@
     <script src="js/group-management.js"></script>
     <script src="js/standards-panel.js"></script>
     <script src="js/main.js"></script>
+    
+    <!-- Initialize Lucide Icons -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        lucide.createIcons();
+      });
+    </script>
   </body>
 </html>

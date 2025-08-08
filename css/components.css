@@ -1,5 +1,19 @@
 /* OKO Teacher Dashboard - Components */
 
+/* Lucide Icon Base Styles */
+.stat-change i,
+.copy-btn i,
+.meta-item i {
+  width: 14px;
+  height: 14px;
+  margin-right: 4px;
+}
+
+.search-input-wrapper i {
+  width: 16px;
+  height: 16px;
+}
+
 /* Buttons */
 .btn-create {
   padding: 10px 20px;
@@ -63,6 +77,11 @@
   min-width: 40px;
 }
 
+.split-button-dropdown svg[data-lucide] {
+  width: 18px !important;
+  height: 18px !important;
+}
+
 .split-button-dropdown:hover {
   background: #4745ae;
 }
@@ -121,7 +140,8 @@
 }
 
 .split-dropdown-icon {
-  font-size: 18px;
+  width: 18px;
+  height: 18px;
   margin-top: 2px;
   flex-shrink: 0;
 }

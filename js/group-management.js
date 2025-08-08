@@ -176,16 +176,16 @@ function createGroupCard(data) {
             <div class="group-code-section">
                 <div class="code-label">Student Login Code</div>
                 <div class="group-code">${data.groupCode}</div>
-                <button class="copy-btn" onclick="copyGroupCode('${data.groupCode}')">📋 Copy Code</button>
+                <button class="copy-btn" onclick="copyGroupCode('${data.groupCode}')"><i data-lucide="copy"></i> Copy Code</button>
             </div>
             
             <div class="group-meta">
                 <span class="meta-item">
-                    <span>👥</span>
+                    <i data-lucide="users"></i>
                     <span>0/24 joined</span>
                 </span>
                 <span class="meta-item">
-                    <span>⏱️</span>
+                    <i data-lucide="clock"></i>
                     <span>${data.duration} min session</span>
                 </span>
             </div>
@@ -216,9 +216,9 @@ function updateSectionCount(sectionTitle) {
 function copyGroupCode(code) {
     navigator.clipboard.writeText(code).then(() => {
         // Show feedback
-        event.target.textContent = '✓ Copied!';
+        event.target.innerHTML = '<i data-lucide="check"></i> Copied!';
         setTimeout(() => {
-            event.target.innerHTML = '📋 Copy Code';
+            event.target.innerHTML = '<i data-lucide="copy"></i> Copy Code';
         }, 2000);
     });
 }

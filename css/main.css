@@ -84,7 +84,8 @@ body {
 
 .nav-icon {
   margin-right: 12px;
-  font-size: 18px;
+  width: 18px;
+  height: 18px;
 }
 
 /* Main Content Layout */
@@ -201,8 +202,12 @@ body {
 }
 
 .empty-icon {
-  font-size: 48px;
   margin-bottom: 16px;
+}
+
+.empty-icon i {
+  width: 48px;
+  height: 48px;
 }
 
 .empty-title {
