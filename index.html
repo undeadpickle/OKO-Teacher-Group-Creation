@@ -6,6 +6,7 @@
     <title>OKO Teacher Dashboard - Groups</title>
 
     <!-- CSS Files -->
+    <link rel="stylesheet" href="css/fonts.css" />
     <link rel="stylesheet" href="css/main.css" />
     <link rel="stylesheet" href="css/components.css" />
     <link rel="stylesheet" href="css/modals.css" />
@@ -54,10 +55,31 @@
             <option>This Week</option>
             <option>This Month</option>
           </select> -->
-          <button class="btn-create">
-            <span>+</span>
-            <span>Create New Group</span>
-          </button>
+          <div class="split-button">
+            <button class="split-button-main" id="createGroupMain">
+              <span>+</span>
+              <span>Create New Group</span>
+            </button>
+            <button class="split-button-dropdown" id="createGroupDropdown">
+              <span>▼</span>
+            </button>
+            <div class="split-dropdown-menu" id="createGroupMenu">
+              <div class="split-dropdown-item" data-action="template">
+                <div class="split-dropdown-icon">📚</div>
+                <div class="split-dropdown-content">
+                  <div class="split-dropdown-title">Use Template</div>
+                  <div class="split-dropdown-desc">Quick setup with curriculum-aligned templates</div>
+                </div>
+              </div>
+              <div class="split-dropdown-item" data-action="custom">
+                <div class="split-dropdown-icon">⚙️</div>
+                <div class="split-dropdown-content">
+                  <div class="split-dropdown-title">Custom Group</div>
+                  <div class="split-dropdown-desc">Create a fully customized group from scratch</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

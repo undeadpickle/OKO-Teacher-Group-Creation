@@ -234,10 +234,13 @@ function setupGroupManagement() {
     document.getElementById('groupNameInput').addEventListener('input', updateCreateButton);
     document.getElementById('gradeLevelSelect').addEventListener('change', updateCreateButton);
     
-    // Add click handlers to create group buttons
+    // Add click handlers to create group buttons (legacy)
     document.querySelectorAll('.btn-create').forEach(btn => {
         btn.addEventListener('click', openCreateGroupModal);
     });
+
+    // Split button functionality
+    initializeSplitButton();
     
     // Close modal on escape key
     document.addEventListener('keydown', function(e) {
@@ -252,4 +255,98 @@ function setupGroupManagement() {
             closeCreateGroupModal();
         }
     });
+}
+
+// Split Button Functionality
+function initializeSplitButton() {
+    const mainButton = document.getElementById('createGroupMain');
+    const dropdownButton = document.getElementById('createGroupDropdown');
+    const dropdownMenu = document.getElementById('createGroupMenu');
+    const dropdownItems = document.querySelectorAll('.split-dropdown-item');
+
+    if (!mainButton || !dropdownButton || !dropdownMenu) {
+        return; // Elements not found
+    }
+
+    // Main button click - default action (use template)
+    mainButton.addEventListener('click', () => {
+        openTemplateModal();
+    });
+
+    // Dropdown toggle
+    dropdownButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleSplitDropdown();
+    });
+
+    // Dropdown menu items
+    dropdownItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const action = item.getAttribute('data-action');
+            
+            if (action === 'template') {
+                openTemplateModal();
+            } else if (action === 'custom') {
+                openCustomModal();
+            }
+            
+            closeSplitDropdown();
+        });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.split-button')) {
+            closeSplitDropdown();
+        }
+    });
+
+    // Close dropdown on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeSplitDropdown();
+        }
+    });
+}
+
+function toggleSplitDropdown() {
+    const dropdownButton = document.getElementById('createGroupDropdown');
+    const dropdownMenu = document.getElementById('createGroupMenu');
+    
+    const isActive = dropdownMenu.classList.contains('active');
+    
+    if (isActive) {
+        closeSplitDropdown();
+    } else {
+        openSplitDropdown();
+    }
+}
+
+function openSplitDropdown() {
+    const dropdownButton = document.getElementById('createGroupDropdown');
+    const dropdownMenu = document.getElementById('createGroupMenu');
+    
+    dropdownButton.classList.add('active');
+    dropdownMenu.classList.add('active');
+}
+
+function closeSplitDropdown() {
+    const dropdownButton = document.getElementById('createGroupDropdown');
+    const dropdownMenu = document.getElementById('createGroupMenu');
+    
+    if (dropdownButton) dropdownButton.classList.remove('active');
+    if (dropdownMenu) dropdownMenu.classList.remove('active');
+}
+
+function openTemplateModal() {
+    // For now, use the existing modal - in the future this could be a template-specific modal
+    openCreateGroupModal();
+    closeSplitDropdown();
+}
+
+function openCustomModal() {
+    // For now, use the existing modal - in the future this could be a custom-specific modal
+    openCreateGroupModal();
+    closeSplitDropdown();
 }

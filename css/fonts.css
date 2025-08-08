@@ -1,0 +1,78 @@
+/* OKO Teacher Dashboard - Typography System */
+
+/* Google Fonts - Roboto */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+
+/* ABC Marfa Font Declarations */
+/* Regular Weight */
+@font-face {
+  font-family: 'ABC Marfa';
+  src: url('../assets/fonts/abc-marfa/ABCMarfa-Regular.woff2') format('woff2'),
+       url('../assets/fonts/abc-marfa/ABCMarfa-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Medium Weight */
+@font-face {
+  font-family: 'ABC Marfa';
+  src: url('../assets/fonts/abc-marfa/ABCMarfa-Medium.woff2') format('woff2'),
+       url('../assets/fonts/abc-marfa/ABCMarfa-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* SemiBold Weight */
+@font-face {
+  font-family: 'ABC Marfa';
+  src: url('../assets/fonts/abc-marfa/ABCMarfa-SemiBold.woff2') format('woff2'),
+       url('../assets/fonts/abc-marfa/ABCMarfa-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Bold Weight */
+@font-face {
+  font-family: 'ABC Marfa';
+  src: url('../assets/fonts/abc-marfa/ABCMarfa-Bold.woff2') format('woff2'),
+       url('../assets/fonts/abc-marfa/ABCMarfa-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Typography Variables for Consistent Usage */
+:root {
+  /* Font Families */
+  --font-display: 'ABC Marfa', Georgia, serif;
+  --font-body: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "Courier New", monospace;
+  
+  /* Font Weights */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+}
+
+/* Base Typography Classes */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Weight Utilities */
+.weight-regular { font-weight: var(--weight-regular); }
+.weight-medium { font-weight: var(--weight-medium); }
+.weight-semibold { font-weight: var(--weight-semibold); }
+.weight-bold { font-weight: var(--weight-bold); }
