@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OKO Teacher Dashboard - Groups</title>
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/modals.css" />
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="logo">
+        <img
+          src="assets/images/OKO Core Logotype Dark Green.png"
+          alt="OKO"
+          class="logo-image"
+        />
+      </div>
+
+      <div class="nav-item active">
+        <span class="nav-icon">📊</span>
+        <span>Dashboard</span>
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon">👥</span>
+        <span>Groups</span>
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon">📈</span>
+        <span>Reports</span>
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon">👨‍🎓</span>
+        <span>Students</span>
+      </div>
+      <div class="nav-item">
+        <span class="nav-icon">⚙️</span>
+        <span>Settings</span>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Header -->
+      <div class="header">
+        <h1 class="page-title">Let's Talk Groups</h1>
+        <div class="header-actions">
+          <!-- <select class="date-filter">
+            <option>Today</option>
+            <option>This Week</option>
+            <option>This Month</option>
+          </select> -->
+          <button class="btn-create">
+            <span>+</span>
+            <span>Create New Group</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats Overview -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">Active Sessions</div>
+          <div class="stat-value">3</div>
+          <div class="stat-change">↑ 2 from yesterday</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Students Online</div>
+          <div class="stat-value">47</div>
+          <div class="stat-change">• Live now</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Completed Today</div>
+          <div class="stat-value">8</div>
+          <div class="stat-change">↑ 23% vs avg</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Avg Discourse Score</div>
+          <div class="stat-value">8.2</div>
+          <div class="stat-change">↑ 0.5 this week</div>
+        </div>
+      </div>
+
+      <!-- Ready to Start Section -->
+      <div class="groups-section">
+        <div class="section-header">
+          <h2 class="section-title">Ready to Start</h2>
+          <span class="section-count">2 groups</span>
+        </div>
+        <div class="groups-grid">
+          <!-- Ready Group 1 -->
+          <div class="group-card">
+            <div class="group-status-bar"></div>
+            <div class="group-content">
+              <div class="group-header">
+                <div class="group-name">Period 3 - Advanced</div>
+                <span class="group-badge badge-ready">Ready</span>
+              </div>
+
+              <div class="standard-info">
+                <div class="standard-code">5.NF.B.4b</div>
+                <div class="standard-desc">
+                  Find the area of a rectangle with fractional side lengths
+                </div>
+              </div>
+
+              <div class="group-code-section">
+                <div class="code-label">Student Login Code</div>
+                <div class="group-code">ZBTN1</div>
+                <button
+                  class="copy-btn tooltip"
+                  data-tooltip="Copy student login code"
+                >
+                  📋 Copy Code
+                </button>
+              </div>
+
+              <div class="group-meta">
+                <span class="meta-item">
+                  <span>👥</span>
+                  <span>0/24 joined</span>
+                </span>
+                <span class="meta-item">
+                  <span>⏱️</span>
+                  <span>15 min session</span>
+                </span>
+              </div>
+
+              <div class="group-actions">
+                <button class="btn-action">Edit</button>
+                <button class="btn-action primary">Start Session</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ready Group 2 -->
+          <div class="group-card">
+            <div class="group-status-bar"></div>
+            <div class="group-content">
+              <div class="group-header">
+                <div class="group-name">Period 5 - Mixed</div>
+                <span class="group-badge badge-ready">Ready</span>
+              </div>
+
+              <div class="standard-info">
+                <div class="standard-code">5.MD.C.5</div>
+                <div class="standard-desc">
+                  Relate volume to multiplication and addition
+                </div>
+              </div>
+
+              <div class="group-code-section">
+                <div class="code-label">Student Login Code</div>
+                <div class="group-code">YVNT2</div>
+                <button
+                  class="copy-btn tooltip"
+                  data-tooltip="Copy student login code"
+                >
+                  📋 Copy Code
+                </button>
+              </div>
+
+              <div class="group-meta">
+                <span class="meta-item">
+                  <span>👥</span>
+                  <span>28 students</span>
+                </span>
+                <span class="meta-item">
+                  <span>⏱️</span>
+                  <span>15 min session</span>
+                </span>
+              </div>
+
+              <div class="group-actions">
+                <button class="btn-action">Edit</button>
+                <button class="btn-action primary">Start Session</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Active Sessions Section -->
+      <div class="groups-section">
+        <div class="section-header">
+          <h2 class="section-title">Active Sessions</h2>
+          <span class="section-count">3 groups</span>
+        </div>
+        <div class="groups-grid">
+          <!-- Active Group -->
+          <div class="group-card">
+            <div class="group-status-bar active"></div>
+            <div class="group-content">
+              <div class="group-header">
+                <div class="group-name">Period 2 - Team A</div>
+                <span class="group-badge badge-active">In Progress</span>
+              </div>
+
+              <div class="standard-info">
+                <div class="standard-code">5.NF.A.1</div>
+                <div class="standard-desc">
+                  Add and subtract fractions with unlike denominators
+                </div>
+              </div>
+
+              <div style="margin: 12px 0">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 4px;
+                  "
+                >
+                  <span style="font-size: 13px; color: #666"
+                    >Team Time - Round 1</span
+                  >
+                  <span
+                    style="font-size: 13px; color: #1a5f3f; font-weight: 600"
+                    >18/22 active</span
+                  >
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-fill" style="width: 65%"></div>
+                </div>
+                <div class="time-info">
+                  Started 8 minutes ago • ~7 min remaining
+                </div>
+              </div>
+
+              <div class="group-meta">
+                <span class="student-count">
+                  <span>👥</span>
+                  <span>22 students</span>
+                </span>
+                <span class="meta-item">
+                  <span>💬</span>
+                  <span>High engagement</span>
+                </span>
+              </div>
+
+              <div class="group-actions">
+                <button class="btn-action">Monitor</button>
+                <button class="btn-action">End Early</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Completed Today Section -->
+      <div class="groups-section">
+        <div class="section-header">
+          <h2 class="section-title">Completed Today</h2>
+          <span class="section-count">8 groups</span>
+        </div>
+        <div class="groups-grid">
+          <!-- Completed Group -->
+          <div class="group-card">
+            <div class="group-status-bar completed"></div>
+            <div class="group-content">
+              <div class="group-header">
+                <div class="group-name">Period 1 - Morning</div>
+                <span class="group-badge badge-completed">Completed</span>
+              </div>
+
+              <div class="standard-info">
+                <div class="standard-code">5.NBT.B.6</div>
+                <div class="standard-desc">
+                  Find whole-number quotients using strategies
+                </div>
+              </div>
+
+              <div
+                style="
+                  background: #f8f9fa;
+                  border-radius: 8px;
+                  padding: 12px;
+                  margin: 12px 0;
+                "
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 8px;
+                  "
+                >
+                  <span style="font-size: 13px; color: #666"
+                    >Session Summary</span
+                  >
+                  <span style="font-size: 13px; color: #4caf50"
+                    >✓ Complete</span
+                  >
+                </div>
+                <div
+                  style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 12px;
+                  "
+                >
+                  <div>
+                    <div style="font-size: 11px; color: #999">
+                      Participation
+                    </div>
+                    <div style="font-size: 16px; font-weight: 600">96%</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 11px; color: #999">
+                      Discourse Score
+                    </div>
+                    <div style="font-size: 16px; font-weight: 600">8.7</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="group-meta">
+                <span class="meta-item">
+                  <span>⏰</span>
+                  <span>9:15 AM</span>
+                </span>
+                <span class="meta-item">
+                  <span>⏱️</span>
+                  <span>14 min</span>
+                </span>
+              </div>
+
+              <div class="group-actions">
+                <button class="btn-action">View Report</button>
+                <button class="btn-action">Duplicate</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scheduled Section -->
+      <div class="groups-section">
+        <div class="section-header">
+          <h2 class="section-title">Scheduled for Later</h2>
+          <span class="section-count">3 groups</span>
+        </div>
+        <div class="groups-grid">
+          <!-- Scheduled Group -->
+          <div class="group-card">
+            <div class="group-status-bar pending"></div>
+            <div class="group-content">
+              <div class="group-header">
+                <div class="group-name">Period 6 - Remedial</div>
+                <span class="group-badge badge-scheduled">Scheduled</span>
+              </div>
+
+              <div class="standard-info">
+                <div class="standard-code">4.NF.B.4</div>
+                <div class="standard-desc">
+                  Multiply a fraction by a whole number (Prerequisite)
+                </div>
+              </div>
+
+              <div
+                style="
+                  background: #fff8e1;
+                  border-radius: 8px;
+                  padding: 12px;
+                  margin: 12px 0;
+                  text-align: center;
+                "
+              >
+                <div
+                  style="
+                    font-size: 13px;
+                    color: #f57c00;
+                    font-weight: 600;
+                    margin-bottom: 4px;
+                  "
+                >
+                  Scheduled for 2:30 PM
+                </div>
+                <div style="font-size: 12px; color: #666">
+                  Starts in 3 hours 45 minutes
+                </div>
+              </div>
+
+              <div class="group-meta">
+                <span class="meta-item">
+                  <span>👥</span>
+                  <span>18 students</span>
+                </span>
+                <span class="meta-item">
+                  <span>⏱️</span>
+                  <span>20 min session</span>
+                </span>
+              </div>
+
+              <div class="group-actions">
+                <button class="btn-action">Edit</button>
+                <button class="btn-action">Activate Now</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Empty state for creating more -->
+          <div class="empty-state">
+            <div class="empty-icon">📝</div>
+            <div class="empty-title">Plan Ahead</div>
+            <div class="empty-desc">
+              Schedule groups in advance for smoother lessons
+            </div>
+            <button class="btn-create">
+              <span>+</span>
+              <span>Schedule Group</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Standards Selection Side Panel -->
+    <div id="standardsPanel" class="standards-panel-overlay">
+      <div class="standards-panel">
+        <!-- Left Panel: Search and Navigation -->
+        <div class="standards-left-panel">
+          <div class="panel-header">
+            <div class="panel-title">Select Standard</div>
+            <div class="panel-subtitle">
+              Search or browse to find the right standard for your students
+            </div>
+            <button class="panel-close" onclick="closeStandardsPanel()">
+              &times;
+            </button>
+          </div>
+
+          <!-- Search Section -->
+          <div class="search-section">
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search for standards (e.g., 'fractions with unlike denominators')"
+              id="standardSearchInput"
+            />
+            <div class="filter-chips">
+              <div
+                class="filter-chip"
+                onclick="toggleFilter(this, 'grade', '3')"
+              >
+                Grade 3
+              </div>
+              <div
+                class="filter-chip"
+                onclick="toggleFilter(this, 'grade', '4')"
+              >
+                Grade 4
+              </div>
+              <div
+                class="filter-chip"
+                onclick="toggleFilter(this, 'grade', '5')"
+              >
+                Grade 5
+              </div>
+              <div
+                class="filter-chip"
+                onclick="toggleFilter(this, 'grade', '6')"
+              >
+                Grade 6
+              </div>
+              <div
+                class="filter-chip"
+                onclick="toggleFilter(this, 'domain', 'NF')"
+              >
+                Fractions
+              </div>
+              <div
+                class="filter-chip"
+                onclick="toggleFilter(this, 'domain', 'MD')"
+              >
+                Measurement
+              </div>
+              <div
+                class="filter-chip"
+                onclick="toggleFilter(this, 'domain', 'NBT')"
+              >
+                Base Ten
+              </div>
+            </div>
+          </div>
+
+          <!-- Recently Used Standards -->
+          <div class="recently-used-section">
+            <div class="section-label">Recently Used</div>
+            <div class="recent-standards-list">
+              <div class="recent-standard" onclick="selectStandard('5.NF.A.1')">
+                <div class="recent-standard-code">5.NF.A.1</div>
+                <div class="recent-standard-name">
+                  Add and subtract fractions with unlike denominators
+                </div>
+              </div>
+              <div class="recent-standard" onclick="selectStandard('5.MD.C.5')">
+                <div class="recent-standard-code">5.MD.C.5</div>
+                <div class="recent-standard-name">
+                  Relate volume to multiplication and addition
+                </div>
+              </div>
+              <div class="recent-standard" onclick="selectStandard('4.MD.A.3')">
+                <div class="recent-standard-code">4.MD.A.3</div>
+                <div class="recent-standard-name">
+                  Apply area and perimeter formulas for rectangles
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Search Results (Hidden by default, shown when searching) -->
+          <div class="search-results" id="searchResults" style="display: none">
+            <div class="search-results-header">
+              <div class="search-results-count" id="searchResultsCount">
+                0 results
+              </div>
+            </div>
+            <div class="search-results-list" id="searchResultsList"></div>
+          </div>
+
+          <!-- Standards Tree (Shown by default) -->
+          <div class="standards-tree-section" id="standardsTree">
+            <div class="section-label">Browse by Grade & Domain</div>
+
+            <!-- Grade 4 -->
+            <div class="tree-node">
+              <div class="tree-node-header" onclick="toggleTreeNode(this)">
+                <span class="tree-expand-icon">▶</span>
+                <span class="tree-node-label">Grade 4</span>
+              </div>
+              <div class="tree-node-content">
+                <!-- Measurement & Data -->
+                <div class="tree-node">
+                  <div class="tree-node-header" onclick="toggleTreeNode(this)">
+                    <span class="tree-expand-icon">▶</span>
+                    <span class="tree-node-label">Measurement & Data</span>
+                  </div>
+                  <div class="tree-node-content">
+                    <div
+                      class="standard-item"
+                      onclick="selectStandard('4.MD.A.3')"
+                    >
+                      <div class="standard-code">4.MD.A.3</div>
+                      <div class="standard-name">Area and Perimeter</div>
+                      <div class="standard-preview">
+                        Apply area and perimeter formulas for rectangles
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Number & Operations - Fractions -->
+                <div class="tree-node">
+                  <div class="tree-node-header" onclick="toggleTreeNode(this)">
+                    <span class="tree-expand-icon">▶</span>
+                    <span class="tree-node-label"
+                      >Number & Operations - Fractions</span
+                    >
+                  </div>
+                  <div class="tree-node-content">
+                    <div
+                      class="standard-item"
+                      onclick="selectStandard('4.NF.B.4')"
+                    >
+                      <div class="standard-code">4.NF.B.4</div>
+                      <div class="standard-name">
+                        Multiply Fractions by Whole Numbers
+                      </div>
+                      <div class="standard-preview">
+                        Apply and extend previous understandings of
+                        multiplication
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Grade 5 -->
+            <div class="tree-node">
+              <div class="tree-node-header" onclick="toggleTreeNode(this)">
+                <span class="tree-expand-icon">▶</span>
+                <span class="tree-node-label">Grade 5</span>
+              </div>
+              <div class="tree-node-content">
+                <!-- Number & Operations - Fractions -->
+                <div class="tree-node">
+                  <div class="tree-node-header" onclick="toggleTreeNode(this)">
+                    <span class="tree-expand-icon">▶</span>
+                    <span class="tree-node-label"
+                      >Number & Operations - Fractions</span
+                    >
+                  </div>
+                  <div class="tree-node-content">
+                    <div
+                      class="standard-item"
+                      onclick="selectStandard('5.NF.A.1')"
+                    >
+                      <div class="standard-code">5.NF.A.1</div>
+                      <div class="standard-name">
+                        Add and Subtract Fractions
+                      </div>
+                      <div class="standard-preview">
+                        Add and subtract fractions with unlike denominators
+                      </div>
+                    </div>
+                    <div
+                      class="standard-item"
+                      onclick="selectStandard('5.NF.B.4')"
+                    >
+                      <div class="standard-code">5.NF.B.4</div>
+                      <div class="standard-name">Multiply Fractions</div>
+                      <div class="standard-preview">
+                        Apply and extend previous understandings of
+                        multiplication
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Measurement & Data -->
+                <div class="tree-node">
+                  <div class="tree-node-header" onclick="toggleTreeNode(this)">
+                    <span class="tree-expand-icon">▶</span>
+                    <span class="tree-node-label">Measurement & Data</span>
+                  </div>
+                  <div class="tree-node-content">
+                    <div
+                      class="standard-item"
+                      onclick="selectStandard('5.MD.C.5')"
+                    >
+                      <div class="standard-code">5.MD.C.5</div>
+                      <div class="standard-name">Volume</div>
+                      <div class="standard-preview">
+                        Relate volume to multiplication and addition
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Number & Operations in Base Ten -->
+                <div class="tree-node">
+                  <div class="tree-node-header" onclick="toggleTreeNode(this)">
+                    <span class="tree-expand-icon">▶</span>
+                    <span class="tree-node-label"
+                      >Number & Operations in Base Ten</span
+                    >
+                  </div>
+                  <div class="tree-node-content">
+                    <div
+                      class="standard-item"
+                      onclick="selectStandard('5.NBT.B.7')"
+                    >
+                      <div class="standard-code">5.NBT.B.7</div>
+                      <div class="standard-name">Decimal Operations</div>
+                      <div class="standard-preview">
+                        Add, subtract, multiply, and divide decimals to
+                        hundredths
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Grade 6 -->
+            <div class="tree-node">
+              <div class="tree-node-header" onclick="toggleTreeNode(this)">
+                <span class="tree-expand-icon">▶</span>
+                <span class="tree-node-label">Grade 6</span>
+              </div>
+              <div class="tree-node-content">
+                <!-- Ratios & Proportional Relationships -->
+                <div class="tree-node">
+                  <div class="tree-node-header" onclick="toggleTreeNode(this)">
+                    <span class="tree-expand-icon">▶</span>
+                    <span class="tree-node-label"
+                      >Ratios & Proportional Relationships</span
+                    >
+                  </div>
+                  <div class="tree-node-content">
+                    <div
+                      class="standard-item"
+                      onclick="selectStandard('6.RP.A.1')"
+                    >
+                      <div class="standard-code">6.RP.A.1</div>
+                      <div class="standard-name">Understand Ratios</div>
+                      <div class="standard-preview">
+                        Understand ratio concepts and use ratio reasoning
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Expressions & Equations -->
+                <div class="tree-node">
+                  <div class="tree-node-header" onclick="toggleTreeNode(this)">
+                    <span class="tree-expand-icon">▶</span>
+                    <span class="tree-node-label">Expressions & Equations</span>
+                  </div>
+                  <div class="tree-node-content">
+                    <div
+                      class="standard-item"
+                      onclick="selectStandard('6.EE.A.2')"
+                    >
+                      <div class="standard-code">6.EE.A.2</div>
+                      <div class="standard-name">Write Expressions</div>
+                      <div class="standard-preview">
+                        Write, read, and evaluate expressions with letters
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Panel: Standard Details -->
+        <div class="standards-right-panel">
+          <div class="panel-header">
+            <div class="panel-title">Standard Details</div>
+            <div class="panel-subtitle">Review before selecting</div>
+          </div>
+
+          <!-- Default state when no standard selected -->
+          <div
+            id="standardDetailDefault"
+            class="standard-detail-panel active"
+            style="
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              text-align: center;
+              flex: 1;
+            "
+          >
+            <div style="font-size: 48px; margin-bottom: 16px; opacity: 0.3">
+              🔍
+            </div>
+            <div
+              style="
+                font-size: 16px;
+                font-weight: 600;
+                margin-bottom: 8px;
+                color: #666;
+              "
+            >
+              Select a Standard
+            </div>
+            <div style="font-size: 14px; color: #999">
+              Click on a standard from the left to see details and preview
+              questions
+            </div>
+          </div>
+
+          <!-- Standard detail content (hidden initially) -->
+          <div id="standardDetailContent" class="standard-detail-panel">
+            <div class="guidance-text">
+              <div class="guidance-title">
+                💡 Choose Standards Your Students Are Ready For
+              </div>
+              <div class="guidance-desc">
+                Selecting an appropriate difficulty level ensures productive
+                discussions where students can build on each other's ideas
+                without frustration.
+              </div>
+            </div>
+
+            <div class="detail-standard-code" id="detailStandardCode">
+              5.NF.A.1
+            </div>
+            <div class="detail-standard-name" id="detailStandardName">
+              Add and subtract fractions with unlike denominators
+            </div>
+            <div class="detail-standard-desc" id="detailStandardDesc">
+              Add and subtract fractions with unlike denominators (including
+              mixed numbers) by replacing given fractions with equivalent
+              fractions in such a way as to produce an equivalent sum or
+              difference of fractions with like denominators.
+            </div>
+
+            <div style="display: flex; gap: 16px; margin-bottom: 20px">
+              <div class="meta-item">
+                <div class="meta-label">Questions</div>
+                <div class="meta-value" id="detailQuestionCount">24</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Difficulty</div>
+                <div
+                  class="difficulty-badge difficulty-just-right"
+                  id="detailDifficulty"
+                >
+                  Just Right
+                </div>
+              </div>
+            </div>
+
+            <div
+              id="prerequisitesSection"
+              style="margin-bottom: 20px; display: none"
+            >
+              <div class="section-label">Prerequisites (Building Blocks)</div>
+              <div style="font-size: 13px; color: #666; margin-bottom: 12px">
+                <span
+                  class="tooltip"
+                  data-tooltip="Building block standards that prepare students for this topic"
+                  >If this standard seems too challenging, try these
+                  foundational standards first:</span
+                >
+              </div>
+              <div id="prerequisitesList"></div>
+            </div>
+
+            <button
+              class="btn-primary tooltip"
+              data-tooltip="Preview sample questions for this standard"
+              onclick="previewQuestions()"
+              style="margin-bottom: 16px; width: 100%"
+            >
+              👀 Preview Questions
+            </button>
+          </div>
+
+          <div class="panel-actions">
+            <button class="btn-secondary" onclick="closeStandardsPanel()">
+              Cancel
+            </button>
+            <button
+              class="btn-primary"
+              id="selectStandardBtn"
+              onclick="confirmStandardSelection()"
+              disabled
+            >
+              Select This Standard
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Group Modal -->
+    <div id="createGroupModal" class="modal-overlay">
+      <div class="modal">
+        <div class="modal-header">
+          <div>
+            <div class="modal-title">Create New Group</div>
+            <div class="modal-subtitle">
+              Choose a curriculum template or create a custom group
+            </div>
+          </div>
+          <button class="modal-close" onclick="closeCreateGroupModal()">
+            &times;
+          </button>
+        </div>
+
+        <div class="modal-content">
+          <div class="template-gallery">
+            <div
+              class="template-card"
+              onclick="selectTemplate('fractions-basic')"
+            >
+              <div class="template-icon">🔢</div>
+              <div class="template-name">Fractions Foundations</div>
+              <div class="template-details">Grade 5 • 15 minutes</div>
+              <div class="template-standard">5.NF.A.1</div>
+              <div class="template-description">
+                Add and subtract fractions with unlike denominators using visual
+                models and algorithms
+              </div>
+            </div>
+
+            <div
+              class="template-card"
+              onclick="selectTemplate('area-perimeter')"
+            >
+              <div class="template-icon">📐</div>
+              <div class="template-name">Area & Perimeter</div>
+              <div class="template-details">Grade 4 • 20 minutes</div>
+              <div class="template-standard">4.MD.A.3</div>
+              <div class="template-description">
+                Apply area and perimeter formulas for rectangles to solve real
+                world problems
+              </div>
+            </div>
+
+            <div
+              class="template-card"
+              onclick="selectTemplate('decimal-operations')"
+            >
+              <div class="template-icon">💯</div>
+              <div class="template-name">Decimal Operations</div>
+              <div class="template-details">Grade 5 • 15 minutes</div>
+              <div class="template-standard">5.NBT.B.7</div>
+              <div class="template-description">
+                Add, subtract, multiply, and divide decimals to hundredths using
+                concrete models
+              </div>
+            </div>
+
+            <div
+              class="template-card"
+              onclick="selectTemplate('ratios-proportions')"
+            >
+              <div class="template-icon">⚖️</div>
+              <div class="template-name">Ratios & Proportions</div>
+              <div class="template-details">Grade 6 • 20 minutes</div>
+              <div class="template-standard">6.RP.A.1</div>
+              <div class="template-description">
+                Understand ratio concepts and use ratio reasoning to solve
+                problems
+              </div>
+            </div>
+
+            <div
+              class="template-card"
+              onclick="selectTemplate('volume-measurement')"
+            >
+              <div class="template-icon">📦</div>
+              <div class="template-name">Volume & Measurement</div>
+              <div class="template-details">Grade 5 • 15 minutes</div>
+              <div class="template-standard">5.MD.C.5</div>
+              <div class="template-description">
+                Relate volume to multiplication and addition of whole numbers
+              </div>
+            </div>
+
+            <div
+              class="template-card"
+              onclick="selectTemplate('algebraic-expressions')"
+            >
+              <div class="template-icon">📊</div>
+              <div class="template-name">Algebraic Expressions</div>
+              <div class="template-details">Grade 6 • 20 minutes</div>
+              <div class="template-standard">6.EE.A.2</div>
+              <div class="template-description">
+                Write, read, and evaluate expressions in which letters stand for
+                numbers
+              </div>
+            </div>
+          </div>
+
+          <hr class="modal-divider" />
+
+          <div class="custom-form-section" id="customForm">
+            <h3 style="margin-bottom: 20px; color: #1a1a1a">
+              Or Create Custom Group
+            </h3>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Group Name</label>
+                <input
+                  type="text"
+                  class="form-input"
+                  placeholder="e.g., Period 3 - Advanced"
+                  id="groupNameInput"
+                />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Grade Level</label>
+                <select class="form-select" id="gradeLevelSelect">
+                  <option value="">Select Grade</option>
+                  <option value="3">Grade 3</option>
+                  <option value="4">Grade 4</option>
+                  <option value="5">Grade 5</option>
+                  <option value="6">Grade 6</option>
+                  <option value="7">Grade 7</option>
+                  <option value="8">Grade 8</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Math Standard</label>
+                <div
+                  class="standard-selector"
+                  onclick="openStandardSelection()"
+                >
+                  <div class="standard-selector-content">
+                    <div
+                      class="standard-selector-placeholder"
+                      id="standardPlaceholder"
+                    >
+                      Click to select a standard...
+                    </div>
+                    <div
+                      class="standard-selector-selected"
+                      id="standardSelected"
+                      style="display: none"
+                    >
+                      <div
+                        class="standard-code-display"
+                        id="selectedStandardCode"
+                      ></div>
+                      <div id="selectedStandardName"></div>
+                    </div>
+                  </div>
+                  <span
+                    class="tooltip"
+                    data-tooltip="Search math standards"
+                    style="font-size: 18px; color: #999"
+                    >🔍</span
+                  >
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Session Duration</label>
+                <select class="form-select" id="durationSelect">
+                  <option value="10">10 minutes</option>
+                  <option value="15" selected>15 minutes</option>
+                  <option value="20">20 minutes</option>
+                  <option value="25">25 minutes</option>
+                  <option value="30">30 minutes</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn-secondary" onclick="closeCreateGroupModal()">
+            Cancel
+          </button>
+          <button
+            class="btn-primary"
+            id="createGroupBtn"
+            disabled
+            onclick="createGroup()"
+          >
+            Create Group
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/data.js"></script>
+    <script src="js/group-management.js"></script>
+    <script src="js/standards-panel.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
