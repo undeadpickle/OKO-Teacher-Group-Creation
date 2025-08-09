@@ -364,3 +364,8 @@ function openCustomModal() {
     openCreateGroupModal();
     closeSplitDropdown();
 }
+
+// Edit group placeholder function
+function editGroup() {
+    alert('Group edit coming soon!');
+}

@@ -370,6 +370,10 @@
   color: #666;
   cursor: pointer;
   margin-top: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .copy-btn:hover {
@@ -429,18 +433,24 @@
 }
 
 .difficulty-just-right {
-  background: #e3f2fd;
+  background: linear-gradient(135deg, #e3f2fd, #bbdefb);
   color: #1565c0;
+  border: 1px solid #90caf9;
+  position: relative;
 }
 
 .difficulty-too-easy {
-  background: #e8f5e8;
+  background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
   color: #2e7d32;
+  border: 1px solid #81c784;
+  position: relative;
 }
 
 .difficulty-too-hard {
-  background: #fff3e0;
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2);
   color: #e65100;
+  border: 1px solid #ffcc02;
+  position: relative;
 }
 
 /* Form Elements */
@@ -469,6 +479,8 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 14px;
+  height: 48px;
+  box-sizing: border-box;
   transition: all 0.2s;
 }
 
@@ -483,6 +495,8 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 14px;
+  height: 48px;
+  box-sizing: border-box;
   background: white;
   cursor: pointer;
 }

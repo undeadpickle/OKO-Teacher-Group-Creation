@@ -162,7 +162,7 @@
               </div>
 
               <div class="group-actions">
-                <button class="btn-action">Edit</button>
+                <button class="btn-action" onclick="editGroup()">Edit</button>
                 <button class="btn-action primary">Start Session</button>
               </div>
             </div>
@@ -207,7 +207,7 @@
               </div>
 
               <div class="group-actions">
-                <button class="btn-action">Edit</button>
+                <button class="btn-action" onclick="editGroup()">Edit</button>
                 <button class="btn-action primary">Start Session</button>
               </div>
             </div>
@@ -428,7 +428,7 @@
               </div>
 
               <div class="group-actions">
-                <button class="btn-action">Edit</button>
+                <button class="btn-action" onclick="editGroup()">Edit</button>
                 <button class="btn-action">Activate Now</button>
               </div>
             </div>
@@ -467,12 +467,24 @@
 
           <!-- Search Section -->
           <div class="search-section">
-            <input
-              type="text"
-              class="search-input"
-              placeholder="Search for standards (e.g., 'fractions with unlike denominators')"
-              id="standardSearchInput"
-            />
+            <div class="search-input-wrapper">
+              <input
+                type="text"
+                class="search-input"
+                placeholder="Search for standards (e.g., 'fractions with unlike denominators')"
+                id="standardSearchInput"
+              />
+              <button 
+                class="search-clear-btn" 
+                id="searchClearBtn"
+                onclick="clearSearchInput()"
+                style="display: none;"
+                title="Clear search"
+              >
+                <i data-lucide="x"></i>
+              </button>
+              <span class="ai-badge">✨ AI-Enhanced</span>
+            </div>
             <div class="filter-chips">
               <div
                 class="filter-chip"
@@ -563,6 +575,7 @@
               <div class="tree-node-header" onclick="toggleTreeNode(this)">
                 <i data-lucide="chevron-right" class="tree-expand-icon"></i>
                 <span class="tree-node-label">Grade 4</span>
+                <span class="tree-node-count">2 domains, 2 standards</span>
               </div>
               <div class="tree-node-content">
                 <!-- Measurement & Data -->
@@ -570,6 +583,7 @@
                   <div class="tree-node-header" onclick="toggleTreeNode(this)">
                     <i data-lucide="chevron-right" class="tree-expand-icon"></i>
                     <span class="tree-node-label">Measurement & Data</span>
+                    <span class="tree-node-count">1 standard</span>
                   </div>
                   <div class="tree-node-content">
                     <div
@@ -592,6 +606,7 @@
                     <span class="tree-node-label"
                       >Number & Operations - Fractions</span
                     >
+                    <span class="tree-node-count">1 standard</span>
                   </div>
                   <div class="tree-node-content">
                     <div
@@ -617,6 +632,7 @@
               <div class="tree-node-header" onclick="toggleTreeNode(this)">
                 <i data-lucide="chevron-right" class="tree-expand-icon"></i>
                 <span class="tree-node-label">Grade 5</span>
+                <span class="tree-node-count">3 domains, 4 standards</span>
               </div>
               <div class="tree-node-content">
                 <!-- Number & Operations - Fractions -->
@@ -626,6 +642,7 @@
                     <span class="tree-node-label"
                       >Number & Operations - Fractions</span
                     >
+                    <span class="tree-node-count">2 standards</span>
                   </div>
                   <div class="tree-node-content">
                     <div
@@ -659,6 +676,7 @@
                   <div class="tree-node-header" onclick="toggleTreeNode(this)">
                     <i data-lucide="chevron-right" class="tree-expand-icon"></i>
                     <span class="tree-node-label">Measurement & Data</span>
+                    <span class="tree-node-count">1 standard</span>
                   </div>
                   <div class="tree-node-content">
                     <div
@@ -681,6 +699,7 @@
                     <span class="tree-node-label"
                       >Number & Operations in Base Ten</span
                     >
+                    <span class="tree-node-count">1 standard</span>
                   </div>
                   <div class="tree-node-content">
                     <div
@@ -704,6 +723,7 @@
               <div class="tree-node-header" onclick="toggleTreeNode(this)">
                 <i data-lucide="chevron-right" class="tree-expand-icon"></i>
                 <span class="tree-node-label">Grade 6</span>
+                <span class="tree-node-count">2 domains, 2 standards</span>
               </div>
               <div class="tree-node-content">
                 <!-- Ratios & Proportional Relationships -->
@@ -713,6 +733,7 @@
                     <span class="tree-node-label"
                       >Ratios & Proportional Relationships</span
                     >
+                    <span class="tree-node-count">1 standard</span>
                   </div>
                   <div class="tree-node-content">
                     <div
@@ -733,6 +754,7 @@
                   <div class="tree-node-header" onclick="toggleTreeNode(this)">
                     <i data-lucide="chevron-right" class="tree-expand-icon"></i>
                     <span class="tree-node-label">Expressions & Equations</span>
+                    <span class="tree-node-count">1 standard</span>
                   </div>
                   <div class="tree-node-content">
                     <div
@@ -759,106 +781,147 @@
             <div class="panel-subtitle">Review before selecting</div>
           </div>
 
-          <!-- Default state when no standard selected -->
-          <div
-            id="standardDetailDefault"
-            class="standard-detail-panel active"
-            style="
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              text-align: center;
-              flex: 1;
-            "
-          >
-            <div style="font-size: 48px; margin-bottom: 16px; opacity: 0.3">
-              <i data-lucide="search"></i>
-            </div>
+          <!-- Scrollable content area -->
+          <div class="standards-right-content">
+            <!-- Default state when no standard selected -->
             <div
+              id="standardDetailDefault"
+              class="standard-detail-panel active"
               style="
-                font-size: 16px;
-                font-weight: 600;
-                margin-bottom: 8px;
-                color: #666;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                flex: 1;
               "
             >
-              Select a Standard
-            </div>
-            <div style="font-size: 14px; color: #999">
-              Click on a standard from the left to see details and preview
-              questions
-            </div>
-          </div>
-
-          <!-- Standard detail content (hidden initially) -->
-          <div id="standardDetailContent" class="standard-detail-panel">
-            <div class="guidance-text">
-              <div class="guidance-title">
-                <i data-lucide="lightbulb"></i> Choose Standards Your Students Are Ready For
+              <div style="font-size: 48px; margin-bottom: 16px; opacity: 0.3">
+                <i data-lucide="search"></i>
               </div>
-              <div class="guidance-desc">
-                Selecting an appropriate difficulty level ensures productive
-                discussions where students can build on each other's ideas
-                without frustration.
+              <div
+                style="
+                  font-size: 16px;
+                  font-weight: 600;
+                  margin-bottom: 8px;
+                  color: #666;
+                "
+              >
+                Select a Standard
+              </div>
+              <div style="font-size: 14px; color: #999">
+                Click on a standard from the left to see details and preview
+                questions
               </div>
             </div>
 
-            <div class="detail-standard-code" id="detailStandardCode">
-              5.NF.A.1
-            </div>
-            <div class="detail-standard-name" id="detailStandardName">
-              Add and subtract fractions with unlike denominators
-            </div>
-            <div class="detail-standard-desc" id="detailStandardDesc">
-              Add and subtract fractions with unlike denominators (including
-              mixed numbers) by replacing given fractions with equivalent
-              fractions in such a way as to produce an equivalent sum or
-              difference of fractions with like denominators.
-            </div>
-
-            <div style="display: flex; gap: 16px; margin-bottom: 20px">
-              <div class="meta-item">
-                <div class="meta-label">Questions</div>
-                <div class="meta-value" id="detailQuestionCount">24</div>
+            <!-- Standard detail content (hidden initially) -->
+            <div id="standardDetailContent" class="standard-detail-panel">
+              <div class="guidance-text">
+                <div class="guidance-title">
+                  <i data-lucide="lightbulb"></i> Choose Standards Your Students Are Ready For
+                </div>
+                <div class="guidance-desc">
+                  Selecting an appropriate difficulty level ensures productive
+                  discussions where students can build on each other's ideas
+                  without frustration.
+                </div>
               </div>
-              <div class="meta-item">
-                <div class="meta-label">Difficulty</div>
-                <div
-                  class="difficulty-badge difficulty-just-right"
-                  id="detailDifficulty"
-                >
-                  Just Right
+
+              <div class="detail-standard-code" id="detailStandardCode">
+                5.NF.A.1
+              </div>
+              <div class="detail-standard-name" id="detailStandardName">
+                Add and subtract fractions with unlike denominators
+              </div>
+              <div class="detail-standard-desc" id="detailStandardDesc">
+                Add and subtract fractions with unlike denominators (including
+                mixed numbers) by replacing given fractions with equivalent
+                fractions in such a way as to produce an equivalent sum or
+                difference of fractions with like denominators.
+              </div>
+
+              <!-- Substandards Information -->
+              <div id="substandardsSection" style="margin-bottom: 20px;">
+                <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
+                  <span class="tooltip" data-tooltip="This standard includes more granular sub-skills for targeted instruction">
+                    Includes substandards:
+                  </span>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;" id="substandardsList">
+                  <div class="substandard-chip official">
+                    <span class="substandard-code">5.NF.A.1a</span>
+                    <span class="substandard-badge">Official</span>
+                  </div>
+                  <div class="substandard-chip official">
+                    <span class="substandard-code">5.NF.A.1b</span>
+                    <span class="substandard-badge">Official</span>
+                  </div>
+                  <div class="substandard-chip unofficial">
+                    <span class="substandard-code">5.NF.A.1-1</span>
+                    <span class="substandard-badge">Unofficial</span>
+                  </div>
+                  <div class="substandard-chip unofficial">
+                    <span class="substandard-code">5.NF.A.1-2</span>
+                    <span class="substandard-badge">Unofficial</span>
+                  </div>
+                </div>
+                <div style="font-size: 12px; color: #888; margin-top: 8px; font-style: italic;">
+                  Select individual substandards for more targeted group focus
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 16px; margin-bottom: 20px">
+                <div class="meta-item">
+                  <div class="meta-label">Questions</div>
+                  <div class="meta-value" id="detailQuestionCount">24</div>
+                </div>
+                <div class="meta-item">
+                  <div class="meta-label">Difficulty</div>
+                  <div
+                    class="difficulty-badge difficulty-just-right"
+                    id="detailDifficulty"
+                  >
+                    Just Right
+                  </div>
+                </div>
+              </div>
+
+              <div
+                id="prerequisitesSection"
+                style="margin-bottom: 20px; display: none"
+              >
+                <div class="section-label">Prerequisites (Building Blocks)</div>
+                <div style="font-size: 13px; color: #666; margin-bottom: 12px">
+                  <span
+                    class="tooltip"
+                    data-tooltip="Building block standards that prepare students for this topic"
+                    >If this standard seems too challenging, try these
+                    foundational standards first:</span
+                  >
+                </div>
+                <div id="prerequisitesList"></div>
+              </div>
+
+              <!-- Sample Questions Preview -->
+              <div class="questions-preview-section" id="questionsPreviewSection">
+                <div style="margin-bottom: 16px;">
+                  <h4 style="margin: 0 0 12px 0; font-size: 16px; font-weight: 600; color: #1a1a1a;">
+                    Sample Questions
+                  </h4>
+                  <div style="font-size: 13px; color: #666; margin-bottom: 16px;">
+                    Preview <span id="previewCount">3</span> of <span id="totalQuestionCount">24</span> questions for this standard
+                  </div>
+                </div>
+                
+                <div id="inlineSampleQuestions" class="inline-sample-questions">
+                  <!-- Questions will be populated dynamically -->
                 </div>
               </div>
             </div>
-
-            <div
-              id="prerequisitesSection"
-              style="margin-bottom: 20px; display: none"
-            >
-              <div class="section-label">Prerequisites (Building Blocks)</div>
-              <div style="font-size: 13px; color: #666; margin-bottom: 12px">
-                <span
-                  class="tooltip"
-                  data-tooltip="Building block standards that prepare students for this topic"
-                  >If this standard seems too challenging, try these
-                  foundational standards first:</span
-                >
-              </div>
-              <div id="prerequisitesList"></div>
-            </div>
-
-            <button
-              class="btn-primary tooltip"
-              data-tooltip="Preview sample questions for this standard"
-              onclick="previewQuestions()"
-              style="margin-bottom: 16px; width: 100%"
-            >
-              👀 Preview Questions
-            </button>
           </div>
 
+          <!-- Fixed action buttons at bottom -->
           <div class="panel-actions">
             <button class="btn-secondary" onclick="closeStandardsPanel()">
               Cancel
@@ -892,6 +955,10 @@
         </div>
 
         <div class="modal-content">
+          <h3 style="margin-bottom: 20px; color: #1a1a1a">
+            Choose a Template
+          </h3>
+          
           <div class="template-gallery">
             <div
               class="template-card"
@@ -1071,6 +1138,7 @@
         </div>
       </div>
     </div>
+
 
     <!-- JavaScript Files -->
     <script src="js/data.js"></script>

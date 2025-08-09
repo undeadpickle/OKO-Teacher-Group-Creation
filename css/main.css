@@ -165,8 +165,8 @@ body {
 
 .section-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 12px;
   margin-bottom: 20px;
 }
 
@@ -178,12 +178,13 @@ body {
 }
 
 .section-count {
-  background: #e0e0e0;
+  background: #f0f0f0;
   color: #666;
-  padding: 4px 12px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .groups-grid {

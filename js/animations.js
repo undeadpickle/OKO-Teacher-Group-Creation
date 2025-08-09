@@ -28,6 +28,9 @@ function initializeAnimations() {
     
     // Add subtle nav animations
     setupNavAnimations();
+    
+    // Initialize rotating placeholder text
+    setupRotatingPlaceholder();
 }
 
 // Group card hover animations
@@ -316,6 +319,41 @@ function animateCopyFeedback(button) {
                 duration: 0.2,
                 ease: "power2.out"
             });
+        }
+    });
+}
+
+// Rotating placeholder text for semantic search demonstration
+function setupRotatingPlaceholder() {
+    const searchInput = document.getElementById('standardSearchInput');
+    if (!searchInput) return;
+    
+    const placeholders = [
+        "Search for standards (e.g., 'fractions with unlike denominators')",
+        "Try: 'pizza problems with fractions' or 'area word problems'",
+        "Search: 'Illustrative Math Unit 5.3' or curriculum terms...",
+        "Find: 'multiplying mixed numbers' or 'decimal place value'",
+        "Try: 'geometry shapes' or 'ratio word problems'",
+        "Search: 'IM Grade 4 Module 2' or natural language..."
+    ];
+    
+    let currentIndex = 0;
+    
+    function rotatePlaceholder() {
+        // Only rotate if the input is empty and not focused
+        if (searchInput.value === '' && searchInput !== document.activeElement) {
+            currentIndex = (currentIndex + 1) % placeholders.length;
+            searchInput.placeholder = placeholders[currentIndex];
+        }
+    }
+    
+    // Rotate every 4 seconds
+    setInterval(rotatePlaceholder, 4000);
+    
+    // Reset to first placeholder when input gets focus
+    searchInput.addEventListener('focus', () => {
+        if (searchInput.value === '') {
+            searchInput.placeholder = placeholders[0];
         }
     });
 }
