@@ -12,6 +12,8 @@ A prototype for the OKO Teacher Dashboard's "Group Creation" flow, specifically 
 - **Question Preview**: Full question sets with multiple choice and open response types
 - **Tooltip System**: Contextual help tooltips for difficulty badges and UI elements
 - **Brand Integration**: Official OKO logo properly integrated in sidebar
+- **Smooth Animations**: GSAP-powered hover states, modal transitions, and micro-interactions
+- **Modern Icons**: Lucide icon set for consistent, scalable iconography
 
 ## Getting Started
 
@@ -45,7 +47,8 @@ python -m http.server 8000
 │   ├── main.js                # Initialization & setup
 │   ├── data.js                # Mock data & constants
 │   ├── group-management.js    # Group CRUD operations
-│   └── standards-panel.js     # Standards selection logic
+│   ├── standards-panel.js     # Standards selection logic
+│   └── animations.js          # GSAP animation system
 └── CLAUDE.md                  # Development documentation
 ```
 
@@ -68,9 +71,12 @@ The prototype follows OKO's visual design system:
 ## Technology Stack
 
 - **HTML5**: Semantic markup structure
-- **CSS3**: Modern flexbox/grid layouts, custom properties, animations
+- **CSS3**: Modern flexbox/grid layouts, custom properties
 - **Vanilla JavaScript**: ES6+ features, modular architecture
-- **No Framework**: Lightweight, dependency-free implementation
+- **GSAP**: High-performance animations and micro-interactions
+- **Lucide Icons**: Modern, consistent SVG icon system
+- **Animate.css**: CSS-based animation utilities
+- **No Framework**: Lightweight, minimal-dependency implementation
 
 ## Development Notes
 
@@ -79,6 +85,9 @@ The prototype follows OKO's visual design system:
 - Accessibility features including keyboard navigation and screen reader support
 - Mock data structures simulate real API responses
 - Responsive design tested across desktop, tablet, and mobile viewports
+- Performant GSAP animations with optimized timing and easing curves
+- Scalable SVG icons that adapt to different sizes and contexts
+- Smooth micro-interactions enhance user experience without being distracting
 
 ## Browser Support
 

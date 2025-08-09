@@ -37,13 +37,16 @@ The prototype uses a clean separation of concerns across multiple files:
 │   ├── main.js (initialization & setup)
 │   ├── data.js (mock data & constants)
 │   ├── group-management.js (group CRUD operations)
-│   └── standards-panel.js (standards selection logic)
+│   ├── standards-panel.js (standards selection logic)
+│   └── animations.js (GSAP animation system)
 └── CLAUDE.md (documentation)
 ```
 
 - **HTML Structure**: Clean semantic markup with external CSS/JS references
 - **CSS Styling**: Modular stylesheets implementing OKO's design system
 - **JavaScript Logic**: Component rendering, state management, and interaction handlers
+- **Animation System**: GSAP-powered micro-interactions and smooth transitions
+- **Icon System**: Lucide SVG icons for modern, scalable iconography
 
 ### Component System (Simulated)
 Though built as vanilla HTML/CSS/JS, the code simulates a component architecture:
@@ -179,6 +182,7 @@ The prototype strictly follows OKO's visual design system:
   - `data.js`: Mock data structures and constants (137 lines)
   - `group-management.js`: Group CRUD operations and modal logic (254 lines)
   - `standards-panel.js`: Standards selection, search, and navigation (243 lines)
+  - `animations.js`: GSAP-powered animation system for micro-interactions (325 lines)
 
 ### When extending this prototype:
 - Maintain the OKO brand color system (Foundational Green as primary, Warm White background)
@@ -194,11 +198,22 @@ The prototype strictly follows OKO's visual design system:
 - Store image assets in `/assets/images/` directory
 - Difficulty badges use regular case text (not uppercase)
 - Tooltips support multi-line wrapping with max-width: 350px
+- All icons use Lucide SVG system with `<i data-lucide="icon-name"></i>` syntax
+- Animation timing: 0.1s hover in, 0.15s hover out for optimal responsiveness
+- Use `gsap.to()` and `gsap.set()` for all animations with "power2.out" easing
+- Animation durations: hover (0.1-0.15s), modals (0.3-0.4s), micro-interactions (0.06-0.12s)
+- Icons are automatically sized via CSS classes targeting `svg[data-lucide]` elements
 
 ### Recent Updates
+- **Animation System**: Implemented GSAP-powered micro-interactions and smooth transitions
+- **Icon System**: Replaced all emojis/Unicode icons with Lucide SVG icon set
+- **Modal Animations**: Enhanced modal open/close with fade and scale effects
+- **Hover States**: Optimized card and button hover animations for responsiveness
+- **Dropdown Animations**: Added smooth scale and fade transitions for dropdown menus
+- **Performance**: Optimized animation timing and easing curves for 60fps performance
 - Added comprehensive tooltip system with contextual help text
 - Integrated official OKO brand logo in sidebar
-- Removed date filter dropdown from header (commented out)
+- Fixed modal scrollbar positioning within rounded corners
 - Updated difficulty badge styling to use regular case text
 - Fixed standards panel z-index stacking issues
 - Improved tooltip text wrapping and positioning

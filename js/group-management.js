@@ -152,6 +152,11 @@ function addNewGroupCard(groupData) {
     const newCard = createGroupCard(groupData);
     readySection.appendChild(newCard);
     
+    // Animate the new card in
+    if (window.animateNewGroupCard) {
+        window.animateNewGroupCard(newCard);
+    }
+    
     // Update section count
     updateSectionCount('Ready to Start');
 }
@@ -215,10 +220,19 @@ function updateSectionCount(sectionTitle) {
 // Copy group code function
 function copyGroupCode(code) {
     navigator.clipboard.writeText(code).then(() => {
+        // Add animation feedback
+        if (window.animateCopyFeedback) {
+            window.animateCopyFeedback(event.target);
+        }
+        
         // Show feedback
         event.target.innerHTML = '<i data-lucide="check"></i> Copied!';
         setTimeout(() => {
             event.target.innerHTML = '<i data-lucide="copy"></i> Copy Code';
+            // Re-initialize icons for the new content
+            if (window.lucide) {
+                lucide.createIcons();
+            }
         }, 2000);
     });
 }
