@@ -155,7 +155,7 @@
 
 /* Custom Form Section */
 .custom-form-section {
-  opacity: 0.6;
+  opacity: 1;
   transition: opacity 0.2s;
 }
 

@@ -26,7 +26,9 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  margin: 0 auto;
   transition: background 0.2s;
 }
 
@@ -362,22 +364,41 @@
 }
 
 .copy-btn {
-  padding: 4px 12px;
+  padding: 8px 16px;
   background: white;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 12px;
+  font-weight: 500;
   color: #666;
   cursor: pointer;
-  margin-top: 8px;
+  margin: 8px auto 0;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  gap: 6px;
+  min-width: 120px;
+  transition: all 0.2s ease;
+  position: relative;
 }
 
 .copy-btn:hover {
   background: #f5f5f5;
+  border-color: #ccc;
+}
+
+/* Copy confirmation states */
+.copy-btn.copying {
+  background: #e8f5e9;
+  border-color: #4caf50;
+  color: #2e7d32;
+}
+
+.copy-btn.copied {
+  background: #e8f5e9;
+  border-color: #4caf50;
+  color: #2e7d32;
 }
 
 /* Group Meta */
@@ -394,6 +415,7 @@
   display: flex;
   gap: 8px;
   margin-top: 16px;
+  justify-content: center;
 }
 
 /* Progress Bar */
@@ -470,7 +492,7 @@
   font-family: var(--font-display);
   font-size: 14px;
   font-weight: 600;
-  color: #333;
+  color: #1a1a1a;
   margin-bottom: 8px;
 }
 

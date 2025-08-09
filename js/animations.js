@@ -307,20 +307,49 @@ function animateNewGroupCard(cardElement) {
     });
 }
 
-// Copy button feedback animation
+// Enhanced copy button feedback animation
 function animateCopyFeedback(button) {
+    // Scale bounce effect
     gsap.to(button, {
         scale: 0.95,
         duration: 0.1,
         ease: "power2.out",
         onComplete: () => {
             gsap.to(button, {
-                scale: 1,
-                duration: 0.2,
-                ease: "power2.out"
+                scale: 1.05,
+                duration: 0.15,
+                ease: "power2.out",
+                onComplete: () => {
+                    gsap.to(button, {
+                        scale: 1,
+                        duration: 0.1,
+                        ease: "power2.out"
+                    });
+                }
             });
         }
     });
+    
+    // Gentle pulse effect for success state
+    if (button.classList.contains('copied')) {
+        gsap.fromTo(button, 
+            { 
+                boxShadow: "0 0 0 rgba(76, 175, 80, 0)" 
+            },
+            {
+                boxShadow: "0 0 10px rgba(76, 175, 80, 0.3)",
+                duration: 0.3,
+                ease: "power2.out",
+                onComplete: () => {
+                    gsap.to(button, {
+                        boxShadow: "0 0 0 rgba(76, 175, 80, 0)",
+                        duration: 0.5,
+                        ease: "power2.out"
+                    });
+                }
+            }
+        );
+    }
 }
 
 // Rotating placeholder text for semantic search demonstration

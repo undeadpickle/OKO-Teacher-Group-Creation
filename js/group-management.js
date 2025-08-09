@@ -8,12 +8,29 @@ let selectedStandard = null;
 function openCreateGroupModal() {
     document.getElementById('createGroupModal').classList.add('active');
     document.body.style.overflow = 'hidden';
+    
+    // Reset modal scroll position to top
+    setTimeout(() => {
+        const modalContent = document.querySelector('#createGroupModal .modal-content');
+        if (modalContent) {
+            modalContent.scrollTop = 0;
+        }
+    }, 50);
 }
 
 // Close create group modal
 function closeCreateGroupModal() {
     document.getElementById('createGroupModal').classList.remove('active');
     document.body.style.overflow = '';
+    
+    // Reset modal scroll position to top
+    setTimeout(() => {
+        const modalContent = document.querySelector('#createGroupModal .modal-content');
+        if (modalContent) {
+            modalContent.scrollTop = 0;
+        }
+    }, 100);
+    
     resetCreateGroupForm();
 }
 
@@ -217,24 +234,102 @@ function updateSectionCount(sectionTitle) {
     });
 }
 
-// Copy group code function
-function copyGroupCode(code) {
-    navigator.clipboard.writeText(code).then(() => {
-        // Add animation feedback
-        if (window.animateCopyFeedback) {
-            window.animateCopyFeedback(event.target);
-        }
+// Copy group code function with enhanced UX
+function copyGroupCode(code, buttonElement) {
+    // Use the passed button element or fall back to event target
+    const button = buttonElement || event.target;
+    
+    // Disable button during copy process
+    button.disabled = true;
+    button.classList.add('copying');
+    
+    // Try clipboard API first (modern browsers)
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(() => {
+            showCopySuccess(button);
+        }).catch(() => {
+            fallbackCopy(code, button);
+        });
+    } else {
+        // Fallback for older browsers
+        fallbackCopy(code, button);
+    }
+}
+
+// Show copy success feedback
+function showCopySuccess(button) {
+    button.classList.remove('copying');
+    button.classList.add('copied');
+    button.innerHTML = '<i data-lucide="check"></i> Copied!';
+    
+    // Re-initialize icons for the new content
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+    
+    // Add animation feedback
+    if (window.animateCopyFeedback) {
+        window.animateCopyFeedback(button);
+    }
+    
+    // Reset after 2 seconds
+    setTimeout(() => {
+        button.disabled = false;
+        button.classList.remove('copied');
+        button.innerHTML = '<i data-lucide="copy"></i> Copy Code';
         
-        // Show feedback
-        event.target.innerHTML = '<i data-lucide="check"></i> Copied!';
-        setTimeout(() => {
-            event.target.innerHTML = '<i data-lucide="copy"></i> Copy Code';
-            // Re-initialize icons for the new content
-            if (window.lucide) {
-                lucide.createIcons();
-            }
-        }, 2000);
-    });
+        // Re-initialize icons for the new content
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    }, 2000);
+}
+
+// Fallback copy method for older browsers
+function fallbackCopy(code, button) {
+    try {
+        // Create temporary textarea
+        const textArea = document.createElement('textarea');
+        textArea.value = code;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        // Try to copy
+        const successful = document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        if (successful) {
+            showCopySuccess(button);
+        } else {
+            showCopyError(button);
+        }
+    } catch (err) {
+        showCopyError(button);
+    }
+}
+
+// Show copy error feedback
+function showCopyError(button) {
+    button.disabled = false;
+    button.classList.remove('copying');
+    button.innerHTML = '<i data-lucide="x"></i> Copy Failed';
+    
+    // Re-initialize icons
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+    
+    // Reset after 2 seconds
+    setTimeout(() => {
+        button.innerHTML = '<i data-lucide="copy"></i> Copy Code';
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    }, 2000);
 }
 
 // Edit group placeholder
@@ -360,9 +455,20 @@ function openTemplateModal() {
 }
 
 function openCustomModal() {
-    // For now, use the existing modal - in the future this could be a custom-specific modal
+    // Open the modal first
     openCreateGroupModal();
     closeSplitDropdown();
+    
+    // Scroll to the custom form section after a short delay to ensure modal is fully rendered
+    setTimeout(() => {
+        const customFormSection = document.getElementById('customForm');
+        if (customFormSection) {
+            customFormSection.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    }, 100);
 }
 
 // Edit group placeholder function
