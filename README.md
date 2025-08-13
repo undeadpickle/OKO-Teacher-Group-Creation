@@ -7,9 +7,10 @@ A high-fidelity prototype for the OKO Teacher Dashboard's "Group Creation" flow,
 ### Core Functionality
 - **Group Management**: Create, update, and manage collaborative math session groups with diverse content levels
 - **CCSS Integration**: Orange pill badges displaying Common Core State Standards identifiers (6.SP.B.5c, 7.EE.A.1, etc.)
-- **Standards Selection**: Dual-method selection (semantic search + hierarchical browsing)
+- **Standards Selection**: Enhanced modal with semantic search + hierarchical browsing (90% viewport height)
 - **Template System**: 6 curriculum-aligned templates for quick group creation
 - **Interactive Descriptions**: Expandable "Show More" functionality with smooth animations
+- **Sample Question Preview**: Outlined pill buttons showing math problem previews via tooltips
 
 ### Enhanced User Experience  
 - **Chat Bubble Tooltips**: Dark green tooltip system with rounded corners and animated connection tails
@@ -23,6 +24,7 @@ A high-fidelity prototype for the OKO Teacher Dashboard's "Group Creation" flow,
 - **Realistic Group Sizes**: Variable student counts (2-5 students) reflecting actual classroom differentiation
 - **Time Estimates**: Session duration ranges based on content complexity and student needs
 - **Domain-Specific Icons**: Visual indicators for Statistics, Ratios, Algebra, Fractions, and Geometry
+- **Math Problem Previews**: Domain-specific sample questions (multiple choice and open response) for immediate content insight
 
 ## Getting Started
 
@@ -87,14 +89,16 @@ The prototype implements OKO's comprehensive visual design system:
 
 ### Primary Workflows
 1. **Copy Student Codes**: Click "Copy Code" → Confetti celebration with multi-colored particle burst
-2. **View Standard Details**: Click "Show More" → Smooth expansion revealing full Common Core descriptions  
-3. **Student Information**: Hover over student count → Chat bubble showing individual student names
-4. **Session Timing**: Hover over time estimate → Explanation of duration variability factors
-5. **CCSS Badges**: Hover over orange badges → Educational tooltip about Common Core identifiers
+2. **Preview Sample Questions**: Click "Sample Question" button → Tooltip showing math problem preview
+3. **View Standard Details**: Click "Show More" → Smooth expansion revealing full Common Core descriptions  
+4. **Student Information**: Hover over student count → Chat bubble showing individual student names
+5. **Session Timing**: Hover over time estimate → Explanation of duration variability factors
+6. **CCSS Badges**: Hover over orange badges → Educational tooltip about Common Core identifiers
 
 ### Interactive Elements
-- **Group Cards**: Purple-bordered cards with hover animations and comprehensive tooltips
-- **Standards Selection**: Dual-method selection (semantic search + hierarchical browsing)
+- **Group Cards**: Purple-bordered cards with hover animations, bottom-aligned layouts, and comprehensive tooltips
+- **Standards Selection**: Enhanced modal (90vh height) with semantic search + hierarchical browsing
+- **Sample Question Buttons**: Outlined pill buttons showing domain-specific math problems in 400px tooltips
 - **Copy Success**: Enhanced feedback with color changes, animations, and confetti celebrations
 - **Expandable Content**: "Show More" links reveal detailed standard descriptions with GSAP transitions
 

@@ -136,11 +136,12 @@ The prototype strictly follows OKO's visual design system:
 - **Populated State**: All fields configured, Update button enabled, "Ready" status  
 - **Loading State**: Spinner replaces Update button text during simulated API calls
 
-### Side Panel Workflow
-1. Opens via preview icon or standard selector click
-2. Left panel: semantic search, filter chips, recently used standards
-3. Right panel: selected standard details, prerequisites, preview problems
-4. Selection updates the originating group card and closes panel
+### Standards Modal Workflow
+1. Opens via "Edit Group" button on group cards
+2. Enhanced modal with 90% viewport height for better content visibility
+3. Left panel: semantic search, filter chips, and grade/domain browsing tree
+4. Right panel: selected standard details, prerequisites, preview problems
+5. Selection updates the originating group card and closes modal
 
 ### Group Creation Workflow
 1. Click "+ Create Group" button in dashboard header
@@ -172,7 +173,6 @@ The prototype strictly follows OKO's visual design system:
 ### Advanced UX Features
 - **Standards Tree**: Expandable hierarchy for browsing by grade/domain/cluster
 - **Semantic Search**: Natural language search with filter chips
-- **Recently Used**: Quick access to previously selected standards
 - **Substandards Handling**: Official vs unofficial substandards with visual badges
 - **Difficulty Assessment**: "Just right", "Too easy", "Too hard" indicators with explanatory tooltips
 - **Readiness Guidance**: Contextual help text for appropriate standard selection
@@ -180,6 +180,7 @@ The prototype strictly follows OKO's visual design system:
 - **Confetti Animation**: Fun celebratory burst animation on successful copy actions with colorful particles, gravity physics, and random shapes (circles, squares, triangles, stars)
 - **Diverse Group Representation**: Realistic 6th grade classroom with above/below grade level content, varied group sizes (2-5 students), and different time allocations
 - **Interactive Tooltips**: Chat bubble-style tooltips with dark green background (#002E19), rounded corners, and animated tails for student names and session information
+- **Sample Question Preview**: Outlined pill button on each group card that shows a sample question in a tooltip without entering edit mode
 
 ## Development Notes
 
@@ -208,7 +209,7 @@ The prototype strictly follows OKO's visual design system:
 - Modal z-index stacking: create group (1200) > questions (1100) > standard selection (1300)
 - Store image assets in `/assets/images/` directory
 - Difficulty badges use regular case text (not uppercase)
-- Tooltips support multi-line wrapping with max-width: 350px
+- Tooltips support multi-line wrapping with max-width: 350px (400px for sample question tooltips)
 - All icons use Lucide SVG system with `<i data-lucide="icon-name"></i>` syntax
 - Animation timing: 0.1s hover in, 0.15s hover out for optimal responsiveness
 - Use `gsap.to()` and `gsap.set()` for all animations with "power2.out" easing
@@ -216,6 +217,11 @@ The prototype strictly follows OKO's visual design system:
 - Icons are automatically sized via CSS classes targeting `svg[data-lucide]` elements
 
 ### Recent Updates (Latest)
+- **Standards Modal Enhancement**: Increased modal height to 90vh and removed "Recently Used" section for better content visibility and space optimization
+- **Sample Question Preview**: Added outlined pill button on group cards showing sample questions via tooltip - uses existing tooltip system with 400px max-width for question content
+- **CCSS Badge Repositioning**: Adjusted orange badge positioning to top-right corner edge (top: -2px, right: -2px) for exact Figma Container design alignment
+- **Card Layout Optimization**: Implemented bottom-alignment for student login code sections using flexbox to ensure consistent card layout across varying content heights
+- **Question Generation System**: Added domain-specific sample question generation (SP, NF, MD, RP, EE, G domains) with both multiple choice and open response question types
 - **Figma Integration**: Implemented exact Figma Container design for group cards with purple top border (#605dec) and proper spacing
 - **CCSS Badge System**: Added orange pill badges (#f7622b) in top-right corners showing Common Core identifiers (6.SP.B.5c, etc.)
 - **Chat Bubble Tooltips**: Enhanced tooltip system with dark green backgrounds, rounded corners, and animated connection tails

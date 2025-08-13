@@ -17,6 +17,12 @@ INSTRUCTIONS FOR AI:
 
 ### Added
 
+- **Sample Question Preview**: Outlined pill button on group cards displaying sample math problems in tooltips to allow teachers to preview question content without entering edit mode, improving workflow efficiency and reducing navigation steps.
+
+- **Domain-Specific Question Generation**: Intelligent question templates for different CCSS domains (Statistics & Probability, Number & Operations—Fractions, Measurement & Data, Ratios & Proportional Relationships, Expressions & Equations, Geometry) with both multiple choice and open response formats to provide realistic previews of student activities.
+
+- **Enhanced Standards Modal**: Increased modal height to 90% viewport to display more standard content and improve browsing experience when selecting Common Core standards for group configuration.
+
 - **CCSS Badge System**: Orange pill badges in top-right corner of each group card displaying Common Core State Standards identifiers (e.g., "6.SP.B.5c", "7.EE.A.1") to provide instant visual identification of specific standards for teachers organizing math sessions.
 
 - **Confetti Burst Animation**: Multi-colored particle celebration system for copy success actions using GSAP physics with gravity, rotation, and random shapes (circles, squares, triangles, stars) to enhance user engagement and provide delightful feedback.
@@ -30,6 +36,14 @@ INSTRUCTIONS FOR AI:
 - **Interactive Description Expansion**: "Show More" functionality with smooth GSAP animations for standard descriptions, allowing teachers to view abbreviated or full Common Core standard explanations as needed.
 
 ### Changed
+
+- **CCSS Badge Positioning**: Refined orange badge placement to exact top-right corner edge (top: -2px, right: -2px) to match Figma Container design specifications and ensure consistent visual alignment across all group cards.
+
+- **Card Layout Structure**: Implemented flexbox-based bottom alignment for student login code sections to ensure uniform card heights and professional layout consistency when content varies between cards.
+
+- **Standards Modal Interface**: Removed "Recently Used" section to allocate more space for search results and grade/domain browsing, streamlining the standard selection workflow and reducing visual clutter.
+
+- **Sample Question Button Styling**: Updated from text link to outlined pill button with purple border (#605dec), 6px border radius, and hover fill effects to match Figma design system and improve visual hierarchy.
 
 - **Group Card Design**: Completely redesigned cards to match exact Figma specifications with purple top borders (#605dec), proper spacing (24px padding), and comprehensive information hierarchy to improve visual consistency and user experience.
 
@@ -53,19 +67,25 @@ INSTRUCTIONS FOR AI:
 
 ---
 
-## [Version Number] - [YYYY-MM-DD]
+## [0.2.0] - [2025-08-13]
 
 ### Added
 
-- [Description of feature and its purpose.]
+- **Sample Question Preview**: Outlined pill button on group cards displaying sample math problems in tooltips to allow teachers to preview question content without entering edit mode, improving workflow efficiency and reducing navigation steps.
+
+- **Domain-Specific Question Generation**: Intelligent question templates for different CCSS domains (Statistics & Probability, Number & Operations—Fractions, Measurement & Data, Ratios & Proportional Relationships, Expressions & Equations, Geometry) with both multiple choice and open response formats to provide realistic previews of student activities.
+
+- **Enhanced Standards Modal**: Increased modal height to 90% viewport to display more standard content and improve browsing experience when selecting Common Core standards for group configuration.
 
 ### Changed
 
-- [Description of change and the reasoning behind it.]
+- **CCSS Badge Positioning**: Refined orange badge placement to exact top-right corner edge (top: -2px, right: -2px) to match Figma Container design specifications and ensure consistent visual alignment across all group cards.
 
-### Fixed
+- **Card Layout Structure**: Implemented flexbox-based bottom alignment for student login code sections to ensure uniform card heights and professional layout consistency when content varies between cards.
 
-- [Description of bug fix and its impact.]
+- **Standards Modal Interface**: Removed "Recently Used" section to allocate more space for search results and grade/domain browsing, streamlining the standard selection workflow and reducing visual clutter.
+
+- **Sample Question Button Styling**: Updated from text link to outlined pill button with purple border (#605dec), 6px border radius, and hover fill effects to match Figma design system and improve visual hierarchy.
 
 ---
 
