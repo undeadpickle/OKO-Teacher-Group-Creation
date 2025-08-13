@@ -68,6 +68,7 @@ function createGroupCard(group) {
                     ${standardData && description.includes('...') ? `<a href="#" class="show-more-link" id="show-more-${group.id}" onclick="toggleStandardDescription(${group.id}, '${group.standard}'); return false;">Show More</a>` : ''}
                 </div>
             </div>
+            ${standardData ? `<a href="#" class="sample-question-link tooltip" data-tooltip="${getQuestionPreviewTooltip(group.standard).replace(/"/g, '&quot;')}" onclick="return false;">Sample Question</a>` : ''}
         </div>
         
         <div class="student-code-section">
@@ -378,6 +379,78 @@ function getStudentNamesTooltip(groupId, studentCount) {
 // Helper function to generate CCSS badge tooltip text
 function getCCSSTooltipText(standardCode) {
     return 'This standard identifier is a unique code that designates the grade, domain, cluster, and specific standard in the Common Core State Standards for precise reference in curriculum and assessments.';
+}
+
+// Helper function to generate question preview tooltip content
+function getQuestionPreviewTooltip(standardCode) {
+    if (!standardCode || !standardsData[standardCode]) {
+        return 'Preview question available after selecting a standard';
+    }
+    
+    const standard = standardsData[standardCode];
+    
+    // Generate sample questions using existing logic
+    const sampleQuestion = generateSampleQuestionForPreview(standard);
+    
+    let tooltipContent = `${sampleQuestion.type}\n\n${sampleQuestion.text}`;
+    
+    if (sampleQuestion.type === 'Multiple Choice') {
+        tooltipContent += '\n\nView all answer choices in Edit mode';
+    } else {
+        tooltipContent += '\n\nStudents provide written explanations';
+    }
+    
+    return tooltipContent;
+}
+
+// Generate a single sample question for preview (simplified version of existing function)
+function generateSampleQuestionForPreview(standard) {
+    const standardCode = standard.code;
+    
+    // Different question templates based on standard type
+    if (standardCode.includes('NF')) {
+        // Fractions questions
+        return {
+            type: 'Multiple Choice',
+            text: 'Maya ate 2/3 of a pizza and Jake ate 1/4 of the same pizza. How much pizza did they eat altogether?'
+        };
+    } else if (standardCode.includes('MD')) {
+        // Measurement questions  
+        return {
+            type: 'Multiple Choice',
+            text: 'A rectangular garden is 8 feet long and 6 feet wide. What is the area of the garden?'
+        };
+    } else if (standardCode.includes('SP')) {
+        // Statistics & Probability questions
+        return {
+            type: 'Multiple Choice', 
+            text: 'Maya collected data on her classmates\' favorite pizza toppings. If 12 students chose pepperoni and 8 chose cheese, what can Maya conclude about the most popular topping?'
+        };
+    } else if (standardCode.includes('RP')) {
+        // Ratios & Proportional Relationships
+        return {
+            type: 'Open Response',
+            text: 'A recipe calls for 2 cups of flour for every 3 cups of sugar. If you want to make a larger batch using 8 cups of flour, how much sugar will you need? Explain your reasoning.'
+        };
+    } else if (standardCode.includes('EE')) {
+        // Expressions & Equations
+        return {
+            type: 'Multiple Choice',
+            text: 'Which expression is equivalent to 3(x + 4)?'
+        };
+    } else if (standardCode.includes('G')) {
+        // Geometry
+        return {
+            type: 'Open Response',
+            text: 'Draw a triangle with one right angle and explain why the other two angles must be acute angles.'
+        };
+    } else {
+        // Generic math questions
+        return {
+            type: 'Multiple Choice',
+            text: 'Which of the following best represents the concept in this standard?'
+        };
+    }
 }
 
 // Function to toggle standard description expansion
