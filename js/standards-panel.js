@@ -7,20 +7,21 @@ let currentEditingGroupIndex = null;
 // Open standard selection panel
 function openStandardSelection() {
     const overlay = document.getElementById('standardsPanel');
-    const panel = overlay.querySelector('.standards-panel');
     overlay.classList.add('active');
-    panel.classList.add('active');
     document.body.style.overflow = 'hidden';
+}
+
+// Alias for compatibility
+function openStandardsPanel() {
+    openStandardSelection();
 }
 
 // Close standards panel
 function closeStandardsPanel() {
     const overlay = document.getElementById('standardsPanel');
-    const panel = overlay.querySelector('.standards-panel');
     overlay.classList.remove('active');
-    panel.classList.remove('active');
     document.body.style.overflow = '';
-    resetStandardsPanel();
+    // Don't reset panel state - preserve selection for next edit
 }
 
 // Reset standards panel state
@@ -247,21 +248,17 @@ function performSearch(query) {
 // Confirm standard selection
 function confirmStandardSelection() {
     const standard = standardsData[currentSelectedStandardId];
-    if (!standard) return;
+    if (!standard || !currentEditingGroup) return;
     
-    selectedStandard = {
-        code: standard.code,
-        name: standard.name
-    };
+    // Update the group with the selected standard
+    updateGroup(currentEditingGroup, {
+        standard: standard.code,
+        grade: standard.grade,
+        domain: standard.domain
+    });
     
-    // Update the custom form if it was opened from there
-    if (document.getElementById('createGroupModal').classList.contains('active')) {
-        document.getElementById('standardPlaceholder').style.display = 'none';
-        document.getElementById('standardSelected').style.display = 'block';
-        document.getElementById('selectedStandardCode').textContent = standard.code;
-        document.getElementById('selectedStandardName').textContent = standard.name;
-        updateCreateButton();
-    }
+    // Clear the editing state
+    currentEditingGroup = null;
     
     closeStandardsPanel();
 }

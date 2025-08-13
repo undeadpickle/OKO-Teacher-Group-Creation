@@ -1,238 +1,148 @@
 // OKO Teacher Dashboard - Group Management Logic
 
-// Modal state management
-let selectedTemplate = null;
+// Current editing group and standard selection state
+let currentEditingGroup = null;
 let selectedStandard = null;
 
-// Open create group modal
-function openCreateGroupModal() {
-    document.getElementById('createGroupModal').classList.add('active');
-    document.body.style.overflow = 'hidden';
+// Render all group cards on page load
+function renderGroupCards() {
+    const container = document.getElementById('groupsContainer');
+    if (!container) return;
     
-    // Reset modal scroll position to top
-    setTimeout(() => {
-        const modalContent = document.querySelector('#createGroupModal .modal-content');
-        if (modalContent) {
-            modalContent.scrollTop = 0;
-        }
-    }, 50);
-}
-
-// Close create group modal
-function closeCreateGroupModal() {
-    document.getElementById('createGroupModal').classList.remove('active');
-    document.body.style.overflow = '';
+    container.innerHTML = '';
     
-    // Reset modal scroll position to top
-    setTimeout(() => {
-        const modalContent = document.querySelector('#createGroupModal .modal-content');
-        if (modalContent) {
-            modalContent.scrollTop = 0;
-        }
-    }, 100);
-    
-    resetCreateGroupForm();
-}
-
-// Reset form state
-function resetCreateGroupForm() {
-    selectedTemplate = null;
-    selectedStandard = null;
-    
-    // Clear template selections
-    document.querySelectorAll('.template-card').forEach(card => {
-        card.classList.remove('selected');
+    groupSlots.forEach(group => {
+        const card = createGroupCard(group);
+        container.appendChild(card);
     });
     
-    // Clear custom form
-    document.getElementById('groupNameInput').value = '';
-    document.getElementById('gradeLevelSelect').value = '';
-    document.getElementById('durationSelect').value = '15';
-    
-    // Reset standard selector
-    document.getElementById('standardPlaceholder').style.display = 'block';
-    document.getElementById('standardSelected').style.display = 'none';
-    
-    // Update form state
-    updateCustomFormState();
-    updateCreateButton();
-}
-
-// Select template
-function selectTemplate(templateId) {
-    selectedTemplate = templateId;
-    
-    // Update UI
-    document.querySelectorAll('.template-card').forEach(card => {
-        card.classList.remove('selected');
-    });
-    event.target.closest('.template-card').classList.add('selected');
-    
-    // Disable custom form when template is selected
-    updateCustomFormState();
-    updateCreateButton();
-}
-
-// Update custom form state
-function updateCustomFormState() {
-    const customForm = document.getElementById('customForm');
-    if (selectedTemplate) {
-        customForm.classList.remove('active');
-    } else {
-        customForm.classList.add('active');
+    // Re-initialize Lucide icons
+    if (window.lucide) {
+        lucide.createIcons();
     }
 }
 
-// Update create button state
-function updateCreateButton() {
-    const createBtn = document.getElementById('createGroupBtn');
-    const groupName = document.getElementById('groupNameInput').value.trim();
-    const gradeLevel = document.getElementById('gradeLevelSelect').value;
-    
-    if (selectedTemplate) {
-        createBtn.disabled = false;
-        createBtn.textContent = 'Create from Template';
-    } else if (groupName && gradeLevel && selectedStandard) {
-        createBtn.disabled = false;
-        createBtn.textContent = 'Create Custom Group';
-    } else {
-        createBtn.disabled = true;
-        createBtn.textContent = 'Create Group';
-    }
-}
-
-// Create group function
-function createGroup() {
-    if (selectedTemplate) {
-        createFromTemplate();
-    } else {
-        createCustomGroup();
-    }
-}
-
-// Create from template
-function createFromTemplate() {
-    const template = groupTemplates[selectedTemplate];
-    if (template) {
-        // Generate a new group code
-        const groupCode = generateGroupCode();
-        
-        // Create new group card and add to Ready section
-        addNewGroupCard({
-            name: template.name,
-            standard: template.standard,
-            standardName: template.standardName,
-            groupCode: groupCode,
-            duration: template.duration,
-            status: 'ready'
-        });
-        
-        closeCreateGroupModal();
-    }
-}
-
-// Create custom group
-function createCustomGroup() {
-    const groupName = document.getElementById('groupNameInput').value.trim();
-    const gradeLevel = document.getElementById('gradeLevelSelect').value;
-    const duration = parseInt(document.getElementById('durationSelect').value);
-    
-    if (groupName && gradeLevel && selectedStandard) {
-        const groupCode = generateGroupCode();
-        
-        addNewGroupCard({
-            name: groupName,
-            standard: selectedStandard.code,
-            standardName: selectedStandard.name,
-            groupCode: groupCode,
-            duration: duration,
-            status: 'ready'
-        });
-        
-        closeCreateGroupModal();
-    }
-}
-
-// Generate random group code
-function generateGroupCode() {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-    let result = '';
-    for (let i = 0; i < 5; i++) {
-        result += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return result;
-}
-
-// Add new group card to the ready section
-function addNewGroupCard(groupData) {
-    const readySection = document.querySelector('.groups-section .groups-grid');
-    const newCard = createGroupCard(groupData);
-    readySection.appendChild(newCard);
-    
-    // Animate the new card in
-    if (window.animateNewGroupCard) {
-        window.animateNewGroupCard(newCard);
-    }
-    
-    // Update section count
-    updateSectionCount('Ready to Start');
-}
-
-// Create group card HTML
-function createGroupCard(data) {
+// Create individual group card HTML - Figma Container Design
+function createGroupCard(group) {
     const card = document.createElement('div');
+    const isNotSet = group.status === 'notSet';
+    
     card.className = 'group-card';
+    card.setAttribute('data-group-id', group.id);
+    
+    // Get standard data if available
+    const standardData = group.standard ? standardsData[group.standard] : null;
+    const grade = standardData ? standardData.grade : group.grade || 6;
+    const domainName = standardData ? getDomainDisplayName(standardData.domain) : getDomainDisplayName(group.domain);
+    const clusterName = standardData ? (standardData.cluster || standardData.name) : (group.cluster || 'No standard selected');
+    const description = standardData ? getStandardDescription(standardData) : 'Click "Edit Group" to choose a math standard';
+    const domainIcon = standardData ? getDomainIcon(standardData.domain) : getDomainIcon(group.domain);
+    
+    // Use actual group data
+    const studentCode = group.studentCode || generateStudentCode();
+    const studentCount = group.studentCount || 0;
+    const sessionTime = group.sessionLength ? `${group.sessionLength.min}-${group.sessionLength.max} MIN` : '20-25 MIN';
+    const studentUrl = group.url || `https://app.okolabs.ai?code=${studentCode}`;
+    
+    // Format description with appropriate prefix
+    const descriptionPrefix = getDescriptionPrefix(standardData);
+    const formattedDescription = descriptionPrefix ? `${descriptionPrefix} ${description}` : description;
+    
     card.innerHTML = `
-        <div class="group-status-bar"></div>
-        <div class="group-content">
-            <div class="group-header">
-                <div class="group-name">${data.name}</div>
-                <span class="group-badge badge-ready">Ready</span>
-            </div>
-            
-            <div class="standard-info">
-                <div class="standard-code">${data.standard}</div>
-                <div class="standard-desc">${data.standardName}</div>
-            </div>
-            
-            <div class="group-code-section">
-                <div class="code-label">Student Login Code</div>
-                <div class="group-code">${data.groupCode}</div>
-                <button class="copy-btn" onclick="copyGroupCode('${data.groupCode}')"><i data-lucide="copy"></i> Copy Code</button>
-            </div>
-            
-            <div class="group-meta">
-                <span class="meta-item">
-                    <i data-lucide="users"></i>
-                    <span>0/24 joined</span>
-                </span>
-                <span class="meta-item">
-                    <i data-lucide="clock"></i>
-                    <span>${data.duration} min session</span>
-                </span>
-            </div>
-            
-            <div class="group-actions">
-                <button class="btn-action" onclick="editGroup(this)">Edit</button>
-                <button class="btn-action primary">Start Session</button>
+        <div class="ccss-badge tooltip" data-tooltip="${getCCSSTooltipText(group.standard || '6.SP.B.5c')}">${group.standard || '6.SP.B.5c'}</div>
+        <div class="group-header">
+            <div class="grade-label">GRADE ${grade}</div>
+            <div class="standard-header">
+                <div class="standard-icon">
+                    <i data-lucide="${domainIcon}"></i>
+                </div>
+                <div class="standard-title">${domainName}</div>
             </div>
         </div>
+        
+        <div class="standard-cluster">
+            <div class="cluster-title">${clusterName}</div>
+            <div class="cluster-description">
+                <div class="cluster-desc-text" id="desc-${group.id}">
+                    <span class="desc-content">${formattedDescription}</span>
+                    ${standardData && description.includes('...') ? `<a href="#" class="show-more-link" id="show-more-${group.id}" onclick="toggleStandardDescription(${group.id}, '${group.standard}'); return false;">Show More</a>` : ''}
+                </div>
+            </div>
+        </div>
+        
+        <div class="student-code-section">
+            <div class="student-code-header">
+                <div class="code-label">STUDENT LOGIN CODE</div>
+                <div class="group-code">${studentCode}</div>
+            </div>
+            <button class="copy-code-btn" onclick="copyGroupCode('${studentCode}', this)">
+                <div class="copy-icon">
+                    <i data-lucide="copy"></i>
+                </div>
+                <span class="copy-text">Copy Code</span>
+            </button>
+            <div class="student-url">${studentUrl}</div>
+        </div>
+        
+        <div class="group-stats">
+            <div class="stat-item tooltip" data-tooltip="${getStudentNamesTooltip(group.id, studentCount)}">
+                <div class="stat-icon">
+                    <i data-lucide="users"></i>
+                </div>
+                <div class="stat-text">${studentCount} STUDENTS</div>
+            </div>
+            <div class="stat-item tooltip" data-tooltip="Group session times can vary depending on the subject, student engagement, and discussion depth. This is a rough time estimate.">
+                <div class="stat-icon">
+                    <i data-lucide="clock"></i>
+                </div>
+                <div class="stat-text">${sessionTime}</div>
+            </div>
+        </div>
+        
+        <button class="edit-group-btn" onclick="editGroup(${group.id})">
+            <span class="edit-btn-text">Edit Group</span>
+        </button>
     `;
+    
     return card;
 }
 
-// Update section count
-function updateSectionCount(sectionTitle) {
-    const sections = document.querySelectorAll('.groups-section');
-    sections.forEach(section => {
-        const title = section.querySelector('.section-title').textContent;
-        if (title === sectionTitle) {
-            const countElement = section.querySelector('.section-count');
-            const cards = section.querySelectorAll('.group-card').length;
-            countElement.textContent = `${cards} group${cards !== 1 ? 's' : ''}`;
+// Remove old helper functions - now using new Figma design
+
+// Update a specific group's data and re-render its card
+function updateGroup(groupId, updates) {
+    const groupIndex = groupSlots.findIndex(g => g.id === groupId);
+    if (groupIndex === -1) return;
+    
+    // Update the group data
+    Object.assign(groupSlots[groupIndex], updates);
+    
+    // Auto-generate name if standard is set
+    if (updates.standard) {
+        groupSlots[groupIndex].name = generateGroupName(updates.standard);
+        groupSlots[groupIndex].url = generateStudentUrl(groupSlots[groupIndex].studentCode);
+        groupSlots[groupIndex].status = 'ready';
+        
+        // Update question count from standards data
+        const standardData = standardsData[updates.standard];
+        if (standardData) {
+            groupSlots[groupIndex].questionCount = standardData.questionCount;
         }
-    });
+    }
+    
+    // Re-render the specific card
+    const card = document.querySelector(`[data-group-id="${groupId}"]`);
+    if (card) {
+        const newCard = createGroupCard(groupSlots[groupIndex]);
+        card.parentNode.replaceChild(newCard, card);
+        
+        // Re-initialize Lucide icons
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    }
 }
+
 
 // Copy group code function with enhanced UX
 function copyGroupCode(code, buttonElement) {
@@ -256,11 +166,16 @@ function copyGroupCode(code, buttonElement) {
     }
 }
 
-// Show copy success feedback
+// Show copy success feedback for new Figma design
 function showCopySuccess(button) {
     button.classList.remove('copying');
     button.classList.add('copied');
-    button.innerHTML = '<i data-lucide="check"></i> Copied!';
+    button.innerHTML = `
+        <div class="copy-icon">
+            <i data-lucide="check"></i>
+        </div>
+        <span class="copy-text">Copied!</span>
+    `;
     
     // Re-initialize icons for the new content
     if (window.lucide) {
@@ -272,11 +187,21 @@ function showCopySuccess(button) {
         window.animateCopyFeedback(button);
     }
     
+    // Add confetti burst animation
+    if (window.createConfettiBurst) {
+        window.createConfettiBurst(button);
+    }
+    
     // Reset after 2 seconds
     setTimeout(() => {
         button.disabled = false;
         button.classList.remove('copied');
-        button.innerHTML = '<i data-lucide="copy"></i> Copy Code';
+        button.innerHTML = `
+            <div class="copy-icon">
+                <i data-lucide="copy"></i>
+            </div>
+            <span class="copy-text">Copy Code</span>
+        `;
         
         // Re-initialize icons for the new content
         if (window.lucide) {
@@ -312,11 +237,16 @@ function fallbackCopy(code, button) {
     }
 }
 
-// Show copy error feedback
+// Show copy error feedback for new Figma design
 function showCopyError(button) {
     button.disabled = false;
     button.classList.remove('copying');
-    button.innerHTML = '<i data-lucide="x"></i> Copy Failed';
+    button.innerHTML = `
+        <div class="copy-icon">
+            <i data-lucide="x"></i>
+        </div>
+        <span class="copy-text">Copy Failed</span>
+    `;
     
     // Re-initialize icons
     if (window.lucide) {
@@ -325,153 +255,181 @@ function showCopyError(button) {
     
     // Reset after 2 seconds
     setTimeout(() => {
-        button.innerHTML = '<i data-lucide="copy"></i> Copy Code';
+        button.innerHTML = `
+            <div class="copy-icon">
+                <i data-lucide="copy"></i>
+            </div>
+            <span class="copy-text">Copy Code</span>
+        `;
         if (window.lucide) {
             lucide.createIcons();
         }
     }, 2000);
 }
 
-// Edit group placeholder
-function editGroup(button) {
-    alert('Edit group functionality will be implemented with standard selection!');
+// Edit group function - opens standards panel
+function editGroup(groupId) {
+    currentEditingGroup = groupId;
+    
+    // Find the group data
+    const group = groupSlots.find(g => g.id === groupId);
+    if (!group) return;
+    
+    // Open the standards selection panel (preserves previous selection)
+    openStandardsPanel();
 }
 
-// Setup group management event listeners
-function setupGroupManagement() {
-    // Add event listeners to update create button
-    document.getElementById('groupNameInput').addEventListener('input', updateCreateButton);
-    document.getElementById('gradeLevelSelect').addEventListener('change', updateCreateButton);
-    
-    // Add click handlers to create group buttons (legacy)
-    document.querySelectorAll('.btn-create').forEach(btn => {
-        btn.addEventListener('click', openCreateGroupModal);
-    });
-
-    // Split button functionality
-    initializeSplitButton();
-    
-    // Close modal on escape key
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closeCreateGroupModal();
-        }
-    });
-    
-    // Close modal on overlay click
-    document.getElementById('createGroupModal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeCreateGroupModal();
-        }
-    });
+// Helper function to get display name for domain
+function getDomainDisplayName(domain) {
+    const domainDisplayNames = {
+        'SP': 'Statistics & Probability',
+        'G': 'Geometry', 
+        'NS': 'The Number System',
+        'RP': 'Ratios & Proportional Relationships',
+        'EE': 'Expressions & Equations',
+        'NF': 'Number & Operations—Fractions',
+        'NBT': 'Number & Operations in Base Ten',
+        'MD': 'Measurement & Data'
+    };
+    return domainDisplayNames[domain] || domain;
 }
 
-// Split Button Functionality
-function initializeSplitButton() {
-    const mainButton = document.getElementById('createGroupMain');
-    const dropdownButton = document.getElementById('createGroupDropdown');
-    const dropdownMenu = document.getElementById('createGroupMenu');
-    const dropdownItems = document.querySelectorAll('.split-dropdown-item');
-
-    if (!mainButton || !dropdownButton || !dropdownMenu) {
-        return; // Elements not found
+// Helper function to get truncated standard description
+function getStandardDescription(standardData) {
+    if (!standardData.description) return '';
+    
+    const description = standardData.description;
+    
+    // Handle specific formatting for different standards
+    if (description.includes('Part c:')) {
+        const partC = description.split('Part c:')[1];
+        if (partC) {
+            const truncated = partC.trim().substring(0, 50);
+            return truncated + (partC.trim().length > 50 ? '...' : '');
+        }
     }
-
-    // Main button click - default action (use template)
-    mainButton.addEventListener('click', () => {
-        openTemplateModal();
-    });
-
-    // Dropdown toggle
-    dropdownButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleSplitDropdown();
-    });
-
-    // Dropdown menu items
-    dropdownItems.forEach(item => {
-        item.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const action = item.getAttribute('data-action');
-            
-            if (action === 'template') {
-                openTemplateModal();
-            } else if (action === 'custom') {
-                openCustomModal();
-            }
-            
-            closeSplitDropdown();
-        });
-    });
-
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.split-button')) {
-            closeSplitDropdown();
-        }
-    });
-
-    // Close dropdown on escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeSplitDropdown();
-        }
-    });
+    
+    // For other descriptions, just truncate at a reasonable length
+    if (description.length > 60) {
+        return description.substring(0, 60) + '...';
+    }
+    
+    return description;
 }
 
-function toggleSplitDropdown() {
-    const dropdownButton = document.getElementById('createGroupDropdown');
-    const dropdownMenu = document.getElementById('createGroupMenu');
+// Helper function to get domain icon
+function getDomainIcon(domain) {
+    const domainIcons = {
+        'SP': 'bar-chart-3',     // Statistics & Probability
+        'RP': 'percent',         // Ratios & Proportional Relationships  
+        'EE': 'calculator',      // Expressions & Equations
+        'NF': 'slice',          // Number & Operations—Fractions
+        'NS': 'grid-3x3',       // The Number System
+        'G': 'triangle',        // Geometry
+        'MD': 'ruler',          // Measurement & Data
+        'NBT': 'hash'           // Number & Operations in Base Ten
+    };
+    return domainIcons[domain] || 'book-open';
+}
+
+// Helper function to get description prefix
+function getDescriptionPrefix(standardData) {
+    if (!standardData) return '';
     
-    const isActive = dropdownMenu.classList.contains('active');
+    // Only add "Part c:" prefix for the SP standard
+    if (standardData.code === '6.SP.B.5c') {
+        return 'Part c:';
+    }
     
-    if (isActive) {
-        closeSplitDropdown();
+    return '';
+}
+
+// Helper function to generate student names tooltip
+function getStudentNamesTooltip(groupId, studentCount) {
+    if (studentCount === 0) {
+        return 'No students assigned yet';
+    }
+    
+    // Pool of student names to randomly select from
+    const studentNames = [
+        'Emma Rodriguez', 'Liam Chen', 'Sophia Johnson', 'Noah Patel', 'Isabella Smith',
+        'Mason Williams', 'Ava Garcia', 'Lucas Brown', 'Mia Davis', 'Ethan Martinez',
+        'Charlotte Wilson', 'Alexander Lee', 'Amelia Taylor', 'Benjamin Anderson', 'Harper Thompson',
+        'Sebastian Moore', 'Evelyn Jackson', 'Oliver White', 'Abigail Harris', 'Elijah Clark',
+        'Emily Lewis', 'James Robinson', 'Elizabeth Walker', 'William Hall', 'Sofia Allen'
+    ];
+    
+    // Create consistent selection based on group ID to avoid changing names on re-render
+    const seedNames = [];
+    const baseIndex = (groupId - 1) * 5; // Different starting point for each group
+    
+    for (let i = 0; i < studentCount; i++) {
+        const nameIndex = (baseIndex + i) % studentNames.length;
+        seedNames.push(studentNames[nameIndex]);
+    }
+    
+    if (studentCount === 1) {
+        return `Student: ${seedNames[0]}`;
     } else {
-        openSplitDropdown();
+        return `Students: ${seedNames.join(', ')}`;
     }
 }
 
-function openSplitDropdown() {
-    const dropdownButton = document.getElementById('createGroupDropdown');
-    const dropdownMenu = document.getElementById('createGroupMenu');
-    
-    dropdownButton.classList.add('active');
-    dropdownMenu.classList.add('active');
+// Helper function to generate CCSS badge tooltip text
+function getCCSSTooltipText(standardCode) {
+    return 'This standard identifier is a unique code that designates the grade, domain, cluster, and specific standard in the Common Core State Standards for precise reference in curriculum and assessments.';
 }
 
-function closeSplitDropdown() {
-    const dropdownButton = document.getElementById('createGroupDropdown');
-    const dropdownMenu = document.getElementById('createGroupMenu');
+// Function to toggle standard description expansion
+function toggleStandardDescription(groupId, standardCode) {
+    const descElement = document.getElementById(`desc-${groupId}`);
+    const showMoreLink = document.getElementById(`show-more-${groupId}`);
+    const descContent = descElement.querySelector('.desc-content');
     
-    if (dropdownButton) dropdownButton.classList.remove('active');
-    if (dropdownMenu) dropdownMenu.classList.remove('active');
-}
-
-function openTemplateModal() {
-    // For now, use the existing modal - in the future this could be a template-specific modal
-    openCreateGroupModal();
-    closeSplitDropdown();
-}
-
-function openCustomModal() {
-    // Open the modal first
-    openCreateGroupModal();
-    closeSplitDropdown();
+    if (!descElement || !showMoreLink || !descContent) return;
     
-    // Scroll to the custom form section after a short delay to ensure modal is fully rendered
-    setTimeout(() => {
-        const customFormSection = document.getElementById('customForm');
-        if (customFormSection) {
-            customFormSection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+    const standardData = standardsData[standardCode];
+    if (!standardData) return;
+    
+    // Get full and short descriptions
+    const fullDescription = standardData.description;
+    const shortDescription = getStandardDescription(standardData);
+    const prefix = getDescriptionPrefix(standardData);
+    
+    // Check if currently expanded (compare with full description)
+    const currentText = descContent.textContent;
+    const isExpanded = currentText.includes(fullDescription);
+    
+    if (isExpanded) {
+        // Collapse - show short version
+        descContent.textContent = shortDescription;
+        showMoreLink.textContent = "Show More";
+        
+        // Add collapse animation
+        if (window.gsap) {
+            gsap.from(descContent, {
+                duration: 0.3,
+                height: "auto",
+                ease: "power2.out"
             });
         }
-    }, 100);
+    } else {
+        // Expand - show full description  
+        descContent.textContent = fullDescription;
+        showMoreLink.textContent = "Show Less";
+        
+        // Add expand animation
+        if (window.gsap) {
+            gsap.from(descContent, {
+                duration: 0.3,
+                height: 0,
+                ease: "power2.out"
+            });
+        }
+    }
 }
 
-// Edit group placeholder function
-function editGroup() {
-    alert('Group edit coming soon!');
+// Initialize group management on page load
+function initializeGroupManagement() {
+    renderGroupCards();
 }

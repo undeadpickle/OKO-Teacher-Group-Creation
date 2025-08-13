@@ -200,7 +200,24 @@
   font-weight: 600;
 }
 
-/* Standards Panel */
+/* Standards Modal Styles */
+.standards-modal {
+  width: 90vw;
+  max-width: 1200px;
+  height: 80vh;
+  max-height: 800px;
+  padding: 0;
+}
+
+.standards-modal-content {
+  display: flex;
+  height: 100%;
+  padding: 0;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Standards Panel (Legacy - now part of modal) */
 .standards-panel-overlay {
   position: fixed;
   top: 0;

@@ -387,6 +387,134 @@ function setupRotatingPlaceholder() {
     });
 }
 
+// Confetti burst animation for copy success
+function createConfettiBurst(button) {
+    if (!button || typeof gsap === 'undefined') return;
+    
+    const buttonRect = button.getBoundingClientRect();
+    const centerX = buttonRect.left + buttonRect.width / 2;
+    const centerY = buttonRect.top + buttonRect.height / 2;
+    
+    // Create confetti container
+    const confettiContainer = document.createElement('div');
+    confettiContainer.style.position = 'fixed';
+    confettiContainer.style.top = '0';
+    confettiContainer.style.left = '0';
+    confettiContainer.style.width = '100%';
+    confettiContainer.style.height = '100%';
+    confettiContainer.style.pointerEvents = 'none';
+    confettiContainer.style.zIndex = '9999';
+    document.body.appendChild(confettiContainer);
+    
+    // Bright and bold confetti colors for fun celebration
+    const colors = [
+        '#FF6B6B', // Bright Red
+        '#4ECDC4', // Turquoise
+        '#45B7D1', // Bright Blue  
+        '#96CEB4', // Mint Green
+        '#FFEAA7', // Sunny Yellow
+        '#DDA0DD', // Plum Purple
+        '#FFB347', // Peach Orange
+        '#87CEEB', // Sky Blue
+        '#98FB98', // Pale Green
+        '#F0E68C'  // Khaki Yellow
+    ];
+    
+    // Create confetti particles
+    const particleCount = 15;
+    const particles = [];
+    
+    for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'absolute';
+        particle.style.width = '8px';
+        particle.style.height = '8px';
+        particle.style.left = centerX + 'px';
+        particle.style.top = centerY + 'px';
+        
+        // Random color
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        // Random shape
+        const shapes = ['circle', 'square', 'triangle', 'star'];
+        const shape = shapes[Math.floor(Math.random() * shapes.length)];
+        
+        // Apply shape-specific styling
+        switch(shape) {
+            case 'circle':
+                particle.style.backgroundColor = color;
+                particle.style.borderRadius = '50%';
+                break;
+            case 'square':
+                particle.style.backgroundColor = color;
+                particle.style.borderRadius = '0';
+                break;
+            case 'triangle':
+                particle.style.width = '0';
+                particle.style.height = '0';
+                particle.style.borderLeft = '4px solid transparent';
+                particle.style.borderRight = '4px solid transparent';
+                particle.style.borderBottom = `8px solid ${color}`;
+                particle.style.borderRadius = '0';
+                break;
+            case 'star':
+                particle.style.backgroundColor = color;
+                particle.style.clipPath = 'polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)';
+                particle.style.borderRadius = '0';
+                break;
+        }
+        
+        confettiContainer.appendChild(particle);
+        particles.push(particle);
+        
+        // Random direction and distance for initial burst
+        const angle = (Math.PI * 2 * i) / particleCount;
+        const velocity = 40 + Math.random() * 40; // Slightly slower initial burst
+        const burstX = centerX + Math.cos(angle) * velocity;
+        const burstY = centerY + Math.sin(angle) * velocity;
+        
+        // Add gravity effect - particles fall down after initial burst
+        const gravityY = burstY + 100 + Math.random() * 150; // Fall down with some variation
+        
+        // Create timeline for more complex animation
+        const tl = gsap.timeline();
+        
+        // Random rotation speeds for each particle
+        const initialRotation = Math.random() * 360; // Random starting rotation
+        const rotationSpeed = (Math.random() - 0.5) * 1440; // Random rotation speed (-720° to +720°)
+        
+        // Set initial rotation
+        gsap.set(particle, { rotation: initialRotation });
+        
+        // Initial burst (faster, outward) with continuous rotation
+        tl.to(particle, {
+            x: burstX - centerX,
+            y: burstY - centerY,
+            rotation: `+=${rotationSpeed * 0.25}`, // Rotate during burst
+            duration: 0.4,
+            ease: "power2.out",
+            delay: Math.random() * 0.15
+        })
+        // Then gravity takes over (slower fall with fade) with continued rotation
+        .to(particle, {
+            y: gravityY - centerY,
+            rotation: `+=${rotationSpeed * 0.75}`, // Continue rotating during fall
+            scale: 0,
+            opacity: 0,
+            duration: 1.2, // Longer fade out
+            ease: "power1.in", // Gravity-like acceleration
+        }, "-=0.1"); // Start falling slightly before burst ends
+    }
+    
+    // Clean up after animation (longer timeout for extended animation)
+    setTimeout(() => {
+        if (confettiContainer.parentNode) {
+            confettiContainer.parentNode.removeChild(confettiContainer);
+        }
+    }, 2000);
+}
+
 // Export for use in other files
 window.animateNewGroupCard = animateNewGroupCard;
 window.animateCopyFeedback = animateCopyFeedback;
+window.createConfettiBurst = createConfettiBurst;

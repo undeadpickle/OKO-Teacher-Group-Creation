@@ -2,8 +2,8 @@
 
 // Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Setup group management functionality
-    setupGroupManagement();
+    // Initialize group management with 5 fixed cards
+    initializeGroupManagement();
     
     // Setup standards panel functionality  
     setupStandardsPanel();

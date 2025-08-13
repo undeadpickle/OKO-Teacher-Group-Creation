@@ -59,36 +59,7 @@
       <div class="header">
         <h1 class="page-title">Let's Talk Groups</h1>
         <div class="header-actions">
-          <!-- <select class="date-filter">
-            <option>Today</option>
-            <option>This Week</option>
-            <option>This Month</option>
-          </select> -->
-          <div class="split-button">
-            <button class="split-button-main" id="createGroupMain">
-              <span>+</span>
-              <span>Create New Group</span>
-            </button>
-            <button class="split-button-dropdown" id="createGroupDropdown">
-              <i data-lucide="chevron-down"></i>
-            </button>
-            <div class="split-dropdown-menu" id="createGroupMenu">
-              <div class="split-dropdown-item" data-action="template">
-                <i data-lucide="book" class="split-dropdown-icon"></i>
-                <div class="split-dropdown-content">
-                  <div class="split-dropdown-title">Use Template</div>
-                  <div class="split-dropdown-desc">Quick setup with curriculum-aligned templates</div>
-                </div>
-              </div>
-              <div class="split-dropdown-item" data-action="custom">
-                <i data-lucide="settings" class="split-dropdown-icon"></i>
-                <div class="split-dropdown-content">
-                  <div class="split-dropdown-title">Custom Group</div>
-                  <div class="split-dropdown-desc">Create a fully customized group from scratch</div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <span class="page-description">Edit your group settings and share student codes to start discussions</span>
         </div>
       </div>
 
@@ -116,356 +87,38 @@
         </div>
       </div>
 
-      <!-- Ready to Start Section -->
+      <!-- Let's Talk Groups Section -->
       <div class="groups-section">
         <div class="section-header">
-          <h2 class="section-title">Ready to Start</h2>
-          <span class="section-count">2 groups</span>
+          <h2 class="section-title">Let's Talk Groups</h2>
+          <span class="section-count">5 group slots</span>
         </div>
-        <div class="groups-grid">
-          <!-- Ready Group 1 -->
-          <div class="group-card">
-            <div class="group-status-bar"></div>
-            <div class="group-content">
-              <div class="group-header">
-                <div class="group-name">Period 3 - Advanced</div>
-                <span class="group-badge badge-ready">Ready</span>
-              </div>
-
-              <div class="standard-info">
-                <div class="standard-code">5.NF.B.4b</div>
-                <div class="standard-desc">
-                  Find the area of a rectangle with fractional side lengths
-                </div>
-              </div>
-
-              <div class="group-code-section">
-                <div class="code-label">Student Login Code</div>
-                <div class="group-code">ZBTN1</div>
-                <button
-                  class="copy-btn tooltip"
-                  data-tooltip="Copy student login code"
-                  onclick="copyGroupCode('MX7F3', this)"
-                >
-                  <i data-lucide="copy"></i> Copy Code
-                </button>
-              </div>
-
-              <div class="group-meta">
-                <span class="meta-item">
-                  <i data-lucide="users"></i>
-                  <span>0/24 joined</span>
-                </span>
-                <span class="meta-item">
-                  <i data-lucide="clock"></i>
-                  <span>15 min session</span>
-                </span>
-              </div>
-
-              <div class="group-actions">
-                <button class="btn-action" onclick="editGroup()">Edit</button>
-                <button class="btn-action primary">Start Session</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Ready Group 2 -->
-          <div class="group-card">
-            <div class="group-status-bar"></div>
-            <div class="group-content">
-              <div class="group-header">
-                <div class="group-name">Period 5 - Mixed</div>
-                <span class="group-badge badge-ready">Ready</span>
-              </div>
-
-              <div class="standard-info">
-                <div class="standard-code">5.MD.C.5</div>
-                <div class="standard-desc">
-                  Relate volume to multiplication and addition
-                </div>
-              </div>
-
-              <div class="group-code-section">
-                <div class="code-label">Student Login Code</div>
-                <div class="group-code">YVNT2</div>
-                <button
-                  class="copy-btn tooltip"
-                  data-tooltip="Copy student login code"
-                  onclick="copyGroupCode('YVNT2', this)"
-                >
-                  <i data-lucide="copy"></i> Copy Code
-                </button>
-              </div>
-
-              <div class="group-meta">
-                <span class="meta-item">
-                  <i data-lucide="users"></i>
-                  <span>28 students</span>
-                </span>
-                <span class="meta-item">
-                  <i data-lucide="clock"></i>
-                  <span>15 min session</span>
-                </span>
-              </div>
-
-              <div class="group-actions">
-                <button class="btn-action" onclick="editGroup()">Edit</button>
-                <button class="btn-action primary">Start Session</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Active Sessions Section -->
-      <div class="groups-section">
-        <div class="section-header">
-          <h2 class="section-title">Active Sessions</h2>
-          <span class="section-count">3 groups</span>
-        </div>
-        <div class="groups-grid">
-          <!-- Active Group -->
-          <div class="group-card">
-            <div class="group-status-bar active"></div>
-            <div class="group-content">
-              <div class="group-header">
-                <div class="group-name">Period 2 - Team A</div>
-                <span class="group-badge badge-active">In Progress</span>
-              </div>
-
-              <div class="standard-info">
-                <div class="standard-code">5.NF.A.1</div>
-                <div class="standard-desc">
-                  Add and subtract fractions with unlike denominators
-                </div>
-              </div>
-
-              <div style="margin: 12px 0">
-                <div
-                  style="
-                    display: flex;
-                    justify-content: space-between;
-                    margin-bottom: 4px;
-                  "
-                >
-                  <span style="font-size: 13px; color: #666"
-                    >Team Time - Round 1</span
-                  >
-                  <span
-                    style="font-size: 13px; color: #1a5f3f; font-weight: 600"
-                    >18/22 active</span
-                  >
-                </div>
-                <div class="progress-bar">
-                  <div class="progress-fill" style="width: 65%"></div>
-                </div>
-                <div class="time-info">
-                  Started 8 minutes ago • ~7 min remaining
-                </div>
-              </div>
-
-              <div class="group-meta">
-                <span class="student-count">
-                  <i data-lucide="users"></i>
-                  <span>22 students</span>
-                </span>
-                <span class="meta-item">
-                  <span>💬</span>
-                  <span>High engagement</span>
-                </span>
-              </div>
-
-              <div class="group-actions">
-                <button class="btn-action">Monitor</button>
-                <button class="btn-action">End Early</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Completed Today Section -->
-      <div class="groups-section">
-        <div class="section-header">
-          <h2 class="section-title">Completed Today</h2>
-          <span class="section-count">8 groups</span>
-        </div>
-        <div class="groups-grid">
-          <!-- Completed Group -->
-          <div class="group-card">
-            <div class="group-status-bar completed"></div>
-            <div class="group-content">
-              <div class="group-header">
-                <div class="group-name">Period 1 - Morning</div>
-                <span class="group-badge badge-completed">Completed</span>
-              </div>
-
-              <div class="standard-info">
-                <div class="standard-code">5.NBT.B.6</div>
-                <div class="standard-desc">
-                  Find whole-number quotients using strategies
-                </div>
-              </div>
-
-              <div
-                style="
-                  background: #f8f9fa;
-                  border-radius: 8px;
-                  padding: 12px;
-                  margin: 12px 0;
-                "
-              >
-                <div
-                  style="
-                    display: flex;
-                    justify-content: space-between;
-                    margin-bottom: 8px;
-                  "
-                >
-                  <span style="font-size: 13px; color: #666"
-                    >Session Summary</span
-                  >
-                  <span style="font-size: 13px; color: #4caf50"
-                    >✓ Complete</span
-                  >
-                </div>
-                <div
-                  style="
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 12px;
-                  "
-                >
-                  <div>
-                    <div style="font-size: 11px; color: #999">
-                      Participation
-                    </div>
-                    <div style="font-size: 16px; font-weight: 600">96%</div>
-                  </div>
-                  <div>
-                    <div style="font-size: 11px; color: #999">
-                      Discourse Score
-                    </div>
-                    <div style="font-size: 16px; font-weight: 600">8.7</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="group-meta">
-                <span class="meta-item">
-                  <i data-lucide="clock"></i>
-                  <span>9:15 AM</span>
-                </span>
-                <span class="meta-item">
-                  <i data-lucide="clock"></i>
-                  <span>14 min</span>
-                </span>
-              </div>
-
-              <div class="group-actions">
-                <button class="btn-action">View Report</button>
-                <button class="btn-action">Duplicate</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Scheduled Section -->
-      <div class="groups-section">
-        <div class="section-header">
-          <h2 class="section-title">Scheduled for Later</h2>
-          <span class="section-count">3 groups</span>
-        </div>
-        <div class="groups-grid">
-          <!-- Scheduled Group -->
-          <div class="group-card">
-            <div class="group-status-bar pending"></div>
-            <div class="group-content">
-              <div class="group-header">
-                <div class="group-name">Period 6 - Remedial</div>
-                <span class="group-badge badge-scheduled">Scheduled</span>
-              </div>
-
-              <div class="standard-info">
-                <div class="standard-code">4.NF.B.4</div>
-                <div class="standard-desc">
-                  Multiply a fraction by a whole number (Prerequisite)
-                </div>
-              </div>
-
-              <div
-                style="
-                  background: #fff8e1;
-                  border-radius: 8px;
-                  padding: 12px;
-                  margin: 12px 0;
-                  text-align: center;
-                "
-              >
-                <div
-                  style="
-                    font-size: 13px;
-                    color: #f57c00;
-                    font-weight: 600;
-                    margin-bottom: 4px;
-                  "
-                >
-                  Scheduled for 2:30 PM
-                </div>
-                <div style="font-size: 12px; color: #666">
-                  Starts in 3 hours 45 minutes
-                </div>
-              </div>
-
-              <div class="group-meta">
-                <span class="meta-item">
-                  <i data-lucide="users"></i>
-                  <span>18 students</span>
-                </span>
-                <span class="meta-item">
-                  <i data-lucide="clock"></i>
-                  <span>20 min session</span>
-                </span>
-              </div>
-
-              <div class="group-actions">
-                <button class="btn-action" onclick="editGroup()">Edit</button>
-                <button class="btn-action">Activate Now</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Empty state for creating more -->
-          <div class="empty-state">
-            <div class="empty-icon"><i data-lucide="file-text"></i></div>
-            <div class="empty-title">Plan Ahead</div>
-            <div class="empty-desc">
-              Schedule groups in advance for smoother lessons
-            </div>
-            <button class="btn-create">
-              <span>+</span>
-              <span>Schedule Group</span>
-            </button>
-          </div>
+        <div class="groups-grid" id="groupsContainer">
+          <!-- Group cards will be rendered dynamically by JavaScript -->
         </div>
       </div>
     </div>
 
-    <!-- Standards Selection Side Panel -->
-    <div id="standardsPanel" class="standards-panel-overlay">
-      <div class="standards-panel">
-        <!-- Left Panel: Search and Navigation -->
-        <div class="standards-left-panel">
-          <div class="panel-header">
-            <div class="panel-title">Select Standard</div>
-            <div class="panel-subtitle">
-              Search or browse to find the right standard for your students
+    <!-- Standards Selection Modal -->
+    <div id="standardsPanel" class="modal-overlay">
+      <div class="standards-modal modal">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <div>
+            <div class="modal-title">Select Math Standard</div>
+            <div class="modal-subtitle">
+              Search or browse to find the right standard for your group
             </div>
-            <button class="panel-close" onclick="closeStandardsPanel()">
-              &times;
-            </button>
           </div>
+          <button class="modal-close" onclick="closeStandardsPanel()">
+            &times;
+          </button>
+        </div>
+        
+        <!-- Modal Content -->
+        <div class="modal-content standards-modal-content">
+          <!-- Left Panel: Search and Navigation -->
+          <div class="standards-left-panel">
 
           <!-- Search Section -->
           <div class="search-section">
@@ -923,20 +576,22 @@
             </div>
           </div>
 
-          <!-- Fixed action buttons at bottom -->
-          <div class="panel-actions">
-            <button class="btn-secondary" onclick="closeStandardsPanel()">
-              Cancel
-            </button>
-            <button
-              class="btn-primary"
-              id="selectStandardBtn"
-              onclick="confirmStandardSelection()"
-              disabled
-            >
-              Select This Standard
-            </button>
           </div>
+        </div>
+        
+        <!-- Modal Actions -->
+        <div class="modal-actions">
+          <button class="btn-secondary" onclick="closeStandardsPanel()">
+            Cancel
+          </button>
+          <button
+            class="btn-primary"
+            id="selectStandardBtn"
+            onclick="confirmStandardSelection()"
+            disabled
+          >
+            Select This Standard
+          </button>
         </div>
       </div>
     </div>

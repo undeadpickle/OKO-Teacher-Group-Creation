@@ -14,6 +14,82 @@
   height: 16px;
 }
 
+/* Page Description */
+.page-description {
+  color: #666;
+  font-size: 14px;
+  font-style: italic;
+}
+
+/* Group Card - Not Set State */
+.group-card.not-set {
+  border: 2px dashed #ddd;
+  background: #fafafa;
+}
+
+.group-card.not-set .group-status-bar {
+  background: #b0b0b0;
+}
+
+.group-name.not-set {
+  color: #999;
+  font-style: italic;
+}
+
+.standard-info.not-set {
+  color: #aaa;
+}
+
+.standard-code.not-set {
+  color: #bbb;
+}
+
+/* Student URL Display - Minimal/Tertiary */
+.group-url-section {
+  margin: 8px 0;
+  font-size: 11px;
+  opacity: 0.7;
+  text-align: center;
+}
+
+.group-url {
+  font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+  color: #888;
+  font-weight: 400;
+  word-break: break-all;
+}
+
+/* Session Length with Tooltip */
+.session-length-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.session-length-tooltip {
+  cursor: help;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+/* Badge Styles for New States */
+.badge-not-set {
+  background: #f5f5f5;
+  color: #999;
+}
+
+.badge-needs-review {
+  background: #fff3e0;
+  color: #ff6b35;
+}
+
+/* Question Count Display */
+.question-count {
+  font-size: 12px;
+  color: #666;
+  margin-top: 4px;
+}
+
 /* Buttons */
 .btn-create {
   padding: 10px 20px;
@@ -231,65 +307,116 @@
   border-color: #ccc;
 }
 
-/* Group Cards */
+/* Group Cards - Figma Container Design */
 .group-card {
-  background: white;
-  border-radius: 12px;
-  border: 1px solid #e0e0e0;
-  overflow: hidden;
-  transition: all 0.2s;
-  position: relative;
+  position: relative; /* Ensure relative positioning for absolute children */
+  background: #ffffff;
+  border-radius: 16px;
+  border: 4px solid transparent;
+  border-top-color: #605dec;
+  padding: 24px;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  max-width: 454px;
+  box-sizing: border-box;
 }
 
 .group-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transform: translateY(-2px);
-}
-
-.group-status-bar {
-  height: 4px;
-  background: #4caf50;
-}
-
-.group-status-bar.pending {
-  background: #ff9800;
-}
-
-.group-status-bar.active {
-  background: #2196f3;
-  animation: pulse 2s infinite;
-}
-
-.group-status-bar.completed {
-  background: #9e9e9e;
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-.group-content {
-  padding: 20px;
+  box-shadow: 0 8px 24px rgba(96, 93, 236, 0.15);
 }
 
 .group-header {
   display: flex;
-  justify-content: space-between;
-  align-items: start;
-  margin-bottom: 12px;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.group-name {
-  font-family: var(--font-display);
-  font-size: 16px;
+.grade-label {
+  font-family: "ABC Marfa", sans-serif;
+  font-size: 12px;
+  color: #858b87;
+  text-transform: uppercase;
+  letter-spacing: 0.48px;
+  font-weight: 400;
+}
+
+.standard-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.standard-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  color: #605dec;
+}
+
+.standard-icon svg {
+  width: 32px;
+  height: 32px;
+  color: #605dec;
+}
+
+.standard-title {
+  font-family: "ABC Marfa", sans-serif;
+  font-size: 20px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #605dec;
+  line-height: 1;
+}
+
+.standard-cluster {
+  padding-left: 40px;
+  margin-bottom: 8px;
+}
+
+.cluster-title {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #002e19;
+  margin-bottom: 8px;
+  line-height: 18px;
+}
+
+.cluster-description {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-left: 3px solid #f4f4fd;
+  position: relative;
+}
+
+.cluster-desc-text {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #858b87;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.cluster-desc-part {
+  font-weight: 700;
+}
+
+.show-more-link {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  color: #605dec;
+  text-decoration: none;
+  display: block;
+  margin-top: 4px;
+}
+
+.show-more-link:hover {
+  text-decoration: underline;
 }
 
 /* Group Badges */
@@ -339,83 +466,184 @@
   line-height: 1.4;
 }
 
-/* Group Code Section */
-.group-code-section {
-  background: #f8f9fa;
+/* Student Code Section - Figma Design */
+.student-code-section {
+  background: #f4f4fd;
   border-radius: 8px;
-  padding: 12px;
-  margin-bottom: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
   text-align: center;
+}
+
+.student-code-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
 }
 
 .code-label {
-  font-size: 11px;
-  color: #999;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #9c9bf1;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  letter-spacing: 0.02em;
 }
 
 .group-code {
+  font-family: "Roboto", sans-serif;
   font-size: 24px;
-  font-weight: 700;
-  color: #1a5f3f;
-  letter-spacing: 2px;
-  font-family: var(--font-mono);
+  font-weight: 800;
+  color: #002e19;
+  letter-spacing: 0.02em;
 }
 
-.copy-btn {
-  padding: 8px 16px;
-  background: white;
-  border: 1px solid #ddd;
+.copy-code-btn {
+  background: #fffefe;
+  border: none;
   border-radius: 6px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #666;
-  cursor: pointer;
-  margin: 8px auto 0;
+  padding: 4px 24px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 6px;
-  min-width: 120px;
+  gap: 8px;
+  cursor: pointer;
   transition: all 0.2s ease;
-  position: relative;
 }
 
-.copy-btn:hover {
-  background: #f5f5f5;
-  border-color: #ccc;
+.copy-code-btn:hover {
+  background: #d3d3f8;
+}
+
+.copy-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.copy-text {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #002e19;
+}
+
+.student-url {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #605dec;
+  word-break: break-all;
+  text-align: center;
+  max-width: 100%;
 }
 
 /* Copy confirmation states */
-.copy-btn.copying {
+.copy-code-btn.copying {
   background: #e8f5e9;
-  border-color: #4caf50;
   color: #2e7d32;
 }
 
-.copy-btn.copied {
+.copy-code-btn.copied {
   background: #e8f5e9;
-  border-color: #4caf50;
   color: #2e7d32;
 }
 
-/* Group Meta */
-.group-meta {
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-  color: #999;
-  padding-top: 12px;
-  border-top: 1px solid #f0f0f0;
+.copy-code-btn.copying .copy-text,
+.copy-code-btn.copied .copy-text {
+  color: #2e7d32;
 }
 
-.group-actions {
+.copy-code-btn.copying .copy-icon,
+.copy-code-btn.copied .copy-icon {
+  color: #2e7d32;
+}
+
+/* Group Stats Section */
+.group-stats {
   display: flex;
-  gap: 8px;
-  margin-top: 16px;
   justify-content: center;
+  gap: 32px;
+  align-items: center;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat-icon {
+  width: 24px;
+  height: 24px;
+  color: #858b87;
+}
+
+.stat-icon svg {
+  color: #858b87;
+}
+
+.stat-text {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #858b87;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* CCSS Code Badge - Top Right Corner */
+.ccss-badge {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: #f7622b;
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: none;
+  padding: 4px 16px;
+  border-radius: 50px;
+  white-space: nowrap;
+  z-index: 100;
+  display: inline-block;
+  line-height: 1;
+  width: fit-content;
+  max-width: none;
+  margin: 0;
+}
+
+/* Edit Group Button */
+.edit-group-btn {
+  background: #605dec;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  height: 40px;
+  box-sizing: border-box;
+}
+
+.edit-group-btn:hover {
+  background: #4f4bc4;
+}
+
+.edit-btn-text {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fffefe;
 }
 
 /* Progress Bar */
@@ -575,7 +803,7 @@
   line-height: 1.4;
 }
 
-/* Tooltips */
+/* Chat Bubble Tooltips */
 .tooltip {
   position: relative;
   cursor: help;
@@ -587,10 +815,10 @@
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background: #333;
+  background: rgba(0, 46, 25, 0.95); /* #002E19 with slight transparency */
   color: white;
-  padding: 8px 12px;
-  border-radius: 4px;
+  padding: 12px 16px;
+  border-radius: 12px; /* More rounded corners */
   font-size: 12px;
   font-weight: 400;
   white-space: normal;
@@ -600,28 +828,35 @@
   line-height: 1.4;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
-  z-index: 1000;
-  margin-bottom: 5px;
+  transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+  transform: translateX(-50%) translateY(-5px); /* Slight upward movement */
+  z-index: 1001; /* Higher than tail */
+  margin-bottom: 8px;
+  box-shadow: 0 4px 12px rgba(0, 46, 25, 0.3); /* Subtle shadow for depth */
 }
 
 .tooltip::before {
   content: "";
   position: absolute;
-  bottom: 100%;
+  bottom: calc(100% - 8px); /* Position tail to connect with bubble */
   left: 50%;
-  transform: translateX(-50%);
-  border: 4px solid transparent;
-  border-top-color: #333;
+  transform: translateX(-50%) translateY(-5px); /* Start position matches tooltip */
+  border: 8px solid transparent; /* Larger tail */
+  border-top-color: rgba(0, 46, 25, 0.95); /* Match tooltip background */
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s, visibility 0.3s;
-  z-index: 1000;
-  margin-bottom: 1px;
+  transition: opacity 0.3s, visibility 0.3s, transform 0.3s; /* Add transform animation */
+  z-index: 1000; /* Behind the tooltip bubble */
 }
 
-.tooltip:hover::after,
+.tooltip:hover::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0); /* Animate into position */
+}
+
 .tooltip:hover::before {
   opacity: 1;
   visibility: visible;
+  transform: translateX(-50%) translateY(0); /* Animate into position with tooltip */
 }

@@ -58,14 +58,21 @@ Though built as vanilla HTML/CSS/JS, the code simulates a component architecture
 
 ### Key Data Structures
 ```javascript
-// Group object structure
+// Group object structure (Updated)
 {
-  groupName: string,
-  status: "ready" | "notSet" | "needsReview", 
-  grade: string | null,
-  standardCode: string | null,
-  standardName: string | null,
-  duration: number
+  id: number,
+  name: string,
+  standard: string, // e.g., '6.SP.B.5c'
+  grade: number, // 5, 6, or 7
+  domain: string, // 'SP', 'RP', 'EE', etc.
+  cluster: string,
+  status: "ready" | "notSet" | "needsReview",
+  studentCount: number,
+  maxStudents: 5,
+  sessionLength: { min: number, max: number },
+  questionCount: number,
+  studentCode: string, // e.g., 'M2YJY'
+  url: string // Generated student URL
 }
 
 // Standard object structure  
@@ -159,7 +166,8 @@ The prototype strictly follows OKO's visual design system:
 - **Custom Creation**: Flexible form-based group creation with validation
 - **Prerequisite Navigation**: Breadcrumb system for exploring building block standards
 - **Question Preview**: Full question sets with multiple choice and open response types
-- **Tooltip System**: Contextual help tooltips for difficulty badges and UI elements
+- **CCSS Badge System**: Orange pill badges showing Common Core State Standards identifiers in top-right corner of each card
+- **Enhanced Tooltip System**: Chat bubble tooltips with proper positioning and contextual help
 
 ### Advanced UX Features
 - **Standards Tree**: Expandable hierarchy for browsing by grade/domain/cluster
@@ -169,6 +177,9 @@ The prototype strictly follows OKO's visual design system:
 - **Difficulty Assessment**: "Just right", "Too easy", "Too hard" indicators with explanatory tooltips
 - **Readiness Guidance**: Contextual help text for appropriate standard selection
 - **Brand Integration**: Official OKO logo properly integrated in sidebar
+- **Confetti Animation**: Fun celebratory burst animation on successful copy actions with colorful particles, gravity physics, and random shapes (circles, squares, triangles, stars)
+- **Diverse Group Representation**: Realistic 6th grade classroom with above/below grade level content, varied group sizes (2-5 students), and different time allocations
+- **Interactive Tooltips**: Chat bubble-style tooltips with dark green background (#002E19), rounded corners, and animated tails for student names and session information
 
 ## Development Notes
 
@@ -204,16 +215,20 @@ The prototype strictly follows OKO's visual design system:
 - Animation durations: hover (0.1-0.15s), modals (0.3-0.4s), micro-interactions (0.06-0.12s)
 - Icons are automatically sized via CSS classes targeting `svg[data-lucide]` elements
 
-### Recent Updates
+### Recent Updates (Latest)
+- **Figma Integration**: Implemented exact Figma Container design for group cards with purple top border (#605dec) and proper spacing
+- **CCSS Badge System**: Added orange pill badges (#f7622b) in top-right corners showing Common Core identifiers (6.SP.B.5c, etc.)
+- **Chat Bubble Tooltips**: Enhanced tooltip system with dark green backgrounds, rounded corners, and animated connection tails
+- **Confetti Celebrations**: Added multi-colored confetti burst animation with gravity physics and random shapes for copy success feedback
+- **Diverse Group Data**: Implemented realistic 6th grade classroom scenarios with above/below grade level groups and varied student counts
+- **Interactive Animations**: Expandable "Show More" functionality for standard descriptions with smooth GSAP transitions
+- **Student Name Tooltips**: Added realistic student name assignments with diverse representation for each group
+- **Copy Button Enhancements**: Updated styling with purple hover states (#d3d3f8) and comprehensive success animations
+
+### Previous Updates
 - **Animation System**: Implemented GSAP-powered micro-interactions and smooth transitions
-- **Icon System**: Replaced all emojis/Unicode icons with Lucide SVG icon set
+- **Icon System**: Replaced all emojis/Unicode icons with Lucide SVG icon set with domain-specific icons
 - **Modal Animations**: Enhanced modal open/close with fade and scale effects
 - **Hover States**: Optimized card and button hover animations for responsiveness
 - **Dropdown Animations**: Added smooth scale and fade transitions for dropdown menus
 - **Performance**: Optimized animation timing and easing curves for 60fps performance
-- Added comprehensive tooltip system with contextual help text
-- Integrated official OKO brand logo in sidebar
-- Fixed modal scrollbar positioning within rounded corners
-- Updated difficulty badge styling to use regular case text
-- Fixed standards panel z-index stacking issues
-- Improved tooltip text wrapping and positioning
