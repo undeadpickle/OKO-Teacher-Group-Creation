@@ -6,6 +6,7 @@ A high-fidelity prototype for the OKO Teacher Dashboard's "Group Creation" flow,
 
 ### Core Functionality
 - **Group Management**: Create, update, and manage collaborative math session groups with diverse content levels
+- **Example Questions Modal**: Full carousel modal displaying all 3 questions per standard with correct answer highlighting, navigation controls, and smooth fade transitions
 - **CCSS Integration**: Orange pill badges displaying Common Core State Standards identifiers (6.SP.B.5c, 7.EE.A.1, etc.)
 - **Standards Selection**: Enhanced modal with semantic search + hierarchical browsing (90% viewport height)
 - **Template System**: 6 curriculum-aligned templates for quick group creation
@@ -90,16 +91,18 @@ The prototype implements OKO's comprehensive visual design system:
 
 ### Primary Workflows
 1. **Set Session Length**: Click segmented control buttons (10-15min, 15-20min, 20-25min) for instant duration selection with visual feedback
-2. **Copy Student Codes**: Click "Copy Code" → Confetti celebration with multi-colored particle burst
-3. **Preview Sample Questions**: Click "Sample Question" button → Tooltip showing math problem preview
-4. **View Standard Details**: Click "Show More" → Smooth expansion revealing full Common Core descriptions  
-5. **Student Information**: Hover over student count → Chat bubble showing individual student names
-6. **Session Timing**: Interactive session length controls with hover states and accessibility support
-7. **CCSS Badges**: Hover over orange badges → Educational tooltip about Common Core identifiers
+2. **View All Questions**: Click "View All Questions" → Full modal carousel showing all 3 questions per standard with correct answers highlighted in green
+3. **Copy Student Codes**: Click "Copy Code" → Confetti celebration with multi-colored particle burst
+4. **Preview Sample Questions**: Click "Sample Question" button → Tooltip showing math problem preview
+5. **View Standard Details**: Click "Show More" → Smooth expansion revealing full Common Core descriptions  
+6. **Student Information**: Hover over student count → Chat bubble showing individual student names
+7. **Session Timing**: Interactive session length controls with hover states and accessibility support
+8. **CCSS Badges**: Hover over orange badges → Educational tooltip about Common Core identifiers
 
 ### Interactive Elements
 - **Segmented Controls**: iOS-style three-button controls for session length with ARIA radiogroup pattern, keyboard navigation, and smooth animations
 - **Group Cards**: Purple-bordered cards with hover animations, bottom-aligned layouts, and comprehensive tooltips
+- **Example Questions Modal**: Carousel modal with purple navigation buttons, fade transitions, keyboard navigation (arrow keys, escape), and click-outside-to-close
 - **Standards Selection**: Enhanced modal (90vh height) with semantic search + hierarchical browsing
 - **Sample Question Buttons**: Outlined pill buttons showing domain-specific math problems in 400px tooltips
 - **Copy Success**: Enhanced feedback with color changes, animations, and confetti celebrations

@@ -17,6 +17,16 @@ INSTRUCTIONS FOR AI:
 
 ### Added
 
+- **Example Questions Modal**: Full carousel modal system displaying all 3 questions per math standard with correct answer highlighting, purple navigation buttons, and smooth fade transitions between questions. Triggered by "View All Questions" buttons on group cards to allow teachers to review complete question sets without entering edit mode, improving lesson planning efficiency and content visibility.
+
+- **Question Data Structure**: Comprehensive example question database with 3 multiple-choice questions per standard (Statistics & Probability, Ratios & Proportions, Expressions & Equations, Number System, Geometry) including realistic math problems, answer choices, and correct answer identification to provide teachers with authentic preview content for classroom planning.
+
+- **Modal Navigation System**: Purple circular navigation buttons positioned inside modal (20px from edges) with smooth hover animations, keyboard controls (arrow keys for navigation, escape to close), and click-outside-to-close functionality to ensure intuitive and accessible question browsing experience.
+
+- **Correct Answer Highlighting**: Visual indication system using light green backgrounds (#e8f5e8), green borders (#4caf50), and dark green text (#2e7d32) to highlight correct answers for teacher reference, eliminating the need for separate answer text and providing immediate visual feedback.
+
+- **Question Progress Tracking**: Dynamic title formatting showing "Problem X of 3" to help teachers understand their position in the question sequence and total available content for each standard, improving navigation clarity.
+
 - **Segmented Control Component**: Modern iOS-style session length selection interface with three discrete options (10-15min, 15-20min, 20-25min) replacing the previous slider component to improve user experience, reduce cognitive load, and provide clearer interaction patterns for teachers setting up math sessions.
 
 - **Enhanced Accessibility Support**: Comprehensive ARIA implementation for session length controls including radiogroup pattern, roving tabindex, keyboard navigation (arrow keys, Home/End, Space/Enter), and screen reader instructions to ensure full accessibility compliance and inclusive design.
