@@ -20,14 +20,17 @@ function renderGroupCards() {
     if (window.lucide) {
         lucide.createIcons();
     }
+    
+    // Add keyboard support for segmented controls
+    addSegmentedControlKeyboardSupport();
 }
 
-// Create individual group card HTML - Figma Container Design
+// Create individual group card HTML - Updated Figma Design
 function createGroupCard(group) {
     const card = document.createElement('div');
     const isNotSet = group.status === 'notSet';
     
-    card.className = 'group-card';
+    card.className = 'group-card-container';
     card.setAttribute('data-group-id', group.id);
     
     // Get standard data if available
@@ -41,74 +44,155 @@ function createGroupCard(group) {
     // Use actual group data
     const studentCode = group.studentCode || generateStudentCode();
     const studentCount = group.studentCount || 0;
-    const sessionTime = group.sessionLength ? `${group.sessionLength.min}-${group.sessionLength.max} MIN` : '20-25 MIN';
+    const sessionLength = group.sessionLength || { min: 15, max: 20 };
     const studentUrl = group.url || `https://app.okolabs.ai?code=${studentCode}`;
     
-    // Format description with appropriate prefix
-    const descriptionPrefix = getDescriptionPrefix(standardData);
-    const formattedDescription = descriptionPrefix ? `${descriptionPrefix} ${description}` : description;
+    // Generate example question for the standard
+    const sampleQuestion = standardData ? generateSampleQuestionForCard(standardData) : getDefaultSampleQuestion();
     
     card.innerHTML = `
-        <div class="ccss-badge tooltip" data-tooltip="${getCCSSTooltipText(group.standard || '6.SP.B.5c')}">${group.standard || '6.SP.B.5c'}</div>
-        <div class="group-header">
-            <div class="grade-label">GRADE ${grade}</div>
-            <div class="standard-header">
-                <div class="standard-icon">
-                    <i data-lucide="${domainIcon}"></i>
+        <div class="group-card">
+            <div class="ccss-badge">${group.standard || '6.SP.B.5c'}</div>
+            
+            <div class="top-content">
+                <div class="domain-cluster-standard-container">
+                    <div class="header-container">
+                        <div class="icon-statistics-probability">
+                            <i data-lucide="${domainIcon}"></i>
+                        </div>
+                        <div class="domain-title">Grade ${grade} » ${domainName}</div>
+                    </div>
+                    <div class="standard-description">${description}</div>
                 </div>
-                <div class="standard-title">${domainName}</div>
+                
+                <div class="example-question-container">
+                    <div class="example-question-content">
+                        <div class="example-question-label">Example Question</div>
+                        <div class="example-question-text">
+                            <span class="question-type-italic">${sampleQuestion.type}: </span>${sampleQuestion.text}
+                        </div>
+                    </div>
+                    <div class="view-all-questions-button" onclick="editGroup(${group.id})">
+                        <span>View All Questions</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bottom-content">
+                <div class="session-length-container">
+                    <div class="session-length-title">Session Length</div>
+                    <div class="session-length-segmented-control" 
+                         role="radiogroup" 
+                         aria-label="Session length selection"
+                         data-group-id="${group.id}">
+                        <button class="session-length-option ${sessionLength.min === 10 && sessionLength.max === 15 ? 'active' : ''}"
+                                role="radio"
+                                aria-checked="${sessionLength.min === 10 && sessionLength.max === 15 ? 'true' : 'false'}"
+                                tabindex="${sessionLength.min === 10 && sessionLength.max === 15 ? '0' : '-1'}"
+                                aria-describedby="session-length-help-${group.id}"
+                                data-min="10" 
+                                data-max="15"
+                                onclick="selectSessionLength(${group.id}, 10, 15, this)">
+                            10-15 Min
+                        </button>
+                        <button class="session-length-option ${sessionLength.min === 15 && sessionLength.max === 20 ? 'active' : ''}"
+                                role="radio"
+                                aria-checked="${sessionLength.min === 15 && sessionLength.max === 20 ? 'true' : 'false'}"
+                                tabindex="${sessionLength.min === 15 && sessionLength.max === 20 ? '0' : '-1'}"
+                                aria-describedby="session-length-help-${group.id}"
+                                data-min="15" 
+                                data-max="20"
+                                onclick="selectSessionLength(${group.id}, 15, 20, this)">
+                            15-20 Min
+                        </button>
+                        <button class="session-length-option ${sessionLength.min === 20 && sessionLength.max === 25 ? 'active' : ''}"
+                                role="radio"
+                                aria-checked="${sessionLength.min === 20 && sessionLength.max === 25 ? 'true' : 'false'}"
+                                tabindex="${sessionLength.min === 20 && sessionLength.max === 25 ? '0' : '-1'}"
+                                aria-describedby="session-length-help-${group.id}"
+                                data-min="20" 
+                                data-max="25"
+                                onclick="selectSessionLength(${group.id}, 20, 25, this)">
+                            20-25 Min
+                        </button>
+                    </div>
+                    <div id="session-length-help-${group.id}" class="sr-only">
+                        Use arrow keys to navigate between session length options, or click to select
+                    </div>
+                    </div>
+                </div>
+                
+                <div class="cta-actions-container">
+                    <button class="edit-group-button" onclick="editGroup(${group.id})">
+                        <span>Edit Group</span>
+                    </button>
+                    <button class="copy-code-button" onclick="copyGroupCode('${studentCode}', this)">
+                        <div class="copy-icon">
+                            <i data-lucide="copy"></i>
+                        </div>
+                        <span>Copy Code</span>
+                    </button>
+                </div>
             </div>
         </div>
-        
-        <div class="standard-cluster">
-            <div class="cluster-title">${clusterName}</div>
-            <div class="cluster-description">
-                <div class="cluster-desc-text" id="desc-${group.id}">
-                    <span class="desc-content">${formattedDescription}</span>
-                    ${standardData && description.includes('...') ? `<a href="#" class="show-more-link" id="show-more-${group.id}" onclick="toggleStandardDescription(${group.id}, '${group.standard}'); return false;">Show More</a>` : ''}
-                </div>
-            </div>
-            ${standardData ? `<a href="#" class="sample-question-link tooltip" data-tooltip="${getQuestionPreviewTooltip(group.standard).replace(/"/g, '&quot;')}" onclick="return false;">Sample Question</a>` : ''}
-        </div>
-        
-        <div class="student-code-section">
-            <div class="student-code-header">
-                <div class="code-label">STUDENT LOGIN CODE</div>
-                <div class="group-code">${studentCode}</div>
-            </div>
-            <button class="copy-code-btn" onclick="copyGroupCode('${studentCode}', this)">
-                <div class="copy-icon">
-                    <i data-lucide="copy"></i>
-                </div>
-                <span class="copy-text">Copy Code</span>
-            </button>
-            <div class="student-url">${studentUrl}</div>
-        </div>
-        
-        <div class="group-stats">
-            <div class="stat-item tooltip" data-tooltip="${getStudentNamesTooltip(group.id, studentCount)}">
-                <div class="stat-icon">
-                    <i data-lucide="users"></i>
-                </div>
-                <div class="stat-text">${studentCount} STUDENTS</div>
-            </div>
-            <div class="stat-item tooltip" data-tooltip="Group session times can vary depending on the subject, student engagement, and discussion depth. This is a rough time estimate.">
-                <div class="stat-icon">
-                    <i data-lucide="clock"></i>
-                </div>
-                <div class="stat-text">${sessionTime}</div>
-            </div>
-        </div>
-        
-        <button class="edit-group-btn" onclick="editGroup(${group.id})">
-            <span class="edit-btn-text">Edit Group</span>
-        </button>
     `;
     
     return card;
 }
 
-// Remove old helper functions - now using new Figma design
+// Helper functions for new Figma design
+
+// Generate sample question for card display
+function generateSampleQuestionForCard(standardData) {
+    const domain = standardData.domain;
+    const standardCode = standardData.code;
+    
+    // Domain-specific sample questions for 6th grade
+    const questionTemplates = {
+        'SP': {
+            type: 'Multiple Choice',
+            text: 'Maya collected data on her classmates\' favorite pizza toppings. If 12 students chose pepperoni and 8 chose cheese, what can Maya conclude about the most popular topping?'
+        },
+        'RP': {
+            type: 'Open Response',
+            text: 'A recipe calls for 2 cups of flour for every 3 cups of sugar. If you want to make a larger batch using 8 cups of flour, how much sugar will you need?'
+        },
+        'EE': {
+            type: 'Multiple Choice',
+            text: 'Which expression is equivalent to 3(x + 4)?'
+        },
+        'NS': {
+            type: 'Multiple Choice',
+            text: 'Which point on the coordinate plane represents the ordered pair (-2, 3)?'
+        },
+        'G': {
+            type: 'Open Response',
+            text: 'Find the area of a triangle with a base of 8 feet and a height of 6 feet. Show your work.'
+        },
+        'NF': {
+            type: 'Multiple Choice',
+            text: 'Maya ate 2/3 of a pizza and Jake ate 1/4 of the same pizza. How much pizza did they eat altogether?'
+        }
+    };
+    
+    return questionTemplates[domain] || questionTemplates['SP'];
+}
+
+// Default sample question for cards without standards
+function getDefaultSampleQuestion() {
+    return {
+        type: 'Multiple Choice',
+        text: 'Select a math standard to see example questions for this group.'
+    };
+}
+
+// Calculate slider progress percentage based on session length
+function getSliderProgress(sessionLength) {
+    const minTime = 10;
+    const maxTime = 25;
+    const midpoint = (sessionLength.min + sessionLength.max) / 2;
+    return ((midpoint - minTime) / (maxTime - minTime)) * 100;
+}
 
 // Update a specific group's data and re-render its card
 function updateGroup(groupId, updates) {
@@ -175,7 +259,7 @@ function showCopySuccess(button) {
         <div class="copy-icon">
             <i data-lucide="check"></i>
         </div>
-        <span class="copy-text">Copied!</span>
+        <span>Copied!</span>
     `;
     
     // Re-initialize icons for the new content
@@ -201,7 +285,7 @@ function showCopySuccess(button) {
             <div class="copy-icon">
                 <i data-lucide="copy"></i>
             </div>
-            <span class="copy-text">Copy Code</span>
+            <span>Copy Code</span>
         `;
         
         // Re-initialize icons for the new content
@@ -246,7 +330,7 @@ function showCopyError(button) {
         <div class="copy-icon">
             <i data-lucide="x"></i>
         </div>
-        <span class="copy-text">Copy Failed</span>
+        <span>Copy Failed</span>
     `;
     
     // Re-initialize icons
@@ -260,7 +344,7 @@ function showCopyError(button) {
             <div class="copy-icon">
                 <i data-lucide="copy"></i>
             </div>
-            <span class="copy-text">Copy Code</span>
+            <span>Copy Code</span>
         `;
         if (window.lucide) {
             lucide.createIcons();
@@ -295,27 +379,10 @@ function getDomainDisplayName(domain) {
     return domainDisplayNames[domain] || domain;
 }
 
-// Helper function to get truncated standard description
+// Helper function to get standard description for new design
 function getStandardDescription(standardData) {
     if (!standardData.description) return '';
-    
-    const description = standardData.description;
-    
-    // Handle specific formatting for different standards
-    if (description.includes('Part c:')) {
-        const partC = description.split('Part c:')[1];
-        if (partC) {
-            const truncated = partC.trim().substring(0, 50);
-            return truncated + (partC.trim().length > 50 ? '...' : '');
-        }
-    }
-    
-    // For other descriptions, just truncate at a reasonable length
-    if (description.length > 60) {
-        return description.substring(0, 60) + '...';
-    }
-    
-    return description;
+    return standardData.description;
 }
 
 // Helper function to get domain icon
@@ -333,176 +400,97 @@ function getDomainIcon(domain) {
     return domainIcons[domain] || 'book-open';
 }
 
-// Helper function to get description prefix
-function getDescriptionPrefix(standardData) {
-    if (!standardData) return '';
-    
-    // Only add "Part c:" prefix for the SP standard
-    if (standardData.code === '6.SP.B.5c') {
-        return 'Part c:';
-    }
-    
-    return '';
-}
 
-// Helper function to generate student names tooltip
-function getStudentNamesTooltip(groupId, studentCount) {
-    if (studentCount === 0) {
-        return 'No students assigned yet';
-    }
+// Session Length Selection Function
+function selectSessionLength(groupId, minTime, maxTime, buttonElement) {
+    // Add visual feedback during selection
+    buttonElement.classList.add('selecting');
+    setTimeout(() => buttonElement.classList.remove('selecting'), 100);
     
-    // Pool of student names to randomly select from
-    const studentNames = [
-        'Emma Rodriguez', 'Liam Chen', 'Sophia Johnson', 'Noah Patel', 'Isabella Smith',
-        'Mason Williams', 'Ava Garcia', 'Lucas Brown', 'Mia Davis', 'Ethan Martinez',
-        'Charlotte Wilson', 'Alexander Lee', 'Amelia Taylor', 'Benjamin Anderson', 'Harper Thompson',
-        'Sebastian Moore', 'Evelyn Jackson', 'Oliver White', 'Abigail Harris', 'Elijah Clark',
-        'Emily Lewis', 'James Robinson', 'Elizabeth Walker', 'William Hall', 'Sofia Allen'
-    ];
+    // Update the group data
+    const groupIndex = groupSlots.findIndex(g => g.id === groupId);
+    if (groupIndex === -1) return;
     
-    // Create consistent selection based on group ID to avoid changing names on re-render
-    const seedNames = [];
-    const baseIndex = (groupId - 1) * 5; // Different starting point for each group
+    // Update session length
+    groupSlots[groupIndex].sessionLength = { min: minTime, max: maxTime };
     
-    for (let i = 0; i < studentCount; i++) {
-        const nameIndex = (baseIndex + i) % studentNames.length;
-        seedNames.push(studentNames[nameIndex]);
-    }
+    // Update all buttons in this segmented control
+    const segmentedControl = buttonElement.closest('.session-length-segmented-control');
+    const allOptions = segmentedControl.querySelectorAll('.session-length-option');
     
-    if (studentCount === 1) {
-        return `Student: ${seedNames[0]}`;
-    } else {
-        return `Students: ${seedNames.join(', ')}`;
+    // Remove active state from all buttons and update roving tabindex
+    allOptions.forEach(option => {
+        option.classList.remove('active');
+        option.setAttribute('aria-checked', 'false');
+        option.setAttribute('tabindex', '-1');
+    });
+    
+    // Add active state to selected button
+    buttonElement.classList.add('active');
+    buttonElement.setAttribute('aria-checked', 'true');
+    buttonElement.setAttribute('tabindex', '0');
+    
+    // Optional: Add haptic feedback for mobile devices
+    if ('vibrate' in navigator) {
+        navigator.vibrate(10); // Very short vibration
     }
 }
 
-// Helper function to generate CCSS badge tooltip text
-function getCCSSTooltipText(standardCode) {
-    return 'This standard identifier is a unique code that designates the grade, domain, cluster, and specific standard in the Common Core State Standards for precise reference in curriculum and assessments.';
-}
-
-// Helper function to generate question preview tooltip content
-function getQuestionPreviewTooltip(standardCode) {
-    if (!standardCode || !standardsData[standardCode]) {
-        return 'Preview question available after selecting a standard';
+// Keyboard navigation for segmented control
+function handleSegmentedControlKeydown(event) {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End', 'Space', 'Enter'].includes(event.key)) {
+        return;
     }
     
-    const standard = standardsData[standardCode];
+    event.preventDefault();
     
-    // Generate sample questions using existing logic
-    const sampleQuestion = generateSampleQuestionForPreview(standard);
+    const currentButton = event.target;
+    const segmentedControl = currentButton.closest('.session-length-segmented-control');
+    const allOptions = Array.from(segmentedControl.querySelectorAll('.session-length-option'));
+    const currentIndex = allOptions.indexOf(currentButton);
     
-    let tooltipContent = `${sampleQuestion.type}\n\n${sampleQuestion.text}`;
+    let targetIndex = currentIndex;
     
-    if (sampleQuestion.type === 'Multiple Choice') {
-        tooltipContent += '\n\nView all answer choices in Edit mode';
-    } else {
-        tooltipContent += '\n\nStudents provide written explanations';
+    switch (event.key) {
+        case 'ArrowLeft':
+            targetIndex = Math.max(0, currentIndex - 1);
+            break;
+        case 'ArrowRight':
+            targetIndex = Math.min(allOptions.length - 1, currentIndex + 1);
+            break;
+        case 'Home':
+            targetIndex = 0;
+            break;
+        case 'End':
+            targetIndex = allOptions.length - 1;
+            break;
+        case 'Space':
+        case 'Enter':
+            currentButton.click();
+            return;
     }
     
-    return tooltipContent;
-}
-
-// Generate a single sample question for preview (simplified version of existing function)
-function generateSampleQuestionForPreview(standard) {
-    const standardCode = standard.code;
-    
-    // Different question templates based on standard type
-    if (standardCode.includes('NF')) {
-        // Fractions questions
-        return {
-            type: 'Multiple Choice',
-            text: 'Maya ate 2/3 of a pizza and Jake ate 1/4 of the same pizza. How much pizza did they eat altogether?'
-        };
-    } else if (standardCode.includes('MD')) {
-        // Measurement questions  
-        return {
-            type: 'Multiple Choice',
-            text: 'A rectangular garden is 8 feet long and 6 feet wide. What is the area of the garden?'
-        };
-    } else if (standardCode.includes('SP')) {
-        // Statistics & Probability questions
-        return {
-            type: 'Multiple Choice', 
-            text: 'Maya collected data on her classmates\' favorite pizza toppings. If 12 students chose pepperoni and 8 chose cheese, what can Maya conclude about the most popular topping?'
-        };
-    } else if (standardCode.includes('RP')) {
-        // Ratios & Proportional Relationships
-        return {
-            type: 'Open Response',
-            text: 'A recipe calls for 2 cups of flour for every 3 cups of sugar. If you want to make a larger batch using 8 cups of flour, how much sugar will you need? Explain your reasoning.'
-        };
-    } else if (standardCode.includes('EE')) {
-        // Expressions & Equations
-        return {
-            type: 'Multiple Choice',
-            text: 'Which expression is equivalent to 3(x + 4)?'
-        };
-    } else if (standardCode.includes('G')) {
-        // Geometry
-        return {
-            type: 'Open Response',
-            text: 'Draw a triangle with one right angle and explain why the other two angles must be acute angles.'
-        };
-    } else {
-        // Generic math questions
-        return {
-            type: 'Multiple Choice',
-            text: 'Which of the following best represents the concept in this standard?'
-        };
+    if (targetIndex !== currentIndex) {
+        // Update roving tabindex
+        allOptions.forEach(option => option.setAttribute('tabindex', '-1'));
+        allOptions[targetIndex].setAttribute('tabindex', '0');
+        allOptions[targetIndex].focus();
     }
 }
 
-// Function to toggle standard description expansion
-function toggleStandardDescription(groupId, standardCode) {
-    const descElement = document.getElementById(`desc-${groupId}`);
-    const showMoreLink = document.getElementById(`show-more-${groupId}`);
-    const descContent = descElement.querySelector('.desc-content');
-    
-    if (!descElement || !showMoreLink || !descContent) return;
-    
-    const standardData = standardsData[standardCode];
-    if (!standardData) return;
-    
-    // Get full and short descriptions
-    const fullDescription = standardData.description;
-    const shortDescription = getStandardDescription(standardData);
-    const prefix = getDescriptionPrefix(standardData);
-    
-    // Check if currently expanded (compare with full description)
-    const currentText = descContent.textContent;
-    const isExpanded = currentText.includes(fullDescription);
-    
-    if (isExpanded) {
-        // Collapse - show short version
-        descContent.textContent = shortDescription;
-        showMoreLink.textContent = "Show More";
-        
-        // Add collapse animation
-        if (window.gsap) {
-            gsap.from(descContent, {
-                duration: 0.3,
-                height: "auto",
-                ease: "power2.out"
-            });
-        }
-    } else {
-        // Expand - show full description  
-        descContent.textContent = fullDescription;
-        showMoreLink.textContent = "Show Less";
-        
-        // Add expand animation
-        if (window.gsap) {
-            gsap.from(descContent, {
-                duration: 0.3,
-                height: 0,
-                ease: "power2.out"
-            });
-        }
-    }
+// Add keyboard event listeners to segmented controls after rendering
+function addSegmentedControlKeyboardSupport() {
+    const segmentedControls = document.querySelectorAll('.session-length-segmented-control');
+    segmentedControls.forEach(control => {
+        const options = control.querySelectorAll('.session-length-option');
+        options.forEach(option => {
+            option.addEventListener('keydown', handleSegmentedControlKeydown);
+        });
+    });
 }
 
 // Initialize group management on page load
 function initializeGroupManagement() {
     renderGroupCards();
+    addSegmentedControlKeyboardSupport();
 }

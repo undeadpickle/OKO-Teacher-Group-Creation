@@ -338,31 +338,28 @@
   border-color: #ccc;
 }
 
-/* Group Cards - Figma Container Design */
+/* Group Cards - New Figma Design */
+.group-card-container {
+  position: relative;
+  width: 100%;
+  min-width: 320px;
+  max-width: 100%;
+}
+
 .group-card {
-  position: relative; /* Ensure relative positioning for absolute children */
+  position: relative;
   background: #ffffff;
   border-radius: 16px;
   border: 4px solid transparent;
   border-top-color: #605dec;
-  padding: 24px;
+  padding: 32px 24px 24px 24px;
   transition: all 0.2s ease;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   width: 100%;
-  max-width: 454px;
+  min-height: 550px;
   box-sizing: border-box;
-}
-
-/* Standard cluster should grow to fill available space */
-.standard-cluster {
-  flex-grow: 1;
-}
-
-/* Bottom section container for alignment */
-.group-card .student-code-section {
-  margin-top: auto;
 }
 
 .group-card:hover {
@@ -370,95 +367,366 @@
   box-shadow: 0 8px 24px rgba(96, 93, 236, 0.15);
 }
 
-.group-header {
+/* Top Content Container */
+.top-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+/* Bottom Content Container */
+.bottom-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex-shrink: 0;
+}
+
+/* CCSS Badge */
+.ccss-badge {
+  background: #f7622b;
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 16px;
+  border-radius: 50px;
+  white-space: nowrap;
+  line-height: 1;
+  align-self: flex-start;
+  flex-shrink: 0;
+}
+
+/* Domain Cluster Standard Container */
+.domain-cluster-standard-container {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.grade-label {
-  font-family: "ABC Marfa", sans-serif;
-  font-size: 12px;
-  color: #858b87;
-  text-transform: uppercase;
-  letter-spacing: 0.48px;
-  font-weight: 400;
-}
-
-.standard-header {
+.header-container {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.standard-icon {
+.icon-statistics-probability {
   width: 32px;
   height: 32px;
   flex-shrink: 0;
   color: #605dec;
 }
 
-.standard-icon svg {
+.icon-statistics-probability svg {
   width: 32px;
   height: 32px;
   color: #605dec;
 }
 
-.standard-title {
+.domain-title {
   font-family: "ABC Marfa", sans-serif;
   font-size: 20px;
   font-weight: 600;
   color: #605dec;
-  line-height: 1;
+  line-height: 1.2;
+  flex: 1;
 }
 
-.standard-cluster {
-  padding-left: 40px;
-  margin-bottom: 8px;
+.standard-description {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #002e19;
+  line-height: 1.25;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.cluster-title {
+/* Example Question Container */
+.example-question-container {
+  background: #f4f4fd;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  min-height: 120px;
+}
+
+.example-question-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.example-question-label {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: #002e19;
-  margin-bottom: 8px;
-  line-height: 18px;
+  line-height: 1.3;
 }
 
-.cluster-description {
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  border-left: 3px solid #f4f4fd;
-  position: relative;
-}
-
-.cluster-desc-text {
+.example-question-text {
   font-family: "Roboto", sans-serif;
   font-size: 14px;
   font-weight: 400;
-  color: #858b87;
-  line-height: 1.4;
-  flex: 1;
+  color: #002e19;
+  line-height: 1.3;
+  flex-grow: 1;
+  overflow-wrap: break-word;
 }
 
-.cluster-desc-part {
-  font-weight: 700;
+.question-type-italic {
+  font-style: italic;
 }
 
-.show-more-link {
+.view-all-questions-button {
+  background: #ffffff;
+  border: 1px solid #bab9f5;
+  border-radius: 6px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  align-self: flex-start;
+  width: fit-content;
+}
+
+.view-all-questions-button:hover {
+  background: #f0f0ff;
+}
+
+.view-all-questions-button span {
   font-family: "Roboto", sans-serif;
-  font-size: 14px;
+  font-size: 12px;
+  font-weight: 400;
   color: #605dec;
-  text-decoration: none;
-  display: block;
-  margin-top: 4px;
+  line-height: 1;
 }
 
-.show-more-link:hover {
-  text-decoration: underline;
+/* Session Length Container */
+.session-length-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
+
+.session-length-title {
+  font-family: "ABC Marfa", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #605dec;
+  line-height: 1.1;
+  align-self: flex-start;
+  width: 100%;
+}
+
+.session-length-times {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.time-option {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #bab9f5;
+  line-height: 1.5;
+}
+
+.time-option.active {
+  color: #605dec;
+  font-weight: 500;
+}
+
+/* Session Length Segmented Control */
+.session-length-segmented-control {
+  display: flex;
+  background: #f4f4fd;
+  border-radius: 8px;
+  padding: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.session-length-option {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #605dec;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: center;
+  white-space: nowrap;
+  position: relative;
+  outline: none;
+}
+
+.session-length-option:hover {
+  background: rgba(96, 93, 236, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(96, 93, 236, 0.1);
+}
+
+.session-length-option.active {
+  background: #605dec;
+  color: #ffffff;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(96, 93, 236, 0.3);
+}
+
+.session-length-option.active:hover {
+  background: #4f4bc4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(96, 93, 236, 0.4);
+}
+
+.session-length-option:focus-visible {
+  box-shadow: 0 0 0 2px rgba(96, 93, 236, 0.5);
+  z-index: 1;
+}
+
+.session-length-option:active {
+  transform: translateY(0);
+  transition: transform 0.1s;
+}
+
+/* Smooth selection animation */
+.session-length-option.selecting {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* Enhanced states for better feedback */
+.session-length-segmented-control:focus-within {
+  box-shadow: 0 0 0 3px rgba(96, 93, 236, 0.2);
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 480px) {
+  .session-length-option {
+    padding: 10px 8px;
+    font-size: 11px;
+  }
+  
+  .session-length-segmented-control {
+    padding: 3px;
+  }
+}
+
+/* CTA Actions Container */
+.cta-actions-container {
+  display: flex;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.edit-group-button {
+  flex: 1;
+  background: #fffefe;
+  border: 1px solid #605dec;
+  border-radius: 6px;
+  padding: 12px 16px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.edit-group-button:hover {
+  background: #f0f0ff;
+}
+
+.edit-group-button span {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #605dec;
+  line-height: 1;
+}
+
+.copy-code-button {
+  flex: 1;
+  background: #605dec;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 16px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.copy-code-button:hover {
+  background: #4f4bc4;
+}
+
+.copy-code-button .copy-icon {
+  width: 24px;
+  height: 24px;
+  color: #fffefe;
+}
+
+.copy-code-button .copy-icon svg {
+  width: 24px;
+  height: 24px;
+  color: #fffefe;
+}
+
+.copy-code-button span {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fffefe;
+  line-height: 1;
+}
+
+.copy-code-button.copied {
+  background: #e8f5e9;
+}
+
+.copy-code-button.copied .copy-icon,
+.copy-code-button.copied span {
+  color: #2e7d32;
+}
+
 
 /* Group Badges */
 .group-badge {
@@ -489,225 +757,7 @@
   color: #e65100;
 }
 
-/* Standard Info */
-.standard-info {
-  margin-bottom: 16px;
-}
 
-.standard-code {
-  font-size: 13px;
-  font-weight: 600;
-  color: #1a5f3f;
-  margin-bottom: 4px;
-}
-
-.standard-desc {
-  font-size: 14px;
-  color: #666;
-  line-height: 1.4;
-}
-
-/* Student Code Section - Figma Design */
-.student-code-section {
-  background: #f4f4fd;
-  border-radius: 8px;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  text-align: center;
-}
-
-.student-code-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  width: 100%;
-}
-
-.code-label {
-  font-family: "Roboto", sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  color: #9c9bf1;
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-}
-
-.group-code {
-  font-family: "Roboto", sans-serif;
-  font-size: 24px;
-  font-weight: 800;
-  color: #002e19;
-  letter-spacing: 0.02em;
-}
-
-.copy-code-btn {
-  background: #fffefe;
-  border: 1px solid #bab9f5;
-  border-radius: 6px;
-  padding: 4px 24px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.copy-code-btn:hover {
-  background: #d3d3f8;
-}
-
-.copy-icon {
-  width: 24px;
-  height: 24px;
-  color: #605dec;
-}
-
-.copy-text {
-  font-family: "Roboto", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  color: #605dec;
-}
-
-.student-url {
-  font-family: "Roboto", sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  color: #605dec;
-  word-break: break-all;
-  text-align: center;
-  max-width: 100%;
-}
-
-/* Copy confirmation states */
-.copy-code-btn.copying {
-  background: #e8f5e9;
-  color: #2e7d32;
-}
-
-.copy-code-btn.copied {
-  background: #e8f5e9;
-  color: #2e7d32;
-}
-
-.copy-code-btn.copying .copy-text,
-.copy-code-btn.copied .copy-text {
-  color: #2e7d32;
-}
-
-.copy-code-btn.copying .copy-icon,
-.copy-code-btn.copied .copy-icon {
-  color: #2e7d32;
-}
-
-/* Group Stats Section */
-.group-stats {
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-  align-items: center;
-}
-
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.stat-icon {
-  width: 24px;
-  height: 24px;
-  color: #858b87;
-}
-
-.stat-icon svg {
-  color: #858b87;
-}
-
-.stat-text {
-  font-family: "Roboto", sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  color: #858b87;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-/* CCSS Code Badge - Top Right Corner */
-.ccss-badge {
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  background: #f7622b;
-  color: #ffffff;
-  font-family: "Roboto", sans-serif;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: none;
-  padding: 4px 16px;
-  border-radius: 50px;
-  white-space: nowrap;
-  z-index: 100;
-  display: inline-block;
-  line-height: 1;
-  width: fit-content;
-  max-width: none;
-  margin: 0;
-}
-
-/* CCSS Badge Tooltip - Right aligned */
-.ccss-badge.tooltip::after {
-  left: auto;
-  right: 0;
-  transform: translateX(0);
-}
-
-.ccss-badge.tooltip::before {
-  left: auto;
-  right: 16px; /* Position tail closer to right edge */
-  transform: translateX(0) translateY(-5px);
-}
-
-.ccss-badge.tooltip:hover::after {
-  transform: translateX(0) translateY(0);
-}
-
-.ccss-badge.tooltip:hover::before {
-  transform: translateX(0) translateY(0);
-}
-
-/* Edit Group Button */
-.edit-group-btn {
-  background: #605dec;
-  border: none;
-  border-radius: 6px;
-  padding: 12px 16px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  height: 40px;
-  box-sizing: border-box;
-}
-
-.edit-group-btn:hover {
-  background: #4f4bc4;
-}
-
-.edit-btn-text {
-  font-family: "Roboto", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  color: #fffefe;
-}
 
 /* Progress Bar */
 .progress-bar {

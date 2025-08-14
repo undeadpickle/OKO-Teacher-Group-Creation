@@ -124,10 +124,10 @@ The prototype strictly follows OKO's visual design system:
 - Buttons: 14px SemiBold, uppercase
 
 ### Layout Specifications
-- Responsive grid: 3 columns (desktop) → 2 columns (tablet) → 1 column (mobile)
-- Card dimensions: 320px min width, 400px max width
-- Spacing: 24px grid gutters, 16px card padding
-- Border radius: 8px cards, 4px buttons, 12px/16px chips
+- Responsive grid: Auto-fill columns based on 320px minimum card width
+- Card dimensions: 320px min width, responsive max width
+- Spacing: 24px horizontal gaps, 64px vertical gaps, 24px card padding
+- Border radius: 16px cards, 6px buttons/segmented controls, 8px containers
 
 ## Key Interaction Patterns
 
@@ -169,6 +169,7 @@ The prototype strictly follows OKO's visual design system:
 - **Question Preview**: Full question sets with multiple choice and open response types
 - **CCSS Badge System**: Orange pill badges showing Common Core State Standards identifiers in top-right corner of each card
 - **Enhanced Tooltip System**: Chat bubble tooltips with proper positioning and contextual help
+- **Session Length Controls**: Segmented control interface with accessibility features and keyboard navigation
 
 ### Advanced UX Features
 - **Standards Tree**: Expandable hierarchy for browsing by grade/domain/cluster
@@ -186,13 +187,13 @@ The prototype strictly follows OKO's visual design system:
 
 ### File Structure Guidelines
 - **CSS Files**: Each file has a specific purpose:
-  - `main.css`: Dashboard layout, sidebar, stats, base components (210 lines)
-  - `components.css`: Reusable UI components, buttons, cards, forms (388 lines)  
+  - `main.css`: Dashboard layout, sidebar, stats, responsive grid (220+ lines)
+  - `components.css`: Reusable UI components, buttons, cards, segmented controls (700+ lines)  
   - `modals.css`: All modal and panel styles (509 lines)
 - **JavaScript Files**: Clean separation of concerns:
   - `main.js`: Initialization and event listener setup (11 lines)
   - `data.js`: Mock data structures and constants (137 lines)
-  - `group-management.js`: Group CRUD operations and modal logic (254 lines)
+  - `group-management.js`: Group CRUD operations, segmented controls, and modal logic (480+ lines)
   - `standards-panel.js`: Standards selection, search, and navigation (243 lines)
   - `animations.js`: GSAP-powered animation system for micro-interactions (325 lines)
 
@@ -217,10 +218,14 @@ The prototype strictly follows OKO's visual design system:
 - Icons are automatically sized via CSS classes targeting `svg[data-lucide]` elements
 
 ### Recent Updates (Latest)
+- **Session Length UI Redesign**: Replaced slider component with segmented control for session length selection (10-15min, 15-20min, 20-25min) to improve user experience with clear discrete options, single-click selection, and better accessibility compliance
+- **Improved Accessibility**: Implemented proper ARIA radiogroup pattern for session length controls with keyboard navigation (arrow keys, home/end), roving tabindex, and screen reader support
+- **Enhanced Visual Feedback**: Added smooth animations, hover effects, and selection states to segmented control with purple theming (#605dec) to match overall design system
+- **Mobile Optimization**: Optimized session length controls for touch devices with larger targets and haptic feedback on mobile platforms
 - **Standards Modal Enhancement**: Increased modal height to 90vh and removed "Recently Used" section for better content visibility and space optimization
 - **Sample Question Preview**: Added outlined pill button on group cards showing sample questions via tooltip - uses existing tooltip system with 400px max-width for question content
 - **CCSS Badge Repositioning**: Adjusted orange badge positioning to top-right corner edge (top: -2px, right: -2px) for exact Figma Container design alignment
-- **Card Layout Optimization**: Implemented bottom-alignment for student login code sections using flexbox to ensure consistent card layout across varying content heights
+- **Card Layout Optimization**: Implemented bottom-alignment for student login code sections using flexbox to ensure consistent card layout across varying content heights and improved responsive grid with 24px horizontal gaps and 64px vertical spacing
 - **Question Generation System**: Added domain-specific sample question generation (SP, NF, MD, RP, EE, G domains) with both multiple choice and open response question types
 - **Figma Integration**: Implemented exact Figma Container design for group cards with purple top border (#605dec) and proper spacing
 - **CCSS Badge System**: Added orange pill badges (#f7622b) in top-right corners showing Common Core identifiers (6.SP.B.5c, etc.)

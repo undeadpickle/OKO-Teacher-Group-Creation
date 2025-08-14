@@ -189,8 +189,43 @@ body {
 
 .groups-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px 24px;
+  row-gap: 64px;
+  width: 100%;
+}
+
+/* Responsive breakpoints for group cards */
+@media (max-width: 1400px) {
+  .groups-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px 24px;
+    row-gap: 64px;
+  }
+}
+
+@media (max-width: 900px) {
+  .groups-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px 24px;
+    row-gap: 64px;
+  }
+}
+
+@media (max-width: 480px) {
+  .groups-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    row-gap: 48px;
+  }
+  
+  .group-card-container {
+    max-width: 100%;
+  }
+  
+  .group-card {
+    min-width: 320px;
+  }
 }
 
 /* Empty State */

@@ -13,11 +13,12 @@ A high-fidelity prototype for the OKO Teacher Dashboard's "Group Creation" flow,
 - **Sample Question Preview**: Outlined pill buttons showing math problem previews via tooltips
 
 ### Enhanced User Experience  
+- **Segmented Controls**: Modern iOS-style session length selection (10-15min, 15-20min, 20-25min) with single-click interaction, keyboard navigation, and accessibility compliance
 - **Chat Bubble Tooltips**: Dark green tooltip system with rounded corners and animated connection tails
 - **Confetti Celebrations**: Multi-colored particle burst animations with gravity physics and random shapes (circles, squares, triangles, stars)
 - **Student Management**: Realistic student name assignments with diverse representation
 - **Copy Success Feedback**: Enhanced copy button with purple hover states and celebration animations
-- **Responsive Design**: Adapts seamlessly from desktop to tablet to mobile viewports
+- **Responsive Design**: Adapts seamlessly from desktop to tablet to mobile viewports with optimized touch targets
 
 ### Educational Features
 - **Diverse Classroom Scenarios**: Above grade level (Grade 7), at grade level (Grade 6), and below grade level (Grade 5) content
@@ -88,14 +89,16 @@ The prototype implements OKO's comprehensive visual design system:
 ## 🎯 Key Interactions
 
 ### Primary Workflows
-1. **Copy Student Codes**: Click "Copy Code" → Confetti celebration with multi-colored particle burst
-2. **Preview Sample Questions**: Click "Sample Question" button → Tooltip showing math problem preview
-3. **View Standard Details**: Click "Show More" → Smooth expansion revealing full Common Core descriptions  
-4. **Student Information**: Hover over student count → Chat bubble showing individual student names
-5. **Session Timing**: Hover over time estimate → Explanation of duration variability factors
-6. **CCSS Badges**: Hover over orange badges → Educational tooltip about Common Core identifiers
+1. **Set Session Length**: Click segmented control buttons (10-15min, 15-20min, 20-25min) for instant duration selection with visual feedback
+2. **Copy Student Codes**: Click "Copy Code" → Confetti celebration with multi-colored particle burst
+3. **Preview Sample Questions**: Click "Sample Question" button → Tooltip showing math problem preview
+4. **View Standard Details**: Click "Show More" → Smooth expansion revealing full Common Core descriptions  
+5. **Student Information**: Hover over student count → Chat bubble showing individual student names
+6. **Session Timing**: Interactive session length controls with hover states and accessibility support
+7. **CCSS Badges**: Hover over orange badges → Educational tooltip about Common Core identifiers
 
 ### Interactive Elements
+- **Segmented Controls**: iOS-style three-button controls for session length with ARIA radiogroup pattern, keyboard navigation, and smooth animations
 - **Group Cards**: Purple-bordered cards with hover animations, bottom-aligned layouts, and comprehensive tooltips
 - **Standards Selection**: Enhanced modal (90vh height) with semantic search + hierarchical browsing
 - **Sample Question Buttons**: Outlined pill buttons showing domain-specific math problems in 400px tooltips
