@@ -167,6 +167,7 @@ The prototype strictly follows OKO's visual design system:
 - **Custom Creation**: Flexible form-based group creation with validation
 - **Prerequisite Navigation**: Breadcrumb system for exploring building block standards
 - **Question Preview**: Full question sets with multiple choice and open response types
+- **Example Questions Modal**: Carousel-based modal showing all 3 questions per standard with correct answer highlighting
 - **CCSS Badge System**: Orange pill badges showing Common Core State Standards identifiers in top-right corner of each card
 - **Enhanced Tooltip System**: Chat bubble tooltips with proper positioning and contextual help
 - **Session Length Controls**: Segmented control interface with accessibility features and keyboard navigation
@@ -207,7 +208,7 @@ The prototype strictly follows OKO's visual design system:
 - Status transitions follow: notSet → ready, or ready ↔ needsReview
 - Use Character Carrot (#FF6B35) for error/warning states, not red
 - Template data can be extended by adding entries to `groupTemplates` in `data.js`
-- Modal z-index stacking: create group (1200) > questions (1100) > standard selection (1300)
+- Modal z-index stacking: example questions (1400) > standard selection (1300) > create group (1200) > questions (1100)
 - Store image assets in `/assets/images/` directory
 - Difficulty badges use regular case text (not uppercase)
 - Tooltips support multi-line wrapping with max-width: 350px (400px for sample question tooltips)
@@ -218,6 +219,17 @@ The prototype strictly follows OKO's visual design system:
 - Icons are automatically sized via CSS classes targeting `svg[data-lucide]` elements
 
 ### Recent Updates (Latest)
+- **Example Questions Modal**: Implemented full carousel modal for viewing all questions associated with each group's standard
+  - Modal triggered by "View All Questions" button on group cards
+  - Carousel displays 3 questions per standard with fade transitions between questions
+  - Navigation via purple circular buttons positioned inside modal (20px from edges)
+  - Questions show "Problem X of 3" format for clear progression tracking
+  - Multiple choice answers with correct answer highlighted in green (#e8f5e8 background, #4caf50 border)
+  - Keyboard navigation: Arrow keys for prev/next, Escape to close
+  - Click outside modal to close functionality
+  - Data structure: Each standard has 3 example questions in `exampleQuestions` object in data.js
+  - Modal styling: 900px width, 100px horizontal padding for button clearance
+  - Z-index: 1400 (highest in modal stack)
 - **Session Length UI Redesign**: Replaced slider component with segmented control for session length selection (10-15min, 15-20min, 20-25min) to improve user experience with clear discrete options, single-click selection, and better accessibility compliance
 - **Improved Accessibility**: Implemented proper ARIA radiogroup pattern for session length controls with keyboard navigation (arrow keys, home/end), roving tabindex, and screen reader support
 - **Enhanced Visual Feedback**: Added smooth animations, hover effects, and selection states to segmented control with purple theming (#605dec) to match overall design system

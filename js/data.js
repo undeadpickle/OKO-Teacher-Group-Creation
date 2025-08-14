@@ -480,3 +480,407 @@ function generateGroupName(standard) {
     
     return `Grade ${grade} – ${domainName} – ${standardName}`;
 }
+
+// Example questions data for each group (3 questions per standard)
+const exampleQuestions = {
+    '6.SP.B.5c': [
+        {
+            id: 1,
+            title: "Problem 1: Delivery Times",
+            problemText: "A local bakery recorded the time (in minutes) it took to deliver 10 orders: 15, 18, 16, 20, 22, 19, 17, 24, 30, 18.",
+            questionText: "Which statement best summarizes the delivery times?",
+            type: "multiple-choice",
+            choices: [
+                {
+                    letter: "a)",
+                    text: "The median delivery time is 19 minutes, with an interquartile range of 6 minutes; delivery times are fairly consistent except for one long delivery (an outlier)."
+                },
+                {
+                    letter: "b)",
+                    text: "The mean delivery time is approximately 20 minutes, the IQR is about 4 minutes, and times are evenly spread."
+                },
+                {
+                    letter: "c)",
+                    text: "The median is 18 minutes, IQR is 14 minutes, showing extreme variability."
+                },
+                {
+                    letter: "d)",
+                    text: "The mean is 19 minutes, and there are no unusual deviations."
+                }
+            ],
+            correctAnswer: "A"
+        },
+        {
+            id: 2,
+            title: "Problem 2: Test Scores",
+            problemText: "Ms. Johnson recorded her class's test scores (out of 100): 92, 88, 76, 94, 85, 91, 82, 89, 90, 87, 84, 93.",
+            questionText: "What can you conclude about the distribution of test scores?",
+            type: "multiple-choice",
+            choices: [
+                {
+                    letter: "a)",
+                    text: "The mean is 87.5 with high variability and several outliers."
+                },
+                {
+                    letter: "b)",
+                    text: "The median is 88.5, mean is about 87.6, showing a fairly consistent performance with most scores clustering around the center."
+                },
+                {
+                    letter: "c)",
+                    text: "The data shows extreme spread with no clear center."
+                },
+                {
+                    letter: "d)",
+                    text: "All students performed equally well."
+                }
+            ],
+            correctAnswer: "B"
+        },
+        {
+            id: 3,
+            title: "Problem 3: Plant Heights",
+            problemText: "A gardener measured the heights (in cm) of 8 tomato plants: 45, 52, 48, 61, 49, 47, 50, 46.",
+            questionText: "Which measure of center and variability best describes this data?",
+            type: "multiple-choice",
+            choices: [
+                {
+                    letter: "a)",
+                    text: "Mean = 49.75 cm, range = 16 cm, with most plants close to average height except one notably taller plant."
+                },
+                {
+                    letter: "b)",
+                    text: "Median = 50 cm, no variability present in the data."
+                },
+                {
+                    letter: "c)",
+                    text: "The data is too spread out to find meaningful measures."
+                },
+                {
+                    letter: "d)",
+                    text: "Mean = 45 cm with extreme outliers throughout."
+                }
+            ],
+            correctAnswer: "A"
+        }
+    ],
+    '6.RP.A.1': [
+        {
+            id: 1,
+            title: "Problem 1: Recipe Ratios",
+            problemText: "A cookie recipe calls for 3 cups of flour and 2 cups of sugar.",
+            questionText: "What is the ratio of flour to sugar in this recipe?",
+            type: "multiple-choice",
+            choices: [
+                {
+                    letter: "a)",
+                    text: "2:3"
+                },
+                {
+                    letter: "b)",
+                    text: "3:2"
+                },
+                {
+                    letter: "c)",
+                    text: "5:1"
+                },
+                {
+                    letter: "d)",
+                    text: "1:5"
+                }
+            ],
+            correctAnswer: "B"
+        },
+        {
+            id: 2,
+            title: "Problem 2: Color Marbles",
+            problemText: "In a bag, there are 12 red marbles and 8 blue marbles.",
+            questionText: "What is the ratio of red marbles to blue marbles?",
+            type: "multiple-choice",
+            choices: [
+                {
+                    letter: "a)",
+                    text: "8:12"
+                },
+                {
+                    letter: "b)",
+                    text: "12:8"
+                },
+                {
+                    letter: "c)",
+                    text: "3:2"
+                },
+                {
+                    letter: "d)",
+                    text: "Both B and C are correct"
+                }
+            ],
+            correctAnswer: "D"
+        },
+        {
+            id: 3,
+            title: "Problem 3: Student Groups",
+            problemText: "In a classroom, there are 15 boys and 10 girls.",
+            questionText: "What ratio represents the relationship between boys and the total number of students?",
+            type: "multiple-choice",
+            choices: [
+                {
+                    letter: "a)",
+                    text: "15:10"
+                },
+                {
+                    letter: "b)",
+                    text: "15:25"
+                },
+                {
+                    letter: "c)",
+                    text: "10:25"
+                },
+                {
+                    letter: "d)",
+                    text: "3:5"
+                }
+            ],
+            correctAnswer: "B"
+        }
+    ],
+    '6.EE.A.2': [
+        {
+            id: 1,
+            title: "Problem 1: Age Expression",
+            problemText: "Let x represent Maria's age now.",
+            questionText: "Which expression represents Maria's age 5 years from now?",
+            type: "multiple-choice",
+            choices: [
+                {
+                    letter: "a)",
+                    text: "x - 5"
+                },
+                {
+                    letter: "b)",
+                    text: "x + 5"
+                },
+                {
+                    letter: "c)",
+                    text: "5x"
+                },
+                {
+                    letter: "d)",
+                    text: "5 - x"
+                }
+            ],
+            correctAnswer: "B"
+        },
+        {
+            id: 2,
+            title: "Problem 2: Shopping Cost",
+            problemText: "Sarah buys n notebooks that cost $3 each and 2 pens that cost $1.50 each.",
+            questionText: "Which expression represents the total cost?",
+            type: "multiple-choice",
+            choices: [
+                {
+                    letter: "a)",
+                    text: "3n + 3"
+                },
+                {
+                    letter: "b)",
+                    text: "3n + 1.50"
+                },
+                {
+                    letter: "c)",
+                    text: "3n + 2(1.50)"
+                },
+                {
+                    letter: "d)",
+                    text: "3n + 2 + 1.50"
+                }
+            ],
+            correctAnswer: "C"
+        },
+        {
+            id: 3,
+            title: "Problem 3: Perimeter Expression",
+            problemText: "A rectangle has length (x + 4) and width (x - 2).",
+            questionText: "What is the expression for the perimeter of this rectangle?",
+            type: "multiple-choice",
+            choices: [
+                {
+                    letter: "a)",
+                    text: "2x + 2"
+                },
+                {
+                    letter: "b)",
+                    text: "4x + 4"
+                },
+                {
+                    letter: "c)",
+                    text: "2(x + 4) + 2(x - 2)"
+                },
+                {
+                    letter: "d)",
+                    text: "Both B and C are correct"
+                }
+            ],
+            correctAnswer: "D"
+        }
+    ],
+    '6.NS.C.6': [
+        {
+            id: 1,
+            title: "Problem 1: Number Line Position",
+            problemText: "Point A is located at -3 on a number line.",
+            questionText: "Which statement about point A is correct?",
+            type: "multiple-choice",
+            choices: [
+                {
+                    letter: "a)",
+                    text: "Point A is 3 units to the right of zero"
+                },
+                {
+                    letter: "b)",
+                    text: "Point A is 3 units to the left of zero"
+                },
+                {
+                    letter: "c)",
+                    text: "Point A is the same as positive 3"
+                },
+                {
+                    letter: "d)",
+                    text: "Point A cannot be placed on a number line"
+                }
+            ],
+            correctAnswer: "B"
+        },
+        {
+            id: 2,
+            title: "Problem 2: Coordinate Plane",
+            problemText: "Point B is located at coordinates (-2, 4) on a coordinate plane.",
+            questionText: "In which quadrant is point B located?",
+            type: "multiple-choice",
+            choices: [
+                {
+                    letter: "a)",
+                    text: "Quadrant I"
+                },
+                {
+                    letter: "b)",
+                    text: "Quadrant II"
+                },
+                {
+                    letter: "c)",
+                    text: "Quadrant III"
+                },
+                {
+                    letter: "d)",
+                    text: "Quadrant IV"
+                }
+            ],
+            correctAnswer: "B"
+        },
+        {
+            id: 3,
+            title: "Problem 3: Opposite Numbers",
+            problemText: "Consider the numbers 7 and -7.",
+            questionText: "What is the relationship between these two numbers?",
+            type: "multiple-choice",
+            choices: [
+                {
+                    letter: "a)",
+                    text: "They are the same number"
+                },
+                {
+                    letter: "b)",
+                    text: "They are opposites and the same distance from zero"
+                },
+                {
+                    letter: "c)",
+                    text: "-7 is farther from zero than 7"
+                },
+                {
+                    letter: "d)",
+                    text: "They cannot both exist on the same number line"
+                }
+            ],
+            correctAnswer: "B"
+        }
+    ],
+    '6.G.A.1': [
+        {
+            id: 1,
+            title: "Problem 1: Triangle Area",
+            problemText: "A right triangle has a base of 8 cm and a height of 6 cm.",
+            questionText: "What is the area of this triangle?",
+            type: "multiple-choice",
+            choices: [
+                {
+                    letter: "a)",
+                    text: "14 cm²"
+                },
+                {
+                    letter: "b)",
+                    text: "24 cm²"
+                },
+                {
+                    letter: "c)",
+                    text: "28 cm²"
+                },
+                {
+                    letter: "d)",
+                    text: "48 cm²"
+                }
+            ],
+            correctAnswer: "B"
+        },
+        {
+            id: 2,
+            title: "Problem 2: Parallelogram Area",
+            problemText: "A parallelogram has a base of 10 meters and a height of 7 meters.",
+            questionText: "What is the area of this parallelogram?",
+            type: "multiple-choice",
+            choices: [
+                {
+                    letter: "a)",
+                    text: "17 m²"
+                },
+                {
+                    letter: "b)",
+                    text: "34 m²"
+                },
+                {
+                    letter: "c)",
+                    text: "70 m²"
+                },
+                {
+                    letter: "d)",
+                    text: "140 m²"
+                }
+            ],
+            correctAnswer: "C"
+        },
+        {
+            id: 3,
+            title: "Problem 3: Composite Shape",
+            problemText: "A shape is made by combining a rectangle (4 cm × 6 cm) with a triangle (base 4 cm, height 3 cm) on top.",
+            questionText: "What is the total area of this composite shape?",
+            type: "multiple-choice",
+            choices: [
+                {
+                    letter: "a)",
+                    text: "30 cm²"
+                },
+                {
+                    letter: "b)",
+                    text: "24 cm²"
+                },
+                {
+                    letter: "c)",
+                    text: "18 cm²"
+                },
+                {
+                    letter: "d)",
+                    text: "36 cm²"
+                }
+            ],
+            correctAnswer: "A"
+        }
+    ]
+};

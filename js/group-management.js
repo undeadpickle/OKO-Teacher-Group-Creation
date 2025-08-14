@@ -72,7 +72,7 @@ function createGroupCard(group) {
                             <span class="question-type-italic">${sampleQuestion.type}: </span>${sampleQuestion.text}
                         </div>
                     </div>
-                    <div class="view-all-questions-button" onclick="editGroup(${group.id})">
+                    <div class="view-all-questions-button" onclick="openExampleQuestionsModal('${group.standard}')">
                         <span>View All Questions</span>
                     </div>
                 </div>
@@ -494,3 +494,238 @@ function initializeGroupManagement() {
     renderGroupCards();
     addSegmentedControlKeyboardSupport();
 }
+
+// Example Questions Modal Functions
+let currentQuestionIndex = 0;
+let currentStandardQuestions = [];
+
+function openExampleQuestionsModal(standardCode) {
+    if (!standardCode || !exampleQuestions[standardCode]) {
+        console.error('No questions found for standard:', standardCode);
+        return;
+    }
+    
+    currentStandardQuestions = exampleQuestions[standardCode];
+    currentQuestionIndex = 0;
+    
+    // Get standard and group data
+    const standardData = standardsData[standardCode];
+    const group = groupSlots.find(g => g.standard === standardCode);
+    
+    if (!standardData) {
+        console.error('Standard data not found:', standardCode);
+        return;
+    }
+    
+    // Update modal header with standard information
+    updateModalHeader(standardData);
+    
+    // Render questions carousel
+    renderQuestionsCarousel();
+    
+    // Show the modal
+    const modal = document.getElementById('exampleQuestionsModal');
+    modal.classList.add('active');
+    
+    // Add GSAP animation
+    if (window.gsap) {
+        gsap.set('.example-questions-modal', { scale: 0.9, opacity: 0 });
+        gsap.to('.example-questions-modal', {
+            scale: 1,
+            opacity: 1,
+            duration: 0.3,
+            ease: "power2.out"
+        });
+    }
+}
+
+function closeExampleQuestionsModal() {
+    const modal = document.getElementById('exampleQuestionsModal');
+    
+    if (window.gsap) {
+        gsap.to('.example-questions-modal', {
+            scale: 0.9,
+            opacity: 0,
+            duration: 0.2,
+            ease: "power2.in",
+            onComplete: () => {
+                modal.classList.remove('active');
+            }
+        });
+    } else {
+        modal.classList.remove('active');
+    }
+}
+
+function updateModalHeader(standardData) {
+    // Update grade and domain
+    const gradeText = document.querySelector('.example-questions-header .grade-text');
+    const domainText = document.querySelector('.example-questions-header .domain-text');
+    const domainIcon = document.querySelector('.domain-icon-svg');
+    
+    if (gradeText) gradeText.textContent = `Grade ${standardData.grade}`;
+    if (domainText) domainText.textContent = getDomainDisplayName(standardData.domain);
+    if (domainIcon) {
+        domainIcon.setAttribute('data-lucide', getDomainIcon(standardData.domain));
+        if (window.lucide) lucide.createIcons();
+    }
+    
+    // Update cluster information
+    const clusterTitle = document.getElementById('exampleClusterTitle');
+    const clusterText = document.getElementById('exampleClusterText');
+    
+    if (clusterTitle) clusterTitle.textContent = standardData.cluster || standardData.name;
+    if (clusterText) clusterText.textContent = standardData.description;
+}
+
+function renderQuestionsCarousel() {
+    const carousel = document.getElementById('questionCarousel');
+    if (!carousel) return;
+    
+    carousel.innerHTML = '';
+    
+    currentStandardQuestions.forEach((question, index) => {
+        const questionElement = createQuestionElement(question, index);
+        carousel.appendChild(questionElement);
+    });
+    
+    // Show first question
+    showQuestion(0);
+}
+
+function createQuestionElement(question, index) {
+    const questionDiv = document.createElement('div');
+    questionDiv.className = 'carousel-question';
+    questionDiv.setAttribute('data-question-index', index);
+    
+    // Update title to include question count
+    const totalQuestions = currentStandardQuestions.length;
+    const questionNumber = index + 1;
+    const originalTitle = question.title.split(': ')[1] || question.title.replace(/Problem \d+: /, '');
+    const updatedTitle = `Problem ${questionNumber} of ${totalQuestions}: ${originalTitle}`;
+    
+    // Build choices HTML
+    const choicesHtml = question.choices.map(choice => {
+        // Compare uppercase versions and remove parenthesis
+        const choiceLetter = choice.letter.replace(')', '').toUpperCase();
+        const isCorrect = choiceLetter === question.correctAnswer.toUpperCase();
+        return `
+            <div class="answer-choice ${isCorrect ? 'correct' : ''}">
+                <div class="answer-letter">${choice.letter}</div>
+                <div class="answer-text">${choice.text}</div>
+            </div>
+        `;
+    }).join('');
+    
+    questionDiv.innerHTML = `
+        <div class="problem-container">
+            <div class="problem-title">${updatedTitle}</div>
+            <div class="problem-text">${question.problemText}</div>
+        </div>
+        
+        <div class="question-container">
+            <div class="question-title">Question:</div>
+            <div class="question-text">${question.questionText}</div>
+        </div>
+        
+        <div class="answer-container">
+            ${choicesHtml}
+        </div>
+    `;
+    
+    return questionDiv;
+}
+
+function showQuestion(index) {
+    const questions = document.querySelectorAll('.carousel-question');
+    
+    questions.forEach((question, i) => {
+        question.classList.toggle('active', i === index);
+    });
+    
+    currentQuestionIndex = index;
+}
+
+function nextQuestion() {
+    const nextIndex = (currentQuestionIndex + 1) % currentStandardQuestions.length;
+    
+    // Add fade out/in animation
+    if (window.gsap) {
+        const currentQuestion = document.querySelector('.carousel-question.active');
+        const nextQuestionEl = document.querySelectorAll('.carousel-question')[nextIndex];
+        
+        gsap.to(currentQuestion, {
+            opacity: 0,
+            duration: 0.15,
+            ease: "power2.out",
+            onComplete: () => {
+                showQuestion(nextIndex);
+                gsap.fromTo(nextQuestionEl, 
+                    { opacity: 0 },
+                    { opacity: 1, duration: 0.15, ease: "power2.out" }
+                );
+            }
+        });
+    } else {
+        showQuestion(nextIndex);
+    }
+}
+
+function previousQuestion() {
+    const prevIndex = currentQuestionIndex === 0 
+        ? currentStandardQuestions.length - 1 
+        : currentQuestionIndex - 1;
+    
+    // Add fade out/in animation
+    if (window.gsap) {
+        const currentQuestion = document.querySelector('.carousel-question.active');
+        const prevQuestionEl = document.querySelectorAll('.carousel-question')[prevIndex];
+        
+        gsap.to(currentQuestion, {
+            opacity: 0,
+            duration: 0.15,
+            ease: "power2.out",
+            onComplete: () => {
+                showQuestion(prevIndex);
+                gsap.fromTo(prevQuestionEl, 
+                    { opacity: 0 },
+                    { opacity: 1, duration: 0.15, ease: "power2.out" }
+                );
+            }
+        });
+    } else {
+        showQuestion(prevIndex);
+    }
+}
+
+// Keyboard navigation for the modal
+document.addEventListener('keydown', function(event) {
+    const modal = document.getElementById('exampleQuestionsModal');
+    if (!modal || !modal.classList.contains('active')) return;
+    
+    switch(event.key) {
+        case 'ArrowLeft':
+            event.preventDefault();
+            previousQuestion();
+            break;
+        case 'ArrowRight':
+            event.preventDefault();
+            nextQuestion();
+            break;
+        case 'Escape':
+            event.preventDefault();
+            closeExampleQuestionsModal();
+            break;
+    }
+});
+
+// Click outside modal to close
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('exampleQuestionsModal');
+    if (!modal || !modal.classList.contains('active')) return;
+    
+    // Check if clicked target is the modal overlay (not the modal content)
+    if (event.target === modal) {
+        closeExampleQuestionsModal();
+    }
+});

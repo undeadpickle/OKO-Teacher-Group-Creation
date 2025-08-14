@@ -772,6 +772,58 @@
       </div>
     </div>
 
+    <!-- Example Questions Modal -->
+    <div id="exampleQuestionsModal" class="modal-overlay">
+      <div class="example-questions-modal modal">
+        <!-- Close Button -->
+        <button class="modal-close example-questions-close" onclick="closeExampleQuestionsModal()">
+          <i data-lucide="x"></i>
+        </button>
+        
+        <!-- Modal Content Container -->
+        <div class="example-questions-content">
+          <!-- Header Container -->
+          <div class="example-questions-header">
+            <div class="domain-icon">
+              <i data-lucide="scale" class="domain-icon-svg"></i>
+            </div>
+            <div class="domain-title">
+              <span class="grade-text">Grade 6</span>
+              <span class="breadcrumb-separator">»</span>
+              <span class="domain-text">Statistics & Probability</span>
+            </div>
+          </div>
+          
+          <!-- Cluster Description -->
+          <div class="cluster-description">
+            <div class="cluster-title" id="exampleClusterTitle">Summarize and describe distributions.</div>
+            <div class="cluster-text" id="exampleClusterText">
+              Giving quantitative measures of center (median and/or mean) and variability (interquartile range and/or
+              mean absolute deviation), as well as describing any overall pattern and any striking deviations from the
+              overall pattern with reference to the context in which the data were gathered.
+            </div>
+          </div>
+          
+          <!-- Question Container -->
+          <div class="example-question-container">
+            <div id="questionCarousel" class="question-carousel">
+              <!-- Questions will be populated dynamically -->
+            </div>
+          </div>
+        </div>
+        
+        <!-- Previous Button -->
+        <button class="modal-nav-btn modal-prev-btn" onclick="previousQuestion()">
+          <i data-lucide="chevron-left"></i>
+        </button>
+        
+        <!-- Next Button -->
+        <button class="modal-nav-btn modal-next-btn" onclick="nextQuestion()">
+          <i data-lucide="chevron-right"></i>
+        </button>
+      </div>
+    </div>
+
 
     <!-- JavaScript Files -->
     <script src="js/data.js"></script>
