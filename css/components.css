@@ -372,7 +372,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  flex: 1;
 }
 
 /* Bottom Content Container */
@@ -381,6 +380,7 @@
   flex-direction: column;
   gap: 24px;
   flex-shrink: 0;
+  margin-top: auto;
 }
 
 /* CCSS Badge */
@@ -425,7 +425,7 @@
   color: #605dec;
 }
 
-.domain-title {
+.card-domain-title {
   font-family: "ABC Marfa", sans-serif;
   font-size: 20px;
   font-weight: 600;
@@ -448,15 +448,14 @@
 }
 
 /* Example Question Container */
-.example-question-container {
+.group-card .example-question-container {
   background: #f4f4fd;
   border-radius: 8px;
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  flex: 1;
-  min-height: 120px;
+  height: auto !important;
 }
 
 .example-question-content {
@@ -638,7 +637,7 @@
     padding: 10px 8px;
     font-size: 11px;
   }
-  
+
   .session-length-segmented-control {
     padding: 3px;
   }
@@ -727,7 +726,6 @@
   color: #2e7d32;
 }
 
-
 /* Group Badges */
 .group-badge {
   padding: 4px 10px;
@@ -756,8 +754,6 @@
   background: #fff3e0;
   color: #e65100;
 }
-
-
 
 /* Progress Bar */
 .progress-bar {
