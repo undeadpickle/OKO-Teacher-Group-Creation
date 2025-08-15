@@ -15,6 +15,16 @@ INSTRUCTIONS FOR AI:
 
 ## [Unreleased]
 
+### Fixed
+
+- **Example Question Container Auto-Sizing**: Updated group card layout to allow example question containers (light purple background) to auto-size based on content rather than taking up fixed vertical space. Removed `flex: 1` and `min-height: 120px` constraints while adding `height: auto !important` and specific `.group-card .example-question-container` selector to prevent conflicts with modal styles, improving content readability and space efficiency.
+
+- **Bottom Element Anchoring**: Added `margin-top: auto` to `.bottom-content` container to properly anchor session length controls, Edit Group button, and Copy Code button to the bottom of each fixed-height (550px) group card, ensuring consistent layout regardless of variable content length in example question sections.
+
+- **Domain Title Style Conflicts**: Implemented separate CSS classes (`.card-domain-title` and `.modal-domain-title`) to prevent style inheritance conflicts between group cards and standard selection modal, ensuring proper font sizing (20px for group cards, 22px for modal) and independent styling control for better design consistency.
+
+- **Modal Typography**: Updated example questions modal cluster description text to 16px font size and light gray color (#858B87) for better readability, while maintaining cluster title at 16px with original dark color (#002e19) for proper visual hierarchy and improved content scanning.
+
 ### Added
 
 - **Example Questions Modal**: Full carousel modal system displaying all 3 questions per math standard with correct answer highlighting, purple navigation buttons, and smooth fade transitions between questions. Triggered by "View All Questions" buttons on group cards to allow teachers to review complete question sets without entering edit mode, improving lesson planning efficiency and content visibility.

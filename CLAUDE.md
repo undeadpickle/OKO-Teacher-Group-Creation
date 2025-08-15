@@ -219,6 +219,10 @@ The prototype strictly follows OKO's visual design system:
 - Icons are automatically sized via CSS classes targeting `svg[data-lucide]` elements
 
 ### Recent Updates (Latest)
+- **Dynamic Example Question Sizing**: Fixed group card layout to allow example question containers (light purple backgrounds) to auto-size based on content rather than stretching to fill available space. Removed flex: 1 constraint from top-content and added height: auto !important to .group-card .example-question-container, preventing conflicts with modal styles while maintaining proper content flow
+- **Bottom Element Anchoring**: Added margin-top: auto to .bottom-content container ensuring session length controls, Edit Group, and Copy Code buttons remain anchored at bottom of fixed-height (550px) cards regardless of variable content length in example sections
+- **Domain Title Class Separation**: Implemented separate CSS classes (.card-domain-title and .modal-domain-title) to prevent inheritance conflicts between group cards and standards selection modal, ensuring proper font sizing (20px for cards, 22px for modal) and independent styling control
+- **Modal Typography Improvements**: Updated example questions modal cluster text to 16px font size with light gray color (#858B87) and cluster titles to 16px with original dark color (#002e19) for improved readability and visual hierarchy
 - **Example Questions Modal**: Implemented full carousel modal for viewing all questions associated with each group's standard
   - Modal triggered by "View All Questions" button on group cards
   - Carousel displays 3 questions per standard with fade transitions between questions
